@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-  </head>
-  <style>
+</head>
+<style>
     * {
-      margin: 0 auto;
-      max-width: 1280px;
+        margin: 0 auto;
+        max-width: 1280px;
     }
     header {
-        width: 20%;
-        position: fixed;
+        width: 300px;
         background-color: aqua;
-        height: 100%; 
+        height: 100%;
+        position: fixed;
     }
-    .logoHeader{
+    .logoHeader {
         padding: 30px;
         display: flex;
         justify-content: center;
         justify-items: center;
         height: 8%;
+    }
+    .logoHeader img {
+        border-radius: 50%;
     }
     header ul {
         list-style: none;
@@ -47,18 +51,34 @@
         cursor: pointer;
     }
     main {
-        width: 100%;
+        max-width: 679px;
         height: 100vh;
         background-color: grey;
+        display: flex;
+        justify-content: start;
     }
+    .NovoTweet {
+        border: 1px solid rgb(52, 77, 77);
+        width: 100%;
+        height: 150px;
+        display: flex;
 
+    }
+    .NovoTweet-tags {
+        width: 100%;
+        background-color: rgba(137, 43, 226, 0.459);
+    }
+    .NovoTweet img {
+        width: 15%;
+        align-items: center;
+    }
     
-  </style>
-  <body>
-    <header>
+</style>
 
+<body>
+    <header>
         <div class="logoHeader">
-            <img src="logo.png" alt="icone bem-te-vi" />
+            <img src="perfil.jpeg" alt="icone bem-te-vi" />
         </div>
 
         <div class="header__links">
@@ -70,12 +90,19 @@
                 <li class="headerLink"><a href="#">Sair</a></li>
             </ul>
         </div>
+    </header>
 
-        </header>
+    <main>
+        <div class="NovoTweet">
+            <div class="NovoTweet-tags">
+                <img src="logo.png" alt="bem-te-vi.png">
+                <input style="background-color: rgb(70, 95, 95);" type="text" placeholder="O que você está pensando...?">
+            </div>
+            
+            
+        </div>
+    </main>
 
-        <main>
+</body>
 
-        </main>
-
-        </body>
 </html>
