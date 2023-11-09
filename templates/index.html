@@ -8,98 +8,154 @@
 </head>
 <style>
     * {
-        margin: 0 auto;
-        max-width: 1280px;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
-    header {
-        width: 300px;
-        background-color: aqua;
-        height: 100%;
-        position: fixed;
-    }
-    .logoHeader {
-        padding: 30px;
+    body {
         display: flex;
         justify-content: center;
-        justify-items: center;
-        height: 8%;
+        background-color: rgba(138, 134, 131, 0.5);
     }
-    .logoHeader img {
-        border-radius: 50%;
-    }
-    header ul {
-        list-style: none;
-        padding-left: 0;
+    header {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        align-items: center;
+        gap: 2rem;
+        width: 15%;
+        max-width: 300px;
+        height: 100vh;
     }
-    header ul li a {
+    header img {
+        width: 100px;
+        border-radius: 50%;
+        margin: 30px auto;
+    }
+    header p {
+        margin: 0 auto;
+    
+    }
+    header ul {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: left;
+        list-style: none;
+    
+    }
+    .link {
+        border-radius: 12px;
+        padding: 10px;
+        background-color: beige;
         text-decoration: none;
     }
-    .header__links {
-        margin-top: 10px;
-        width: 60%;
-    }
-    .headerLink {
-        width: 100px;
-        padding: 10px;
-        border: 1px solid black;
-        display: flex;
-        justify-content: start;
-        border-radius: 20px;
-        cursor: pointer;
-    }
     main {
-        max-width: 679px;
-        height: 100vh;
-        background-color: grey;
+        width: 30%;
+    
+    }
+    .container__insert__tweet {
+        padding: 2%;
+        border: 0.1px solid black;
+    }
+    .insert__tweet__input {
         display: flex;
-        justify-content: start;
-    }
-    .NovoTweet {
-        border: 1px solid rgb(52, 77, 77);
-        width: 100%;
-        height: 150px;
-        display: flex;
-
-    }
-    .NovoTweet-tags {
-        width: 100%;
-        background-color: rgba(137, 43, 226, 0.459);
-    }
-    .NovoTweet img {
-        width: 15%;
         align-items: center;
+        gap: 1rem;
+    
+    }
+    .insert__tweet__input input {
+        border: none;
+        width: 100%;
+        font-size: 1rem;
+        padding: 10px;
+        background-color: transparent;
+        outline: none;
+    }
+    .postar {
+        display: flex;
+        justify-content: end;
+    
+    }
+    .insert__tweet__input img {
+        width: 70px;
+        border-radius: 50%;
+    
+    }
+    .tweet {
+        padding: 5px;
+        min-height: 90px;
+        border: 0.1px solid black;
+    
+    }
+    .header__tweet {
+        display: flex;
+    
+    }
+    .header__tweet .user {
+        padding: 5px;
+        width: 50%;
+        justify-content: start;
+        display: flex;
+    
+    }
+    .header__tweet .data {
+        padding: 5px;
+        width: 50%;
+        display: flex;
+        justify-content: end;
+    
+    }
+    .header__links {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 50%;
+    }
+    .header__links img {
+        width: 20px;
     }
     
 </style>
 
 <body>
+
     <header>
-        <div class="logoHeader">
-            <img src="perfil.jpeg" alt="icone bem-te-vi" />
-        </div>
+        <img src="perfil_padrao.jpg" alt="fotodeperfil">
+        <p><a href="#">@gontijogabr</a></p>
 
         <div class="header__links">
-            <ul>
-                <li class="headerLink"><a href="#">Perfil</a></li>
-                <li class="headerLink"><a href="#">Home</a></li>
-                <li class="headerLink"><a href="#">Notificacoes</a></li>
-                <li class="headerLink"><a href="#">Mensagens</a></li>
-                <li class="headerLink"><a href="#">Sair</a></li>
-            </ul>
+            <nav>
+                <ul>
+                    <li><a class="link" href="#">Perfil</a></li>
+                    <li><a class="link" href="#">Notificacoes</a></li>
+                    <li><a class="link" href="#">Mensagens</a></li>
+                    <li><a class="link" href="#">Sair</a></li>
+                </ul>
+            </nav>
         </div>
+
     </header>
 
     <main>
-        <div class="NovoTweet">
-            <div class="NovoTweet-tags">
-                <img src="logo.png" alt="bem-te-vi.png">
-                <input style="background-color: rgb(70, 95, 95);" type="text" placeholder="O que você está pensando...?">
+        <div class="container__insert__tweet">
+            <div class="insert__tweet__input">
+                <img src="logo.png" alt="" >
+                <input type="text" placeholder="O que voce esta pensando..?">
             </div>
-            
-            
+            <div class="postar">
+                <button type="button">Postar</button>
+            </div>
+        </div>
+        <div class="container__tweet">
+
+            <div class="tweet">
+                <div class="header__tweet">
+                    <p class="user">@asdvasd</p>
+                    <p class="data">09/11/2023</p>
+                </div>
+                <p class="conteudo">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis nostrum, neque tempora porro temporibus illum voluptatem quae quo deleniti maiores nulla quasi a quam, soluta veritatis. Voluptate ab omnis quaerat! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima illo vero modi. Reprehenderit beatae, earum consectetur corporis fugit aut amet. Minus sequi rem consequuntur doloremque obcaecati aliquam quia ex possimus.</p>
+            </div>
+
         </div>
     </main>
 
