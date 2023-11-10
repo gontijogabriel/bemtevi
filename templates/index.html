@@ -12,11 +12,13 @@
         padding: 0;
         box-sizing: border-box;
     }
+
     body {
         display: flex;
         justify-content: center;
-        background-color: rgba(138, 134, 131, 0.5);
+        background-color: rgba(255, 216, 118, 0.2);
     }
+
     header {
         display: flex;
         flex-direction: column;
@@ -26,44 +28,64 @@
         max-width: 300px;
         height: 100vh;
     }
+
     header img {
         width: 100px;
         border-radius: 50%;
         margin: 30px auto;
     }
+
     header p {
         margin: 0 auto;
-    
+
     }
+
     header ul {
         display: flex;
         flex-direction: column;
         gap: 2rem;
         align-items: left;
         list-style: none;
-    
+
     }
+
     .link {
         border-radius: 12px;
         padding: 10px;
-        background-color: beige;
+        background-color: rgba(138, 134, 131, 0.5);
         text-decoration: none;
     }
+
+    .link:hover {
+        background-color: rgba(138, 134, 131, 0.3);
+        box-shadow: 3px 2px 10px grey;
+    }
+
     main {
         width: 30%;
-    
     }
+
     .container__insert__tweet {
         padding: 2%;
         border: 0.1px solid black;
     }
+
     .insert__tweet__input {
         display: flex;
         align-items: center;
         gap: 1rem;
-    
+
     }
-    .insert__tweet__input input {
+
+    /* .insert__tweet__input input {
+        border: none;
+        width: 100%;
+        font-size: 1rem;
+        padding: 10px;
+        background-color: transparent;
+        outline: none;
+    } */
+    .insert__tweet__input textarea {
         border: none;
         width: 100%;
         font-size: 1rem;
@@ -71,62 +93,106 @@
         background-color: transparent;
         outline: none;
     }
+
+    textarea {
+        border: none;
+        outline: none;
+        box-shadow: none;
+        resize: none;
+        /* Impede o redimensionamento */
+    }
+
     .postar {
         display: flex;
         justify-content: end;
-    
+
     }
+
     .insert__tweet__input img {
         width: 70px;
         border-radius: 50%;
-    
+
     }
+
     .tweet {
         padding: 5px;
-        min-height: 90px;
+        min-height: 60px;
         border: 0.1px solid black;
-    
+
     }
+
     .header__tweet {
         display: flex;
-    
+
     }
+
     .header__tweet .user {
         padding: 5px;
         width: 50%;
         justify-content: start;
         display: flex;
-    
+
     }
+
     .header__tweet .data {
         padding: 5px;
         width: 50%;
         display: flex;
         justify-content: end;
-    
+
     }
+
     .header__links {
         display: flex;
         align-items: center;
         justify-content: center;
         max-width: 50%;
     }
-    .header__links img {
-        width: 20px;
+
+    .main__header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
     }
-    
+
+    .main__header img {
+        width: 10%;
+    }
+
+    .tweetButton {
+        background-color: rgba(138, 134, 131, 0.5);
+        text-decoration: none;
+        width: 50px;
+        height: 30px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        cursor: pointer;
+        border: none;
+    }
+
+    .tweetButton img {
+        height: 80%;
+    }
+
+    .tweetButton:hover {
+        background-color: rgba(138, 134, 131, 0.3);
+        box-shadow: 3px 2px 10px grey;
+    }
 </style>
 
 <body>
 
     <header>
         <img src="perfil_padrao.jpg" alt="fotodeperfil">
-        <p><a href="#">@gontijogabr</a></p>
+        <p><a href="#">@gontijogabriel</a></p>
 
         <div class="header__links">
             <nav>
                 <ul>
-                    <li><a class="link" href="#">Perfil</a></li>
                     <li><a class="link" href="#">Notificacoes</a></li>
                     <li><a class="link" href="#">Mensagens</a></li>
                     <li><a class="link" href="#">Sair</a></li>
@@ -137,13 +203,16 @@
     </header>
 
     <main>
+        <div class="main__header">
+            <img src="logo.png" alt="bem-te-vi.png">
+        </div>
         <div class="container__insert__tweet">
             <div class="insert__tweet__input">
-                <img src="logo.png" alt="" >
-                <input type="text" placeholder="O que voce esta pensando..?">
+                <!-- <input id="new_tweet" type="text" placeholder="O que voce esta pensando..?"> -->
+                <textarea id="new_tweet" rows="3" cols="50" placeholder="O que voce esta pensando..?"></textarea>
             </div>
             <div class="postar">
-                <button type="button">Postar</button>
+                <button id="button_postar" class="tweetButton" type="button">Postar</button>
             </div>
         </div>
         <div class="container__tweet">
@@ -153,12 +222,51 @@
                     <p class="user">@asdvasd</p>
                     <p class="data">09/11/2023</p>
                 </div>
-                <p class="conteudo">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis nostrum, neque tempora porro temporibus illum voluptatem quae quo deleniti maiores nulla quasi a quam, soluta veritatis. Voluptate ab omnis quaerat! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima illo vero modi. Reprehenderit beatae, earum consectetur corporis fugit aut amet. Minus sequi rem consequuntur doloremque obcaecati aliquam quia ex possimus.</p>
+                <p class="conteudo">post aleatorio</p>
             </div>
+
 
         </div>
     </main>
 
 </body>
+<script>
+    document.getElementById("button_postar").addEventListener("click", function () {
+        // Obtém o conteúdo do textarea
+        const newTweetContent = document.getElementById("new_tweet").value;
+
+        // Verifica se o conteúdo não está vazio
+        if (newTweetContent.trim() === "") {
+            alert("Por favor, insira um tweet antes de postar.");
+            return;
+        }
+
+        // Cria um novo elemento de tweet
+        const newTweet = document.createElement("div");
+        newTweet.className = "tweet";
+        newTweet.innerHTML = `
+            <div class="header__tweet">
+            <p class="user">@asdvasd</p>
+            <p class="data">09/11/2023</p>
+            </div>
+            <p class="conteudo">${newTweetContent}</p>
+        `;
+
+        // Adiciona o novo tweet à lista de tweets
+        const containerTweet = document.querySelector(".container__tweet");
+        containerTweet.appendChild(newTweet);
+
+        // Limpa o conteúdo do textarea
+        document.getElementById("new_tweet").value = "";
+    });
+
+    document.getElementById("new_tweet").addEventListener("keypress", function (event) {
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault(); // Impede a quebra de linha
+            document.getElementById("button_postar").click(); // Simula o clique no botão "Postar"
+        }
+    });
+
+</script>
 
 </html>
