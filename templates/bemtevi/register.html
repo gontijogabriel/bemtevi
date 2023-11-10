@@ -1,0 +1,101 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bem-te-vi</title>
+    <link rel="stylesheet" href="{% static 'styles/register.css' %}">
+    <script src="{% static 'scripts/helper.js' %}"></script>
+</head>
+
+<body>
+    <main class="container">
+        
+        <div class="container__header">
+            <div class="container__bemtevi">
+                <img height="45px" src="{% static 'assets/logo.png' %}" alt="Logo bem-te-vi">
+            </div>
+        </div>
+
+        <div class="container__center">
+            {% comment %} <div class="center">
+
+                <h3>Register in bem-te-vi</h3>
+
+                <div id='loginInput' class="loginInput">
+                    <input type="text" placeholder="name">
+                </div>
+
+                <div id='loginInput' class="loginInput">
+                    <input type="text" placeholder="username">
+                </div>
+
+                <div id='loginInput' class="loginInput">
+                    <input type="email" placeholder="email">
+                </div>
+
+                <div id='loginInput' class="loginInput">
+                    <input type="password" placeholder="password">
+                </div>
+
+                <div id='passwordInput' class="loginInput">
+                    <input type="password" placeholder="repeat your password">
+                </div>
+
+                {% if errors %}
+                    <p class="Login__Mensagem"></p>
+                {% endif %}
+
+                <a class="loginButton" href="{% url 'login' %}">
+                    Sing in
+                </a>
+
+                <a class="loginButton" href="{% url 'login' %}">
+                    Voltar
+                </a>
+
+            </div> {% endcomment %}
+
+            <form class="center" method="POST" action="{% url 'register' %}">
+                {% csrf_token %}
+                <h3>Register in bem-te-vi</h3>
+            
+                <div id='nameInput' class="loginInput">
+                    <input type="text" placeholder="name" id="name" name="name">
+                </div>
+            
+                <div id='usernameInput' class="loginInput">
+                    <input type="text" placeholder="username" id="username" name="username">
+                </div>
+            
+                <div id='emailInput' class="loginInput">
+                    <input type="text" placeholder="email" id="email" name="email">
+                </div>
+            
+                <div id='passwordInput' class="loginInput">
+                    <input type="password" placeholder="password" id="password" name="password">
+                </div>
+            
+                <div id='repeatPasswordInput' class="loginInput">
+                    <input type="password" placeholder="repeat your password" id="repeatPassword" name="repeatPassword">
+                </div>
+            
+                {% if errors %}
+                    <p class="Login__Mensagem"></p>
+                {% endif %}
+            
+                <a class="loginButton" type="submit" id="signupButton">
+                    Sign in
+                </a>
+            
+                <a class="loginButton" href="{% url 'login' %}">
+                    Voltar
+                </a>
+            </form>
+            
+        
+    </main>
+</body>
+</html>

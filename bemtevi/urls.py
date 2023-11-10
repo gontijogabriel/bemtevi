@@ -1,7 +1,10 @@
+from django.contrib import admin
 from django.urls import path
-from bemtevi.views import login, login_senha
+from bemtevi.views import index, login, register, forget_password, sua_view
 
 urlpatterns = [
-    path('login/', login, name='login'),
-    path('loginsenha/', login_senha, name='login-senha'),
+    path('bemtevi/', login, name='login'),
+    path('forgetpassword/', forget_password, name='forget_password'),
+    path('register/', register, name='register'),
+    path('index/', index, name='index'),
 ]

@@ -1,10 +1,12 @@
+{%load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bem-te-vi</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
 </head>
 
 <body>
@@ -12,41 +14,45 @@
         
         <div class="container__header">
             <div class="container__bemtevi">
-                <img height="45px" src="logo.png" alt="Logo bem-te-vi">
+                <img height="45px" src="{% static 'assets/logo.png' %}" alt="Logo bem-te-vi">
             </div>
         </div>
 
         <div class="container__center">
-            <div class="center">
 
+            <form class="center" method="POST" action="{% url 'login' %}"> 
+                {% csrf_token %}
                 <h3>Entrar no bem-te-vi</h3>
 
                 <div id='loginInput' class="loginInput">
-                    <input type="text" placeholder="username">
+                    <input name="username" type="text" placeholder="username">
                 </div>
 
                 <div id='passwordInput' class="loginInput">
-                    <input type="password" placeholder="password">
+                    <input name="password" type="password" placeholder="password">
                 </div>
 
                 <button id='login-com-google' class="loginButton">
-                    <img src="icon_google.png" alt="Google icon">
+                    <img src="{% static 'assets/icon_google.png' %}" alt="Google icon">
                     Fazer Login com Google
                 </button>
 
-                <p class="Login__Mensagem">username invalido!</p>
+                {% if errors %}
+                    <p class="Login__Mensagem"></p>
+                {% endif %}
 
-                <button id='login-avancar' class="loginButton">
+                <button id='login-avancar' class="loginButton" type="submit">
                     Avançar
                 </button>
 
                 <button id='login-esqueceu-senha' class="loginButton">
-                    <p>Esqueceu a senha?</p>
+                    Esqueceu a senha?
                 </button>
 
-                <p class="naoTemConta">Não tem uma conta?<a href="#"> Inscreva-se</a></p>
+                <p class="naoTemConta">Não tem uma conta?<a href="{% url 'register' %}"> Inscreva-se</a></p>
 
-            </div>
+            </form>
+
         </div>
         
     </main>

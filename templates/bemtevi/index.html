@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,13 +7,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}">
 </head>
 
 <body>
 
     <header>
-        <img src="perfil_padrao.jpg" alt="fotodeperfil">
+        <img src="{% static 'assets/perfil_padrao.jpg' %}" alt="fotodeperfil">
         <p><a href="#">@gontijogabriel</a></p>
 
         <div class="header__links">
@@ -19,16 +21,15 @@
                 <ul>
                     <li><a class="link" href="#">Notificacoes</a></li>
                     <li><a class="link" href="#">Mensagens</a></li>
-                    <li><a class="link" href="#">Sair</a></li>
+                    <li><a class="link" href="{% url 'login' %}">Sair</a></li>
                 </ul>
             </nav>
         </div>
-
     </header>
 
     <main>
         <div class="main__header">
-            <img src="logo.png" alt="bem-te-vi.png">
+            <img src="{% static 'assets/logo.png'%}" alt="bem-te-vi.png">
         </div>
         <div class="container__insert__tweet">
             <div class="insert__tweet__input">
@@ -49,7 +50,6 @@
                 </div>
                 <p class="conteudo">post aleatorio</p>
             </div> -->
-
 
         </div>
     </main>
@@ -91,7 +91,6 @@
             document.getElementById("button_postar").click(); // Simula o clique no botão "Postar"
         }
     });
-
 </script>
 
 </html>

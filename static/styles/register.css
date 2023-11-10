@@ -10,7 +10,7 @@
     max-width: 400px;
     height: 10%;
     min-width: 400px;
-    min-height: 425px;
+    min-height: 470px;
     background-color: rgba(255, 216, 118, 0.2);
     box-shadow: 3px 2px 10px grey;
     border-radius: 12px;
@@ -46,6 +46,10 @@
     gap: 0.9rem;
 }
 .loginButton {
+    color: black;
+    text-decoration: none;
+    font-style: none;
+    
     height: 30px;
     background-color: rgba(138, 134, 131, 0.5);
     border-radius: 15px;
