@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+</head>
+
+<body>
+
+    <header>
+        <img src="{% static 'assets/logo.png' %}" alt="fotodeperfil">
+
+        <div class="header__links">
+            <nav>
+                <ul>
+                    <li><a class="link" href="{% url 'login' %}">Sing in</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="main__header">
+            {% comment %} <img src="{% static 'assets/logo.png'%}" alt="bem-te-vi.png"> {% endcomment %}
+            <h1>bem-te-vi</h1>
+        </div>
+        {% comment %} <div class="container__insert__tweet">
+            <div class="insert__tweet__input">
+                <!-- <input id="new_tweet" type="text" placeholder="O que voce esta pensando..?"> -->
+                <textarea id="new_tweet" rows="3" cols="50" placeholder="O que voce esta pensando..?"></textarea>
+            </div>
+            <div class="postar">
+                <button id="button_postar" class="tweetButton" type="button">Postar</button>
+            </div>
+        </div> {% endcomment %}
+
+        <div class="container__tweet">
+
+            {% comment %} loop de tweets {% endcomment %}
+
+                        <!-- EXEMPLO -->
+            <div class="tweet">
+                <div class="header__tweet">
+                    <p class="user">@asdvasd</p>
+                    <p class="data">09/11/2023</p>
+                </div>
+                <p class="conteudo">post aleatorio</p>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
