@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from bemtevi.views import index, login, register, forget_password, sua_view
+from bemtevi.views import index, login, register, forget_password
 
 urlpatterns = [
     path('bemtevi/', login, name='login'),
