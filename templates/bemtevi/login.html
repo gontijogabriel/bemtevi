@@ -45,9 +45,12 @@
                     Avançar
                 </button>
 
-                <button id='login-esqueceu-senha' class="loginButton">
-                    Esqueceu a senha?
-                </button>
+                <a class="loginButton" href="{% url 'reset_password' %}">
+                    <button id='login-esqueceu-senha'>
+                        Esqueceu a senha?
+                    </button>
+                </a>
+
 
                 <p class="naoTemConta">Não tem uma conta?<a href="{% url 'register' %}"> Inscreva-se</a></p>
 

@@ -14,7 +14,7 @@
 
     <header>
         <img src="{% static 'assets/perfil_padrao.jpg' %}" alt="fotodeperfil">
-        <p><a href="#">@gontijogabriel</a></p>
+        <p><a href="#">@{{ request.user }}</a></p>
 
         <div class="header__links">
             <nav>
@@ -31,31 +31,36 @@
         <div class="main__header">
             <img src="{% static 'assets/logo.png'%}" alt="bem-te-vi.png">
         </div>
-        <div class="container__insert__tweet">
+        <form class="container__insert__tweet" method="post" action="{% url 'post' %}">
+            {% csrf_token  %}
             <div class="insert__tweet__input">
                 <!-- <input id="new_tweet" type="text" placeholder="O que voce esta pensando..?"> -->
-                <textarea id="new_tweet" rows="3" cols="50" placeholder="O que voce esta pensando..?"></textarea>
+                <textarea name="new_tweet" id="new_tweet" rows="3" cols="50" placeholder="O que voce esta pensando..?"></textarea>
             </div>
             <div class="postar">
-                <button id="button_postar" class="tweetButton" type="button">Postar</button>
+                <button id="button_postar" class="tweetButton" type="submit">Postar</button>
             </div>
-        </div>
+        </form>
         <div class="container__tweet">
 
-            <!-- EXEMPLO -->
-            <!-- <div class="tweet">
-                <div class="header__tweet">
-                    <p class="user">@asdvasd</p>
-                    <p class="data">09/11/2023</p>
-                </div>
-                <p class="conteudo">post aleatorio</p>
-            </div> -->
-
+            {% if tweets %}
+                {% for tweet in tweets %}
+                    <div class="tweet">
+                        <div class="header__tweet">
+                            <p class="user">@{{ tweet.user }}</p>
+                            <p class="data">{{ tweet.data|date:"d/m/Y H:i" }}</p>
+                            
+                        </div>
+                        <p class="conteudo">{{ tweet.tweet }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
         </div>
     </main>
 
 </body>
-<script>
+<!-- <script>
     document.getElementById("button_postar").addEventListener("click", function () {
         // Obtém o conteúdo do textarea
         const newTweetContent = document.getElementById("new_tweet").value;
@@ -91,6 +96,6 @@
             document.getElementById("button_postar").click(); // Simula o clique no botão "Postar"
         }
     });
-</script>
+</script> -->
 
 </html>

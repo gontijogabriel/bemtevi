@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>bem-te-vi</title>
     <link rel="stylesheet" href="{% static 'styles/home.css' %}">
 </head>
 
@@ -41,17 +41,19 @@
 
         <div class="container__tweet">
 
-            {% comment %} loop de tweets {% endcomment %}
-
-                        <!-- EXEMPLO -->
-            <div class="tweet">
-                <div class="header__tweet">
-                    <p class="user">@asdvasd</p>
-                    <p class="data">09/11/2023</p>
-                </div>
-                <p class="conteudo">post aleatorio</p>
-            </div>
-
+            {% if tweets %}
+                {% for tweet in tweets %}
+                    <div class="tweet">
+                        <div class="header__tweet">
+                            <p class="user">@{{ tweet.user }}</p>
+                            <p class="data">{{ tweet.data|date:"d/m/Y H:i" }}</p>
+                            
+                        </div>
+                        <p class="conteudo">{{ tweet.tweet }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
         </div>
 
     </main>

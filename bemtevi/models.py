@@ -7,7 +7,7 @@ class Tweet(models.Model):
 
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     tweet = models.TextField()
-    data = models.DateField()
+    data = models.DateTimeField()
 
     def __str__(self):
         return f'Tweet de {self.user}'
