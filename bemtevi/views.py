@@ -9,23 +9,6 @@ def home(request):
 
     return render(request, 'bemtevi/home.html', {'tweets': tweets})
 
-# def login(request):
-#     if request.method == 'POST':
-#         try:
-#             username = request.POST['username']
-#             password = request.POST['password']
-            
-#             print(username)
-#             print(password)
-            
-#             messages.success(request, 'Login - Sucesso')
-#             return redirect('index')
-#         except Exception as e:
-#             messages.error(request, 'Erro ao fazer login')
-#             return redirect('login')
-    
-#     return render(request, 'bemtevi/login.html')
-
 from django.contrib.auth import authenticate, login as django_login
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -35,12 +18,7 @@ def login(request):
         try:
             username = request.POST['username']
             password = request.POST['password']
-            print('------ 1 -----')
             
-            print(username)
-            print(password)
-
-            # Autentica o usuário
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
@@ -61,7 +39,6 @@ def login(request):
     return render(request, 'bemtevi/login.html')
 
 
-
 def reset_password(request):
     return render(request, 'bemtevi/forget_password.html')
 
@@ -69,13 +46,11 @@ def reset_password(request):
 def register(request):
     if request.method == 'POST':
         try:
-            name = request.POST['name']
             username = request.POST['username']
             email = request.POST['email']
             password = request.POST['password']
             repeat_password = request.POST['repeatPassword']
-
-            print(name)
+            
             print(username)
             print(email)
             print(password)
@@ -88,9 +63,6 @@ def register(request):
 
             # Cria um novo usuário
             user = User.objects.create_user(username=username, email=email, password=password)
-            
-            user.first_name = name.split()[0]
-            user.last_name = ' '.join(name.split()[1:])
             user.save()
             
             print('salvo')
@@ -104,33 +76,15 @@ def register(request):
 
 
 def index(request):
-    tweets = Tweet.objects.all().order_by('-data')
+    tweets = Tweet.objects.all().order_by('-data')[:100]
     return render(request, 'bemtevi/index.html', {'tweets': tweets})
 
 
-# def post(request):
-#     if request.method == 'POST':
-#         try:
-#             print('aquiiiiiiiiiiiiiiii')
-#             tweet = request.POST['new_tweet']
-#             datetime = datetime.now
-
-#             print(tweet)
-#             print(datetime)
-
-#             return redirect('index')
-#         except:
-#             return redirect('index')
-
 import datetime
-
 def post(request):
     if request.method == 'POST':
         try:
-            print('aquiiiiiiiiiiiiiiii')
-            tweet = request.POST['new_tweet']  # Use get para evitar exceções se a chave não existir
-
-            print(tweet)
+            tweet = request.POST['new_tweet']
 
             novo_tweet = Tweet.objects.create(
                 user=request.user,
@@ -143,8 +97,7 @@ def post(request):
             return redirect('index', {'data': request})
         except Exception as e:
             print(f"Erro ao processar o post: {e}")
-            # Considere adicionar uma mensagem de erro ou redirecionar para uma página de erro
+            
             return redirect('index')
-
-    # Considere redirecionar para uma página de erro se o método não for POST
+        
     return redirect('index')
