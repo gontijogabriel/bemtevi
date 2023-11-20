@@ -86,8 +86,8 @@ def post(request):
         try:
             tweet = request.POST['new_tweet']
             
-            if tweet != '':
-
+            if tweet != '' and len(tweet) <= 256:
+        
                 novo_tweet = Tweet.objects.create(
                     user=request.user,
                     tweet=tweet,
@@ -95,6 +95,7 @@ def post(request):
                 )
 
                 print(f"Tweet criado: {novo_tweet}")
+                
 
             return redirect('index', {'data': request})
         
