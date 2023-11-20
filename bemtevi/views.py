@@ -85,16 +85,20 @@ def post(request):
     if request.method == 'POST':
         try:
             tweet = request.POST['new_tweet']
+            
+            if tweet != '':
 
-            novo_tweet = Tweet.objects.create(
-                user=request.user,
-                tweet=tweet,
-                data=datetime.datetime.now()
-            )
+                novo_tweet = Tweet.objects.create(
+                    user=request.user,
+                    tweet=tweet,
+                    data=datetime.datetime.now()
+                )
 
-            print(f"Tweet criado: {novo_tweet}")
+                print(f"Tweet criado: {novo_tweet}")
 
             return redirect('index', {'data': request})
+        
+            
         except Exception as e:
             print(f"Erro ao processar o post: {e}")
             
