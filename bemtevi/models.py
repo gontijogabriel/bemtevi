@@ -11,3 +11,4 @@ class Tweet(models.Model):
 
     def __str__(self):
         return f'Tweet de {self.user}'
+    

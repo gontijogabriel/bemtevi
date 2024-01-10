@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>bem te vi</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    body {
+        width: 100%;
+        display: flex;
+        align-items: start;
+        justify-content: center;
+        gap: 0.25rem;
+        padding-top: 10px;
+    }
+    a {text-decoration: none; color: black;}
+
+    header {
+        width: 10%;
+        min-width: 150px;
+        height: 400px;
+        padding: 10px;
+        background-color: rgb(240, 237, 216);
+        border-radius: 12px;
+    }
+    .header-logo {
+        margin: 0 auto;
+    }
+    .header-logo img {
+        width: 100px;
+        min-width: 60px;
+        padding: 10px;
+    }
+    .header-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .header-link {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        padding: 5px;
+        background-color: rgb(180, 180, 180);
+        border-radius: 8px;
+        gap: 1rem;
+        border: 1px solid black;
+    }
+    .header-link:hover {
+        background-color: rgb(228, 228, 228);
+    }
+    .header-link img {
+        width: 20%;
+    }
+    main {
+        width: 35%;
+        min-width: 500px;
+        height: 600px;
+        background-color: aqua;
+    }
+
+
+
+
+    @media only screen and (max-width: 800px) {
+        body {
+            flex-direction: column;
+            padding: 0;
+        }
+        header {
+            width: 100%;
+            min-width: 270px;
+            height: 170px;
+            display: flex;
+            flex-direction: column;
+        }
+        .header-links {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        main {
+            width: 100%;
+            min-width: 270px;
+        }
+    }
+
+    @media only screen and (max-width: 300px) {
+        header {
+            height: 240px;
+        }
+        .header-links {
+            align-items: center;
+            flex-direction: column;
+        }
+        .header-link {
+            width: 50%;
+        }
+    }
+</style>
+<body>
+    <header>
+        <div class="header-logo">
+            <img src="logo.png" alt="logo">
+        </div>
+
+        <div class="header-links">
+
+            <a href="#" class="header-link">
+                <img src="profile_12382840.png" alt="login-icon">
+                <p>Login</p>
+            </a>
+    
+            <a href="#" class="header-link">
+                <img src="user_121695.png" alt="login-icon">
+                <p>Register</p>
+            </a>
+
+        </div>
+
+    </header>
+
+    <main>
+
+
+    </main>
+
+
+    <!-- <main>
+        <div class="main-header">    
+            <nav class="main-header-links">
+                <a href="#">
+                    <div class="header-logo">
+                        <img src="logo.png" alt="logo">
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="header-link">
+                        <img src="profile_12382840.png" alt="login-icon">
+                        <p>Login</p>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="header-link">
+                        <img src="user_121695.png" alt="login-icon">
+                        <p>Register</p>
+                    </div>
+                </a>
+                <a href="#"><img src="user_121695.png" alt="register-icon">Register</a>          
+            </nav>
+        </div>
+        <div class="main-container">
+            
+            <div class="tweet-container">
+                <div class="header-tweet">
+                    <p>@usuarioAdmin</p>
+                    <p>10/01/2024</p>
+                </div>
+                <div class="main-tweet">
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas aliquam, ea qui eum asperiores officia labore. Illum harum ex ipsum culpa natus omnis aperiam iure, nostrum vel velit, officia in odit veritatis ipsam quia maxime? Ea officia, vero provident quaerat porro consequuntur nihil reiciendis adipisci quam recusandae id quibusdam vitae?</p>
+                </div>
+                <div class="footer-tweet">
+                    <div class="interacao-tweet">                       
+                        <div class="interacao">
+                            <div class="retweet">
+                                <?xml version="1.0" encoding="utf-8"?>
+                                <svg stroke="#000000" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" color="#000000"> 
+                                    <title id="retweetIconTitle">Retweet</title> 
+                                    <path d="M13 18L6 18L6 7"/> 
+                                    <path d="M3 9L6 6L9 9"/> 
+                                    <path d="M11 6L18 6L18 17"/> 
+                                    <path d="M21 15L18 18L15 15"/> 
+                                </svg>
+                            </div>
+                            <div class="like">
+                                <?xml version="1.0" encoding="utf-8"?>
+                                <svg fill="#00000" viewBox="0 0 1920 1920">
+                                    <path d="M1637.176 1129.412h-112.94v112.94c62.23 0 112.94 50.599 112.94 112.942 0 62.344-50.71 112.941-112.94 112.941h-112.942v112.941c62.23 0 112.941 50.598 112.941 112.942 0 62.343-50.71 112.94-112.94 112.94h-960c-155.634 0-282.354-126.606-282.354-282.352V903.529h106.617c140.16 0 274.334-57.6 368.3-157.778C778.486 602.089 937.28 379.256 957.385 112.94h36.367c50.484 0 98.033 22.363 130.334 61.44 32.64 39.53 45.854 91.144 36.14 141.515-22.7 118.589-60.197 236.048-111.246 349.102-23.83 52.517-19.313 112.602 11.746 160.94 31.397 48.566 84.706 77.591 142.644 77.591h433.807c62.231 0 112.942 50.598 112.942 112.942 0 62.343-50.71 112.94-112.942 112.94m225.883-112.94c0-124.575-101.308-225.883-225.883-225.883H1203.37c-19.651 0-37.044-9.374-47.66-25.863-10.391-16.15-11.86-35.577-3.84-53.196 54.663-121.073 94.87-247.115 119.378-374.513 15.925-83.576-5.873-169.072-60.085-234.578C1157.29 37.384 1078.005 0 993.751 0H846.588v56.47c0 254.457-155.068 473.224-285.063 612.029-72.734 77.477-176.98 122.09-285.967 122.09H56v734.117C56 1742.682 233.318 1920 451.294 1920h960c124.574 0 225.882-101.308 225.882-225.882 0-46.42-14.117-89.676-38.174-125.59 87.869-30.947 151.116-114.862 151.116-213.234 0-46.419-14.118-89.675-38.174-125.59 87.868-30.946 151.115-114.862 151.115-213.233" fill-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <p>09:15</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main> -->
+</body>
+</html>
