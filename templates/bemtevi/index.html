@@ -2,100 +2,60 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>bem-te-vi</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>bem te vi</title>
     <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-
 <body>
-
-    <header>
-        <img alt="fotodeperfil">
-        <p><a href="#">@{{ request.user }}</a></p>
-
-        <div class="header__links">
-            <nav>
-                <ul>
-                    <li><a class="link" href="#">Notificacoes</a></li>
-                    <li><a class="link" href="#">Mensagens</a></li>
-                    <li><a class="link" href="{% url 'login' %}">Sair</a></li>
-                </ul>
-            </nav>
+    <header class="header-home">
+        <div class="header-logo">
+            <img src="{% static 'assets/logo.png' %}" alt="logo">
         </div>
+
+        <div class="header-links">
+
+            <a href="{% url 'login' %}" class="header-link">
+                <i class="fa fa-user"></i>
+                <p>Login</p>
+            </a>
+    
+            <a href="#" class="header-link">
+                <i class="fa fa-user-plus"></i>
+                <p>Register</p>
+            </a>
+
+        </div>
+
     </header>
 
-    <main>
-        <div class="main__header">
-            <img src="{% static 'assets/logo.png'%}" alt="bem-te-vi.png">
+    <main class="main-home">
+        <hr>
+        <div class="tweet">
+            <div class="tweet-header">
+                <p>@usuarioAdmin</p>
+                <p>10/01/2024</p>
+            </div>
+            <div class="tweet-main">
+                <div class="foto-main"><img src="{% static 'assets/perfil_padrao.jpg' %}" alt="foto"></div>
+                <div class="tweet-text">
+                    <p>&ensp;Lorem ipsum dolor sit am Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum officiis labore architecto nobis laudantium placeat odio quas qui rem praesentium molestias nam accusamus vero, totam, at recusandae, esse adipisci porro? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium fugit sapiente quisquam quo laboriosam vero ex assumenda, pariatur ipsam, excepturi distinctio incidunt doloremque officia aut nulla. Minima, dolor quos. Harum quam nam alias iste amet. Velit quidem et repellendus atque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores assumenda incidunt quae corrupti tenetur amet? Distinctio, veniam impedit vel perspiciatis unde, quaerat velit enim molestiae beatae ipsam ullam aperiam sequi perferendis in, voluptatum quis? Repudiandae ad molestias enim autem.</p>
+                </div>
+            </div>
+            <div class="tweet-footer">
+                <div class="interacao">
+                    <i class="fa fa-heart" style="color: red;"></i>                       
+                    <i class="fa fa-retweet" style="color: green;"></i>
+                    <i class="fa fa-comment"></i>
+                </div>         
+                <p>09:15</p>
+            </div>
+            <hr>
         </div>
-        <form class="container__insert__tweet" method="post" action="{% url 'post' %}">
-            {% csrf_token  %}
-            <div class="insert__tweet__input">
-                <!-- <input id="new_tweet" type="text" placeholder="O que voce esta pensando..?"> -->
-                <textarea name="new_tweet" id="new_tweet" rows="3" cols="50" placeholder="O que voce esta pensando..?"></textarea>
-            </div>
-            <div class="postar">
-                <button id="button_postar" class="tweetButton" type="submit">Postar</button>
-            </div>
-        </form>
-        <div class="container__tweet">
 
-            {% if tweets %}
-                {% for tweet in tweets %}
-                    <div class="tweet">
-                        <div class="header__tweet">
-                            <p class="user">@{{ tweet.user }}</p>
-                            <p class="data">{{ tweet.data|date:"d/m/Y H:i" }}</p>
-                            
-                        </div>
-                        <p class="conteudo">{{ tweet.tweet }}</p>
-                    </div>
-                {% endfor %}
-            {% endif %}
-            
-        </div>
     </main>
 
 </body>
-<!-- <script>
-    document.getElementById("button_postar").addEventListener("click", function () {
-        // Obtém o conteúdo do textarea
-        const newTweetContent = document.getElementById("new_tweet").value;
-
-        // Verifica se o conteúdo não está vazio
-        if (newTweetContent.trim() === "") {
-            alert("Por favor, insira um tweet antes de postar.");
-            return;
-        }
-
-        // Cria um novo elemento de tweet
-        const newTweet = document.createElement("div");
-        newTweet.className = "tweet";
-        newTweet.innerHTML = `
-            <div class="header__tweet">
-            <p class="user">@asdvasd</p>
-            <p class="data">09/11/2023</p>
-            </div>
-            <p class="conteudo">${newTweetContent}</p>
-        `;
-
-        // Adiciona o novo tweet à lista de tweets
-        const containerTweet = document.querySelector(".container__tweet");
-        containerTweet.appendChild(newTweet);
-
-        // Limpa o conteúdo do textarea
-        document.getElementById("new_tweet").value = "";
-    });
-
-    document.getElementById("new_tweet").addEventListener("keypress", function (event) {
-        if (event.key === "Enter" && !event.shiftKey) {
-            event.preventDefault(); // Impede a quebra de linha
-            document.getElementById("button_postar").click(); // Simula o clique no botão "Postar"
-        }
-    });
-</script> -->
-
 </html>

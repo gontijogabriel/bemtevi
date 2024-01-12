@@ -5,93 +5,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bem-te-vi</title>
+    <title>bem te vi</title>
     <link rel="stylesheet" href="{% static 'styles/register.css' %}">
-    <script src="{% static 'scripts/helper.js' %}"></script>
 </head>
 
 <body>
-    <main class="container">
-        
-        <div class="container__header">
-            <div class="container__bemtevi">
-                <img height="45px" src="{% static 'assets/logo.png' %}" alt="Logo bem-te-vi">
-            </div>
-        </div>
 
-        <div class="container__center">
-            {% comment %} <div class="center">
+    <main>
+        <img src="{% static 'assets/logo.png' %}" alt="bem-te-vi">
+        <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+            <h2>Register</h2>
+            <input type="text" name="username" placeholder="username" id="username">
+            <input type="text" name="email" placeholder="email" id="email">
+            <input type="password" name="password1" placeholder="password" id="password1">
+            <input type="password" name="password2" placeholder="repeat password" id="password2">
 
-                <h3>Register in bem-te-vi</h3>
-
-                <div id='loginInput' class="loginInput">
-                    <input type="text" placeholder="name">
-                </div>
-
-                <div id='loginInput' class="loginInput">
-                    <input type="text" placeholder="username">
-                </div>
-
-                <div id='loginInput' class="loginInput">
-                    <input type="email" placeholder="email">
-                </div>
-
-                <div id='loginInput' class="loginInput">
-                    <input type="password" placeholder="password">
-                </div>
-
-                <div id='passwordInput' class="loginInput">
-                    <input type="password" placeholder="repeat your password">
-                </div>
-
-                {% if errors %}
-                    <p class="Login__Mensagem"></p>
-                {% endif %}
-
-                <a class="loginButton" href="{% url 'login' %}">
-                    Sing in
-                </a>
-
-                <a class="loginButton" href="{% url 'login' %}">
-                    Voltar
-                </a>
-
-            </div> {% endcomment %}
-
-            <form class="center" method="POST" action="{% url 'register' %}">
-                {% csrf_token %}
-                <h3>Register in bem-te-vi</h3>
-            
-                <div id='usernameInput' class="loginInput">
-                    <input type="text" placeholder="username" id="username" name="username">
-                </div>
-            
-                <div id='emailInput' class="loginInput">
-                    <input type="text" placeholder="email" id="email" name="email">
-                </div>
-            
-                <div id='passwordInput' class="loginInput">
-                    <input type="password" placeholder="password" id="password" name="password">
-                </div>
-            
-                <div id='repeatPasswordInput' class="loginInput">
-                    <input type="password" placeholder="repeat your password" id="repeatPassword" name="repeatPassword">
-                </div>
-            
-                {% if errors %}
-                    <p class="Login__Mensagem"></p>
-                {% endif %}
-            
-                <button class="loginButton" type="submit" id="signupButton">
-                    Sign in
-                </button>
-
-                <a class="loginButton" href="{% url 'login' %}">
-                    Voltar
-                </a>
-            </form>
-            
-        
+            <button type="submit">Registrar</button>
+        </form>
     </main>
+
 </body>
 </html>

@@ -1,89 +1,49 @@
 * {
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
-.container {
+body {
+    max-width: 1280px;
     margin: 0 auto;
-    margin-top: 5%;
-    width: 25%;
-    max-width: 400px;
-    height: 10%;
-    min-width: 400px;
-    min-height: 425px;
-    background-color: rgba(255, 216, 118, 0.2);
-    box-shadow: 3px 2px 10px grey;
-    border-radius: 12px;
 }
-.container__header {
-    width: 100%;
-    height: 53px;
-    display: flex;
-}
-.container__bemtevi {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-.container__bemtevi img {
-    margin-top: 20px;
-}
-.container__center {
-    width: 100%;
-    height: calc(100% - 53px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.center {
-    margin-top: 5%;
-    width: 60%;
-    height: 100%;
+main {
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
-}
-.loginButton {
-    color: black;
-    text-decoration: none;
-    font-style: none;
-    
-    height: 30px;
-    background-color: rgba(138, 134, 131, 0.5);
-    border-radius: 15px;
-    display: flex;
     align-items: center;
     justify-content: center;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    gap: 0.7rem;
-    cursor: pointer;
+    gap: 1rem;
 }
-.loginButton img {
-    height: 80%;
+.logo-main {
+    padding: 20px;
+    width: 30%;
+    min-width: 200px;
 }
-.loginButton:hover {
-    background-color: rgba(138, 134, 131, 0.3);
-    box-shadow: 3px 2px 10px grey;
-}
-.loginInput input {
-    width: 100%;
-    height: 35px;
-    border-radius: 3px;
+form {
+    width: 300px;
+    border-radius: 12px;
     padding: 10px;
-    font-size: 15px;
-    border: 1px solid grey;
+    background-color: #ffd42a85;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
-.naoTemConta {
-    margin-top: 10%;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+form input, button {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid;
 }
-.Login__Mensagem {
+.link-login {
+    text-decoration: none; 
+    color: black;
+}
+button:hover {
+    cursor: pointer;
+    background-color: #fff;
+}
+
+main a {
     display: flex;
     justify-content: center;
-}
-button {
-    background: none;
-    border: none;
 }
