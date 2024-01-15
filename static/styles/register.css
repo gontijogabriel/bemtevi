@@ -6,9 +6,8 @@
 }
 
 body {
-    background-color: #f0cc005e;
+    background-color: #ffcf1183;
 }
-
 .container {
     width: 600px;
     height: auto;
@@ -17,7 +16,6 @@ body {
     flex-direction: column;
     align-items: center;
 }
-
 .cont-logo {
     width: 100%;
     display: flex;

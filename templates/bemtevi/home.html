@@ -15,10 +15,10 @@
 
         <div class="header">
             <div class="header-img">
-                <img src="/media/{{ candidato.foto_perfil }}" alt="foto de perfil">
-
-                
+                <img src="{{ data.foto.url }}" alt="foto de perfil">
             </div>
+
+            <p style="text-align: center;">{{ data.username }}</p>
 
             <div class="header-links">
                 <a href="#">
@@ -60,7 +60,7 @@
 
             <div class="add-tweet" onclick="openModal()">
                 <i class="fa-solid fa-plus"></i>
-                <img src="{% static 'logo_black.png' %}" alt="logo">
+                <img src="{% static 'assets/logo_black.png' %}" alt="logo">
             </div>
 
             <!-- Modal -->
