@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login as django_login
 from django.contrib import messages
 from django.shortcuts import render, redirect
 import datetime
-
+from bemtevi.utils import user_data_context
 
 def index(request):
     tweets = Tweet.objects.all().order_by('-data')[:100]
@@ -96,53 +96,22 @@ def register(request):
 
 @login_required(login_url='login')
 def home(request):
+    contexto = user_data_context(request)
+    tweets = Tweet.objects.all().order_by('-data')
     
-    user = User.objects.get(username=request.user)
-    usuario = Usuario.objects.get(user=user)
-
-    contexto = {
-        'id_user':user.pk,
-        'username':user.username,
-        'id':usuario.pk,
-        'nome':usuario.nome,
-        'sobrenome':usuario.sobrenome,
-        'email':usuario.email,
-        'birthday':usuario.data_nascimento,
-        'foto':usuario.foto_perfil,
-    }
-
-    return render(request, 'bemtevi/home.html', {'data': contexto})
-
-
-
-
-
-
-
-
-
-def post(request):
     if request.method == 'POST':
-        try:
-            tweet = request.POST['new_tweet']
-            
-            if tweet != '' and len(tweet) <= 256:
-
-                novo_tweet = Tweet.objects.create(
-                    user=request.user,
-                    tweet=tweet,
-                    data=datetime.datetime.now()
-                )
-
-                print(f"Tweet criado: {novo_tweet}")
-                
-
-            return redirect('index', {'data': request})
+        tweet = request.POST.get('tweet')
+        # contexto_user = user_data_context(request)
         
-            
-        except Exception as e:
-            print(f"Erro ao processar o post: {e}")
-            
-            return redirect('index')
+        user = User.objects.get(username=request.user)
+        usuario = Usuario.objects.get(user=user)
         
-    return redirect('index')
+        newTweet = Tweet.objects.create(user=user, usuario=usuario, tweet=tweet)
+        
+        tweets = Tweet.objects.all().order_by('-data')
+        return render(request, 'bemtevi/home.html', {'data': contexto, 'tweets':tweets})
+
+    return render(request, 'bemtevi/home.html', {'data': contexto, 'tweets':tweets})
+
+
+

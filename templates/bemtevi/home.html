@@ -18,7 +18,7 @@
                 <img src="{{ data.foto.url }}" alt="foto de perfil">
             </div>
 
-            <p style="text-align: center;">{{ data.username }}</p>
+            <p class="username-p">{{ data.username }}</p>
 
             <div class="header-links">
                 <a href="#">
@@ -67,8 +67,9 @@
             <div class="modal" id="myModal">
                 <div class="modal-content">
                     <div class="close" onclick="closeModal()">x</div>
-                    <form method="POST" class="modal-body">
-                        <textarea name="" id="tweet" name="tweet" placeholder="O que você está pensando..."></textarea>
+                    <form method="POST" action="{% url 'home' %}" class="modal-body">
+                        {% csrf_token %}
+                        <textarea id="tweet" name="tweet" placeholder="O que você está pensando..."></textarea>
                         <button class="header-link" type="submit">Postar</button>
                     </form>
                 </div>
@@ -76,37 +77,44 @@
             <!-- Fim Modal -->
 
             <!-- Tweets -->
-            <!-- <div class="tweet">
-                <div class="tweet-section">
-                    <div class="tweet-ft-perfil">
-                        <img src="img/fotodeperfil.png" alt="perfil">
-                    </div>
-                    <div class="tweet-main">
-                        <div class="tweet-header">
-                            <p>@userAdmin</p>
-                            <p>27/12/1998</p>
+            {% if tweets %}
+                {% for t in tweets %}
+                <div class="tweet">
+                    <div class="tweet-section">
+                        <div class="tweet-ft-perfil">
+                            <img src="{{ t.usuario.foto_perfil.url }}" alt="perfil">
                         </div>
-                        <div class="tweet-content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim earum, eos corporis qui exercitationem laborum modi distinctio. Itaque assumenda commodi blanditiis obcaecati, fugit nemo. Enim vel saepe ea? Commodi non sit delectus dicta, illum natus ullam accusamus vitae sequi aliquam fugit, dolor vero incidunt qui.</p>
+                        <div class="tweet-main">
+                            <div class="tweet-header">
+                                <p>{{ t.user.username }}</p>
+                                <p>{{ t.data|date:"d/m/Y" }}</p>
+                            </div>
+                            <div class="tweet-content">
+                                <p>&emsp;{{ t.tweet }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="tweet-footer">
-                    <div class="tweet-reacts">
-                        <a href="#">
-                            <i class="fa-solid fa-heart"></i>
-                        </a>
-                        <a href="#">
-                            <i class="fa-solid fa-retweet"></i>                                   
-                        </a>
-                        <a href="#">
-                            <i class="fa-solid fa-comment"></i>                                
-                        </a>
+                    <div class="tweet-footer">
+                        <div class="tweet-reacts">
+                            <a onclick="like('s')">
+                                <p>{{ t. }}</p>
+                                <i id="react-like" class="fa-solid fa-heart"></i>
+                            </a>
+                            <a href="#">
+                                <p>3</p>
+                                <i id="react-reTweet" class="fa-solid fa-retweet"></i>                                   
+                            </a>
+                            <a href="#">
+                                <p>1</p>
+                                <i id="react-comments" class="fa-solid fa-comment"></i>                                
+                            </a>
+                        </div>
+                        <p>{{ t.data|date:"H:i" }}</p>
                     </div>
-                    <p>09:57</p>
                 </div>
-            </div> -->
+                {% endfor %}
+            {% endif %}
             <!-- Fim Tweets -->
 
         </div>

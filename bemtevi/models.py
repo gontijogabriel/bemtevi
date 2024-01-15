@@ -24,6 +24,7 @@ class Tweet(models.Model):
         verbose_name_plural = 'tweets'
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     tweet = models.TextField()
     data = models.DateTimeField(auto_now_add=True)
     comentario = models.BooleanField(default=False)

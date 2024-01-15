@@ -15,3 +15,7 @@ window.onclick = function(event) {
         modal.style.display = 'none';
     }
 };
+
+function like(id_tweet) {
+    console.log(id_tweet)
+}
