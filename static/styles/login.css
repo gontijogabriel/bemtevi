@@ -7,23 +7,17 @@ body {
     max-width: 1280px;
     margin: 0 auto;
 }
-
-.link-login {
-    text-decoration: none; 
-    color: black;
-}
-
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: calc(70vh - 100px);
     gap: 1rem;
 }
 .logo-main {
-    background-color: black;
-    height: 30%;
+    padding: 20px;
+    width: 30%;
+    min-width: 200px;
 }
 form {
     width: 300px;
@@ -40,7 +34,22 @@ form input, button {
     border-radius: 8px;
     border: 1px solid;
 }
+.link-login {
+    text-decoration: none; 
+    color: black;
+}
 button:hover {
     cursor: pointer;
     background-color: #fff;
+}
+
+main a {
+    display: flex;
+    justify-content: center;
+}
+.messages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
 }

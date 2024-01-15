@@ -18,11 +18,17 @@
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
             <h2>Login</h2>
-            <input type="text" placeholder="username">
-            <input type="password" placeholder="password">
+            <input type="text" id="username" name="username" placeholder="username">
+            <input type="password" id="password" name="password" placeholder="password">
+            {% if messages %}
+                <div class="messages">
+                    {% for msg in messages %}    
+                        <p>{{ msg }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
             <button type="submit">Login</button>
             <a class="link-login" href="#">forget password</a>
-            {% messages %}
         </form>
         <a class="link-login" href="{% url 'register' %}">register</a>
     </main>

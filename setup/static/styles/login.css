@@ -2,10 +2,12 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 body {
     max-width: 1280px;
     margin: 0 auto;
+    background-color: #ffea9883;
 }
 main {
     display: flex;
@@ -23,27 +25,46 @@ form {
     width: 300px;
     border-radius: 12px;
     padding: 10px;
-    background-color: #ffd42a85;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    box-shadow: 0px 0px 20px 0px rgba(60,64,67,0.302), 0 1px 3px 1px rgba(60,64,67,0.149);
+
 }
 form input, button {
-    padding: 8px;
-    border-radius: 8px;
-    border: 1px solid;
+    padding: 5px;
 }
 .link-login {
     text-decoration: none; 
     color: black;
 }
+button {
+    width: 180px;
+    height: 35px;
+    background-color: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    border: none;
+}
 button:hover {
+    background-color: rgb(238, 238, 238);
     cursor: pointer;
-    background-color: #fff;
+    box-shadow: 1px 2px 0 rgba(60,64,67,0.302), 0 1px 3px 1px rgba(60,64,67,0.149);
+    transition: box-shadow .08s linear,min-width .15s cubic-bezier(0.4,0,0.2,1);
 }
 
 main a {
     display: flex;
     justify-content: center;
+}
+.messages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
 }
