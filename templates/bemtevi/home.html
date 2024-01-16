@@ -67,7 +67,7 @@
             <div class="modal" id="myModal">
                 <div class="modal-content">
                     <div class="close" onclick="closeModal()">x</div>
-                    <form method="POST" action="{% url 'home' %}" class="modal-body">
+                    <form method="POST" action="{% url 'newTweet' %}" class="modal-body">
                         {% csrf_token %}
                         <textarea id="tweet" name="tweet" placeholder="O que você está pensando..."></textarea>
                         <button class="header-link" type="submit">Postar</button>
@@ -78,39 +78,54 @@
 
             <!-- Tweets -->
             {% if tweets %}
-                {% for t in tweets %}
+                {% for tw in tweets %}
                 <div class="tweet">
+                    <div class="retweet-section">
+                        <p style="font-size: 12px;"><i class="fa-solid fa-retweet"></i> retweet by @admin</p>
+                    </div>
+                    
                     <div class="tweet-section">
                         <div class="tweet-ft-perfil">
-                            <img src="{{ t.usuario.foto_perfil.url }}" alt="perfil">
+                            <img src="{{ tw.usuario.foto_perfil.url }}" alt="perfil">
                         </div>
                         <div class="tweet-main">
                             <div class="tweet-header">
-                                <p>{{ t.user.username }}</p>
-                                <p>{{ t.data|date:"d/m/Y" }}</p>
+                                <a href="#">{{ tw.user.username }}</a>
+                                <p>{{ tw.data|date:"d/m/Y" }}</p>
                             </div>
                             <div class="tweet-content">
-                                <p>&emsp;{{ t.tweet }}</p>
+                                <p>&emsp;{{ tw.tweet }}</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="tweet-footer">
                         <div class="tweet-reacts">
-                            <a onclick="like('s')">
-                                <p>{{ t. }}</p>
-                                <i id="react-like" class="fa-solid fa-heart"></i>
+                            <a onclick="like({{ tw.id }}, {{ user.id }})">
+                                                      
+                                {% with likes_count=tw.like_set.count %}
+                                    {% if likes_count > 0 %}
+                                        <p>{{ likes_count }}</p>
+                                    {% endif %}
+                                {% endwith %}
+                                
+                                {% if tw.liked_by_user %}
+                                    <i id="react-like" class="fa-solid fa-heart" style="color: red;"></i>
+                                {% else %}
+                                    <i id="react-like" class="fa-solid fa-heart"></i>
+                                {% endif %}
+                               
                             </a>
-                            <a href="#">
-                                <p>3</p>
+                            <a>
+                                <p>x</p>
                                 <i id="react-reTweet" class="fa-solid fa-retweet"></i>                                   
                             </a>
-                            <a href="#">
-                                <p>1</p>
+                            <a>
+                                <p>x</p>
                                 <i id="react-comments" class="fa-solid fa-comment"></i>                                
                             </a>
                         </div>
-                        <p>{{ t.data|date:"H:i" }}</p>
+                        <p>{{ tw.data|date:"H:i" }}</p>
                     </div>
                 </div>
                 {% endfor %}

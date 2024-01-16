@@ -98,7 +98,33 @@ def register(request):
 def home(request):
     contexto = user_data_context(request)
     tweets = Tweet.objects.all().order_by('-data')
+    likes = Like.objects.all()
+    for tweet in tweets:
+        tweet.liked_by_user = tweet.like_set.filter(user=request.user).exists() if request.user.is_authenticated else False
     
+    print('chamou aq')
+    
+    # if request.method == 'POST':
+    #     tweet = request.POST.get('tweet')
+    #     # contexto_user = user_data_context(request)
+        
+    #     user = User.objects.get(username=request.user)
+    #     usuario = Usuario.objects.get(user=user)
+        
+    #     newTweet = Tweet.objects.create(user=user, usuario=usuario, tweet=tweet)
+        
+    #     tweets = Tweet.objects.all().order_by('-data')
+    #     likes = Like.objects.all()
+    #     for tweet in tweets:
+    #         tweet.liked_by_user = tweet.like_set.filter(user=request.user).exists() if request.user.is_authenticated else False
+        
+    #     return render(request, 'bemtevi/home.html', {'data':contexto, 'tweets':tweets, 'likes':likes, 'user':request.user})
+
+    return render(request, 'bemtevi/home.html', {'data':contexto, 'tweets':tweets, 'likes':likes, 'user':request.user})
+
+
+
+def newTweet(request):
     if request.method == 'POST':
         tweet = request.POST.get('tweet')
         # contexto_user = user_data_context(request)
@@ -107,11 +133,41 @@ def home(request):
         usuario = Usuario.objects.get(user=user)
         
         newTweet = Tweet.objects.create(user=user, usuario=usuario, tweet=tweet)
+
+        return redirect('home')
         
-        tweets = Tweet.objects.all().order_by('-data')
-        return render(request, 'bemtevi/home.html', {'data': contexto, 'tweets':tweets})
-
-    return render(request, 'bemtevi/home.html', {'data': contexto, 'tweets':tweets})
 
 
+@login_required(login_url='login')
+def likes(request):
+    if request.method == 'POST':
+        id_tweet = request.POST.get('id_tweet')
+        id_user = request.POST.get('id_user')
 
+        print(f'id user: {id_user} / id tweet: {id_tweet}')
+
+        try:
+            user_data = User.objects.get(id=id_user)
+            tweet_data = Tweet.objects.get(id=id_tweet)
+
+            # Verifica se o usuário já deu like nesse tweet
+            existing_like = Like.objects.filter(user=user_data, tweet=tweet_data)
+
+            if existing_like.exists():
+                # Se o like já existe, exclui
+                existing_like.delete()
+                print('like removido!')
+                return redirect('home')
+
+            else:
+                # Se o like não existe, cria
+                user_like_tweet = Like.objects.create(user=user_data, tweet=tweet_data)
+                print('like - ok!')
+
+                return redirect('home')
+
+            
+        except User.DoesNotExist or Tweet.DoesNotExist:
+        # Adicione um tratamento apropriado se o usuário ou tweet não existir
+            print('Erro: Usuário ou Tweet não encontrado.')
+        return redirect('home')
