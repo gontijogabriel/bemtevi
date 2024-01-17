@@ -1,156 +1,26 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>bem te vi</title>
+    <title>Perfil</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'styles/perfil.css' %}">
 </head>
-<style>
-    * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
-    body {
-        max-width: 700px;
-        margin: 0 auto;
-    }
-
-    a {text-decoration: none; color: black;}
-    hr {color: black;}
-
-    .header-perfil {
-        width: 100%;
-        height: 80px;
-        background-color: rgb(153, 198, 238);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .header-perfil img {
-        width: 60px;
-        height: 60px;
-    }
-    .main-perfil {
-        background-color: yellow;
-        width: 100%;
-        display: flex;
-    }
-    .foto-perfil {
-        padding: 5px;
-        width: 15%;
-        min-width: 180px;
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-        gap: 1rem;
-        justify-content: center;
-    }
-    .foto-perfil img {
-        width: 100%;
-        border-radius: 50%;
-        text-align: center;
-    }
-    .foto-perfil h3 {
-        width: 100%;
-        text-align: center;
-    }
-    .foto-perfil-descricao {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        font-size: 14px;
-    }
-    .descricao-perfil {
-        background-color: aqua;
-        width: 100%;
-    }
-    .descricao-menu {
-        width: 100%;
-
-    }
-
-    .menu-perfil {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        background-color: rgb(156, 114, 51);
-    }
-    .menu-perfil a {
-        width: 25%;
-        height: 100%;
-        text-align: center;
-        padding: 10px;
-    }
-    .menu-perfil a:hover {
-        background-color: blanchedalmond;
-    }
-    .perfil-container {
-        width: 100%;
-        background-color: bisque;
-    }
-
-
-
-    .tweet {
-        width: 100%;
-        border-radius: 3px;
-    }
-    .tweet-header {
-        padding: 5px;
-        display: flex;
-        justify-content: space-between;
-    }
-    .tweet-main {
-        display: flex;
-    }
-    .foto-main img {
-        padding: 3px;
-        width: 60px;
-        min-height: 60px;
-        border-radius: 50%;
-    }
-    .tweet-text {
-        width: 90%;
-        padding: 3px;
-    }
-    .tweet-footer {
-        padding: 5px;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
-    .interacao {
-        display: flex;
-        gap: 2rem;
-    }
-    @media only screen and (max-width: 700px) {
-        .main-perfil {
-            flex-direction: column;
-        }
-    }
-    @media only screen and (max-width: 300px) {}
-</style>
 <body>
     <header class="header-perfil">
-        <img src="logo.png" alt="bem-te-vi">
+        <img src="{% static 'assets/logo.png' %}" alt="bem-te-vi">
     </header>
 
     <main class="main-perfil">
         <div class="foto-perfil">
-            <img src="perfil_padrao.jpg" alt="foto">
-            <h3>@usuarioAdmin</h3>
+            <img src="{{ data.foto.url }}" alt="foto">
+            <h3>{{ data.username }}</h3>
             <div class="foto-perfil-descricao">
                 <p><strong>324</strong> seguidores</p>
                 <p><strong>410</strong> seguindo</p>
-            </div>
-        </div>
-        <div class="descricao-perfil">
-            <div class="descricao-menu">
-                <a href="#">Sair</a>
-                <a href="#">Editar</a>
             </div>
         </div>
     </main>
@@ -164,171 +34,97 @@
 
     <main class="perfil-container">
         <hr>
+        <!-- Tweets -->
+        {% if tweets %}
+        {% for tw in tweets %}
         <div class="tweet">
-            <div class="tweet-header">
-                <p>@usuarioAdmin</p>
-                <p>10/01/2024</p>
-            </div>
-            <div class="tweet-main">
-                <div class="foto-main"><img src="perfil_padrao.jpg" alt="foto"></div>
-                <div class="tweet-text">
-                    <p>&ensp;Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, recusandae. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, expedita.</p>
+            <!-- <div class="retweet-section">
+                <p style="font-size: 12px;"><i class="fa-solid fa-retweet"></i> retweet by @admin</p>
+            </div> -->
+            
+            <div class="tweet-section">
+                <div class="tweet-ft-perfil">
+                    <img src="{{ tw.usuario.foto_perfil.url }}" alt="perfil">
+                </div>
+                <div class="tweet-main">
+                    <div class="tweet-header">
+                        <a href="#">{{ tw.user.username }}</a>
+                        <p>{{ tw.data|date:"d/m/Y" }}</p>
+                    </div>
+                    <div class="tweet-content">
+                        <p>&emsp;{{ tw.tweet }}</p>
+                    </div>
                 </div>
             </div>
+
             <div class="tweet-footer">
-                <div class="interacao">
-                    <i class="fa fa-heart" style="color: red;"></i>                       
-                    <i class="fa fa-retweet" style="color: green;"></i>
-                    <i class="fa fa-comment"></i>
-                </div>         
-                <p>09:15</p>
-            </div>
-            <hr>
-        </div>
+                <div class="tweet-reacts">
+                    <a onclick="like({{tw.id}}, {{user.id}})">
+                                         
+                        {% with likes_count=tw.like_set.count %}
+                            {% if likes_count > 0 %}
+                                <p>{{ likes_count }}</p>
+                            {% endif %}
+                        {% endwith %}
+                        
+                        {% if tw.liked_by_user %}
+                            <i id="react-like" class="fa-solid fa-heart" style="color: red;"></i>
+                        {% else %}
+                            <i id="react-like" class="fa-solid fa-heart"></i>
+                        {% endif %}
+                       
+                    </a>
 
+                        <a onclick="retweet({{tw.id}}, {{user.id}})">
 
+                            {% with retweets_count=tw.retweet_set.count %}
+                                {% if retweets_count > 0 %}
+                                    <p>{{ retweets_count }}</p>
+                                {% endif %}
+                            {% endwith %}
+                            
+                            {% if tw.retweeted_by_user %}
+                                <i id="react-reTweet" class="fa-solid fa-retweet" style="color: green;"></i>
+                            {% else %}
+                                <i id="react-reTweet" class="fa-solid fa-retweet"></i>
+                            {% endif %}  
 
-        <div class="tweet">
-            <div class="tweet-header">
-                <p>@usuarioAdmin</p>
-                <p>10/01/2024</p>
-            </div>
-            <div class="tweet-main">
-                <div class="foto-main"><img src="perfil_padrao.jpg" alt="foto"></div>
-                <div class="tweet-text">
-                    <p>&ensp;Lorem ipsum dolor sit am Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum officiis labore architecto nobis laudantium placeat odio quas qui rem praesentium molestias nam accusamus vero, totam, at recusandae, esse adipisci porro? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium fugit sapiente quisquam quo laboriosam vero ex assumenda, pariatur ipsam, excepturi distinctio incidunt doloremque officia aut nulla. Minima, dolor quos. Harum quam nam alias iste amet. Velit quidem et repellendus atque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores assumenda incidunt quae corrupti tenetur amet? Distinctio, veniam impedit vel perspiciatis unde, quaerat velit enim molestiae beatae ipsam ullam aperiam sequi perferendis in, voluptatum quis? Repudiandae ad molestias enim autem.</p>
+                        </a>
+                        <a>
+                            <p>x</p>
+                            <i id="react-comments" class="fa-solid fa-comment"></i>                                
+                        </a>
+                    </div>
+                    <p>{{ tw.data|date:"H:i" }}</p>
                 </div>
             </div>
-            <div class="tweet-footer">
-                <div class="interacao">
-                    <i class="fa fa-heart" style="color: red;"></i>                       
-                    <i class="fa fa-retweet" style="color: green;"></i>
-                    <i class="fa fa-comment"></i>
-                </div>         
-                <p>09:15</p>
-            </div>
-            <hr>
-        </div>
-
-        <div class="tweet">
-            <div class="tweet-header">
-                <p>@usuarioAdmin</p>
-                <p>10/01/2024</p>
-            </div>
-            <div class="tweet-main">
-                <div class="foto-main"><img src="perfil_padrao.jpg" alt="foto"></div>
-                <div class="tweet-text">
-                    <p>&ensp;Lorem ipsum dolor sit am Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum officiis labore architecto nobis laudantium placeat odio quas qui rem praesentium molestias nam accusamus vero, totam, at recusandae, esse adipisci porro? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium fugit sapiente quisquam quo laboriosam vero ex assumenda, pariatur ipsam, excepturi distinctio incidunt doloremque officia aut nulla. Minima, dolor quos. Harum quam nam alias iste amet. Velit quidem et repellendus atque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores assumenda incidunt quae corrupti tenetur amet? Distinctio, veniam impedit vel perspiciatis unde, quaerat velit enim molestiae beatae ipsam ullam aperiam sequi perferendis in, voluptatum quis? Repudiandae ad molestias enim autem.</p>
+            {% endfor %}
+        {% endif %}
+        <!-- Fim Tweets -->
+            
+            <!-- <div class="tweet">
+                <div class="tweet-header">
+                    <p>@usuarioAdmin</p>
+                    <p>10/01/2024</p>
                 </div>
-            </div>
-            <div class="tweet-footer">
-                <div class="interacao">
-                    <i class="fa fa-heart" style="color: red;"></i>                       
-                    <i class="fa fa-retweet" style="color: green;"></i>
-                    <i class="fa fa-comment"></i>
-                </div>         
-                <p>09:15</p>
-            </div>
-            <hr>
-        </div>
-
-        <div class="tweet">
-            <div class="tweet-header">
-                <p>@usuarioAdmin</p>
-                <p>10/01/2024</p>
-            </div>
-            <div class="tweet-main">
-                <div class="foto-main"><img src="perfil_padrao.jpg" alt="foto"></div>
-                <div class="tweet-text">
-                    <p>&ensp;Lorem ipsum dolor sit am Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum officiis labore architecto nobis laudantium placeat odio quas qui rem praesentium molestias nam accusamus vero, totam, at recusandae, esse adipisci porro? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium fugit sapiente quisquam quo laboriosam vero ex assumenda, pariatur ipsam, excepturi distinctio incidunt doloremque officia aut nulla. Minima, dolor quos. Harum quam nam alias iste amet. Velit quidem et repellendus atque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores assumenda incidunt quae corrupti tenetur amet? Distinctio, veniam impedit vel perspiciatis unde, quaerat velit enim molestiae beatae ipsam ullam aperiam sequi perferendis in, voluptatum quis? Repudiandae ad molestias enim autem.</p>
+                <div class="tweet-main">
+                    <div class="foto-main"><img src="img/perfil_padrao.jpg" alt="foto"></div>
+                    <div class="tweet-text">
+                        <p>&ensp;Lorem ipsum dolor sit am Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum officiis labore architecto nobis laudantium placeat odio quas qui rem praesentium molestias nam accusamus vero, totam, at recusandae, esse adipisci porro? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium fugit sapiente quisquam quo laboriosam vero ex assumenda, pariatur ipsam, excepturi distinctio incidunt doloremque officia aut nulla. Minima, dolor quos. Harum quam nam alias iste amet. Velit quidem et repellendus atque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores assumenda incidunt quae corrupti tenetur amet? Distinctio, veniam impedit vel perspiciatis unde, quaerat velit enim molestiae beatae ipsam ullam aperiam sequi perferendis in, voluptatum quis? Repudiandae ad molestias enim autem.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="tweet-footer">
-                <div class="interacao">
-                    <i class="fa fa-heart" style="color: red;"></i>                       
-                    <i class="fa fa-retweet" style="color: green;"></i>
-                    <i class="fa fa-comment"></i>
-                </div>         
-                <p>09:15</p>
-            </div>
-            <hr>
-        </div>
-
-        <div class="tweet">
-            <div class="tweet-header">
-                <p>@usuarioAdmin</p>
-                <p>10/01/2024</p>
-            </div>
-            <div class="tweet-main">
-                <div class="foto-main"><img src="perfil_padrao.jpg" alt="foto"></div>
-                <div class="tweet-text">
-                    <p>&ensp;Lorem ipsum dolor sit am Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum officiis labore architecto nobis laudantium placeat odio quas qui rem praesentium molestias nam accusamus vero, totam, at recusandae, esse adipisci porro? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium fugit sapiente quisquam quo laboriosam vero ex assumenda, pariatur ipsam, excepturi distinctio incidunt doloremque officia aut nulla. Minima, dolor quos. Harum quam nam alias iste amet. Velit quidem et repellendus atque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores assumenda incidunt quae corrupti tenetur amet? Distinctio, veniam impedit vel perspiciatis unde, quaerat velit enim molestiae beatae ipsam ullam aperiam sequi perferendis in, voluptatum quis? Repudiandae ad molestias enim autem.</p>
+                <div class="tweet-footer">
+                    <div class="interacao">
+                        <i class="fa fa-heart" style="color: red;"></i>                       
+                        <i class="fa fa-retweet" style="color: green;"></i>
+                        <i class="fa fa-comment"></i>
+                    </div>         
+                    <p>09:15</p>
                 </div>
-            </div>
-            <div class="tweet-footer">
-                <div class="interacao">
-                    <i class="fa fa-heart" style="color: red;"></i>                       
-                    <i class="fa fa-retweet" style="color: green;"></i>
-                    <i class="fa fa-comment"></i>
-                </div>         
-                <p>09:15</p>
-            </div>
-            <hr>
-        </div>
+                <hr>
+            </div> -->
 
-        <div class="tweet">
-            <div class="tweet-header">
-                <p>@usuarioAdmin</p>
-                <p>10/01/2024</p>
-            </div>
-            <div class="tweet-main">
-                <div class="foto-main"><img src="perfil_padrao.jpg" alt="foto"></div>
-                <div class="tweet-text">
-                    <p>&ensp;Lorem ipsum dolor sit am Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum officiis labore architecto nobis laudantium placeat odio quas qui rem praesentium molestias nam accusamus vero, totam, at recusandae, esse adipisci porro? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium fugit sapiente quisquam quo laboriosam vero ex assumenda, pariatur ipsam, excepturi distinctio incidunt doloremque officia aut nulla. Minima, dolor quos. Harum quam nam alias iste amet. Velit quidem et repellendus atque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores assumenda incidunt quae corrupti tenetur amet? Distinctio, veniam impedit vel perspiciatis unde, quaerat velit enim molestiae beatae ipsam ullam aperiam sequi perferendis in, voluptatum quis? Repudiandae ad molestias enim autem.</p>
-                </div>
-            </div>
-            <div class="tweet-footer">
-                <div class="interacao">
-                    <i class="fa fa-heart" style="color: red;"></i>                       
-                    <i class="fa fa-retweet" style="color: green;"></i>
-                    <i class="fa fa-comment"></i>
-                </div>         
-                <p>09:15</p>
-            </div>
-            <hr>
-        </div>
-
-        <div class="tweet">
-            <div class="tweet-header">
-                <p>@usuarioAdmin</p>
-                <p>10/01/2024</p>
-            </div>
-            <div class="tweet-main">
-                <div class="foto-main"><img src="perfil_padrao.jpg" alt="foto"></div>
-                <div class="tweet-text">
-                    <p>&ensp;Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae commodi assumenda corporis asperiores? Velit, architecto, laboriosam quisquam quas commodi harum voluptates tempora assumenda pariatur maxime qui unde porro temporibus modi.</p>
-                </div>
-            </div>
-            <div class="tweet-footer">
-                <div class="interacao">
-                    <i class="fa fa-heart" style="color: red;"></i>                       
-                    <i class="fa fa-retweet" style="color: green;"></i>
-                    <i class="fa fa-comment"></i>
-                </div>         
-                <p>09:15</p>
-            </div>
-            <hr>
-        </div>
-
-
-
-
-
-
-
-
-    </main>
-
+        </main>
 
 </body>
 </html>

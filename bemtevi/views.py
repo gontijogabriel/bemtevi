@@ -99,9 +99,15 @@ def home(request):
     contexto = user_data_context(request)
     tweets = Tweet.objects.all().order_by('-data')
     likes = Like.objects.all()
+    retweets = Retweet.objects.all()
+
     for tweet in tweets:
         tweet.liked_by_user = tweet.like_set.filter(user=request.user).exists() if request.user.is_authenticated else False
-    
+        tweet.retweeted_by_user = tweet.retweet_set.filter(user=request.user).exists() if request.user.is_authenticated else False
+
+    # for tweet in tweets:
+    #     tweet.retweeted_by_user = tweet.retweet_set.filter(user=request.user).exists() if request.user.is_authenticated else False
+
     print('chamou aq')
     
     # if request.method == 'POST':
@@ -120,7 +126,7 @@ def home(request):
         
     #     return render(request, 'bemtevi/home.html', {'data':contexto, 'tweets':tweets, 'likes':likes, 'user':request.user})
 
-    return render(request, 'bemtevi/home.html', {'data':contexto, 'tweets':tweets, 'likes':likes, 'user':request.user})
+    return render(request, 'bemtevi/home.html', {'data':contexto, 'tweets':tweets, 'user':request.user})
 
 
 
@@ -144,8 +150,7 @@ def likes(request):
         id_tweet = request.POST.get('id_tweet')
         id_user = request.POST.get('id_user')
 
-        print(f'id user: {id_user} / id tweet: {id_tweet}')
-
+        print(f'LIKE = id user: {id_user} / id tweet: {id_tweet}')
         try:
             user_data = User.objects.get(id=id_user)
             tweet_data = Tweet.objects.get(id=id_tweet)
@@ -171,3 +176,50 @@ def likes(request):
         # Adicione um tratamento apropriado se o usuário ou tweet não existir
             print('Erro: Usuário ou Tweet não encontrado.')
         return redirect('home')
+    
+
+@login_required(login_url='login')
+def retweets(request):
+    if request.method == 'POST':
+        id_tweet = request.POST.get('id_tweet')
+        id_user = request.POST.get('id_user')
+
+        print(f'RETWEET = id user: {id_user} / id tweet: {id_tweet}')
+        try:
+            user_data = User.objects.get(id=id_user)
+            tweet_data = Tweet.objects.get(id=id_tweet)
+
+            # Verifica se o usuário já deu like nesse tweet
+            existing_retweet = Retweet.objects.filter(user=user_data, tweet=tweet_data)
+
+            if existing_retweet.exists():
+                # Se o like já existe, exclui
+                existing_retweet.delete()
+                print('retweet removido!')
+                return redirect('home')
+
+            else:
+                # Se o like não existe, cria
+                user_retweet_tweet = Retweet.objects.create(user=user_data, tweet=tweet_data)
+                print('retweet - ok!')
+
+                return redirect('home')
+
+            
+        except User.DoesNotExist or Tweet.DoesNotExist:
+        # Adicione um tratamento apropriado se o usuário ou tweet não existir
+            print('Erro: Usuário ou Tweet não encontrado.')
+        return redirect('home')
+    
+
+def perfil(request):
+    contexto = user_data_context(request)
+    tweets = Tweet.objects.all().order_by('-data')
+    likes = Like.objects.all()
+    retweets = Retweet.objects.all()
+
+    for tweet in tweets:
+        tweet.liked_by_user = tweet.like_set.filter(user=request.user).exists() if request.user.is_authenticated else False
+        tweet.retweeted_by_user = tweet.retweet_set.filter(user=request.user).exists() if request.user.is_authenticated else False
+        
+    return render(request, 'bemtevi/perfil.html', {'data':contexto, 'tweets':tweets, 'user':request.user})

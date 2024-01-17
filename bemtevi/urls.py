@@ -3,8 +3,8 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from bemtevi.views import ( index, login, register, 
-                            reset_password, home, likes,
-                            newTweet
+                            reset_password, home, likes, retweets,
+                            newTweet, perfil
                         )
 
 urlpatterns = [
@@ -16,6 +16,9 @@ urlpatterns = [
     path('index/', index, name='index'),
     path('newTweet/', newTweet, name='newTweet'),
     path('likes/', likes, name='likes'),
+    path('retweets/', retweets, name='retweets'),
+
+    path('perfil/', perfil, name='perfil'),
 ]
 
 if settings.DEBUG:

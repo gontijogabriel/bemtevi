@@ -40,6 +40,30 @@ function like(tweetId, userId) {
     });
 }
 
+function retweet(tweetId, userId) {
+    console.log('RETWEET / id_user: ' + userId + ' id_tweet: ' + tweetId);
+
+    // Obtenha o token CSRF do cookie
+    const csrftoken = getCookie('csrftoken');
+
+    fetch('/retweets/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrftoken,  // Inclua o token CSRF no cabeçalho
+            // Adicione outros cabeçalhos conforme necessário
+        },
+        body: new URLSearchParams({
+            'id_tweet': tweetId,
+            'id_user': userId,
+            // Adicione outros parâmetros conforme necessário
+        }),
+    }).then(() => {
+        // Recarrega a página após a execução da função
+        location.reload();
+    });
+}
+
 // Função para obter o valor do cookie
 function getCookie(name) {
     let cookieValue = null;

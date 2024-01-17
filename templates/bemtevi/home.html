@@ -21,13 +21,13 @@
             <p class="username-p">{{ data.username }}</p>
 
             <div class="header-links">
-                <a href="#">
+                <a href="{% url 'home' %}">
                     <div class="header-link">
                         <i class="fa fa-house"></i>
                         <p>Home</p>
                     </div>
                 </a>
-                <a href="#">
+                <a href="{% url 'perfil' %}">
                     <div class="header-link">
                         <i class="fa fa-user"></i>
                         <p>Perfil</p>
@@ -80,9 +80,9 @@
             {% if tweets %}
                 {% for tw in tweets %}
                 <div class="tweet">
-                    <div class="retweet-section">
+                    <!-- <div class="retweet-section">
                         <p style="font-size: 12px;"><i class="fa-solid fa-retweet"></i> retweet by @admin</p>
-                    </div>
+                    </div> -->
                     
                     <div class="tweet-section">
                         <div class="tweet-ft-perfil">
@@ -101,8 +101,8 @@
 
                     <div class="tweet-footer">
                         <div class="tweet-reacts">
-                            <a onclick="like({{ tw.id }}, {{ user.id }})">
-                                                      
+                            <a onclick="like({{tw.id}}, {{user.id}})">
+                                                 
                                 {% with likes_count=tw.like_set.count %}
                                     {% if likes_count > 0 %}
                                         <p>{{ likes_count }}</p>
@@ -116,9 +116,21 @@
                                 {% endif %}
                                
                             </a>
-                            <a>
-                                <p>x</p>
-                                <i id="react-reTweet" class="fa-solid fa-retweet"></i>                                   
+
+                            <a onclick="retweet({{tw.id}}, {{user.id}})">
+
+                                {% with retweets_count=tw.retweet_set.count %}
+                                    {% if retweets_count > 0 %}
+                                        <p>{{ retweets_count }}</p>
+                                    {% endif %}
+                                {% endwith %}
+                                
+                                {% if tw.retweeted_by_user %}
+                                    <i id="react-reTweet" class="fa-solid fa-retweet" style="color: green;"></i>
+                                {% else %}
+                                    <i id="react-reTweet" class="fa-solid fa-retweet"></i>
+                                {% endif %}  
+
                             </a>
                             <a>
                                 <p>x</p>

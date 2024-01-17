@@ -1,0 +1,190 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+a {text-decoration: none; color: black;}
+hr {color: black;}
+
+.header-perfil {
+    width: 100%;
+    height: 80px;
+    background-color: rgb(153, 198, 238);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header-perfil img {
+    width: 60px;
+    height: 60px;
+}
+.main-perfil {
+    background-color: yellow;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.foto-perfil {
+    padding: 5px;
+    width: 15%;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+}
+.foto-perfil img {
+    width: 100%;
+    border-radius: 50%;
+    text-align: center;
+}
+.foto-perfil h3 {
+    width: 100%;
+    text-align: center;
+}
+.foto-perfil-descricao {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+.descricao-perfil {
+    background-color: aqua;
+    width: 100%;
+}
+.descricao-menu {
+    width: 100%;
+
+}
+
+.menu-perfil {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: rgb(156, 114, 51);
+}
+.menu-perfil a {
+    width: 25%;
+    height: 100%;
+    text-align: center;
+    padding: 10px;
+}
+.menu-perfil a:hover {
+    background-color: blanchedalmond;
+}
+.perfil-container {
+    width: 100%;
+    background-color: bisque;
+}
+.tweet {
+    width: 100%;
+    border-radius: 3px;
+}
+.tweet-header {
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.tweet-main {
+    display: flex;
+}
+.foto-main img {
+    padding: 3px;
+    width: 60px;
+    min-height: 60px;
+    border-radius: 50%;
+}
+.tweet-text {
+    width: 90%;
+    padding: 3px;
+}
+.tweet-footer {
+    padding: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.interacao {
+    display: flex;
+    gap: 2rem;
+}
+.tweet {
+    width: 98%;
+    border: 1px solid #707070;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 1px;
+}
+.tweet:hover {
+    cursor: pointer;
+    box-shadow: 1px 2px 0 rgba(60,64,67,0.302), 0 1px 3px 1px rgba(60,64,67,0.149);
+    transition: box-shadow .08s linear,min-width .15s cubic-bezier(0.4,0,0.2,1); 
+    background-color: #ccc;
+}
+.tweet-section {
+    width: 100%;
+    display: flex;
+}
+.tweet-ft-perfil {
+    width: 90px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+.tweet-ft-perfil img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    padding: 5px;
+}
+.tweet-main {
+    width: calc(100% - 90px);
+    display: flex;
+    flex-direction: column;
+}
+.tweet-header {
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.tweet-content {
+    padding: 5px;
+}
+.tweet-footer {
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.tweet-reacts {
+    width: 25%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.tweet-reacts a {
+    display: flex;
+    gap: 0.25rem;
+    color: black;
+}
+.tweet-reacts p {
+    font-size: 14px;
+}
+
+@media only screen and (max-width: 700px) {
+    .main-perfil {
+        flex-direction: column;
+    }
+}
+@media only screen and (max-width: 300px) {}
