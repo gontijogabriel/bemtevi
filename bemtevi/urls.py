@@ -1,12 +1,25 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from bemtevi.views import index, login, register, reset_password, home, post
+from bemtevi.views import ( index, login, register, 
+                            reset_password, home, likes, retweets,
+                            newTweet, perfil
+                        )
 
 urlpatterns = [
-    path('', home, name='home'),
-    path('bemtevi/', login, name='login'),
+    path('', index, name='index'),
+    path('home/', home, name='home'),
+    path('login/', login, name='login'),
     path('reset_password/', reset_password, name='reset_password'),
     path('register/', register, name='register'),
     path('index/', index, name='index'),
-    path('post/', post, name='post'),
+    path('newTweet/', newTweet, name='newTweet'),
+    path('likes/', likes, name='likes'),
+    path('retweets/', retweets, name='retweets'),
+
+    path('perfil/', perfil, name='perfil'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

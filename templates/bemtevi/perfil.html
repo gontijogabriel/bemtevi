@@ -1,0 +1,130 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'styles/perfil.css' %}">
+</head>
+<body>
+    <header class="header-perfil">
+        <img src="{% static 'assets/logo.png' %}" alt="bem-te-vi">
+    </header>
+
+    <main class="main-perfil">
+        <div class="foto-perfil">
+            <img src="{{ data.foto.url }}" alt="foto">
+            <h3>{{ data.username }}</h3>
+            <div class="foto-perfil-descricao">
+                <p><strong>324</strong> seguidores</p>
+                <p><strong>410</strong> seguindo</p>
+            </div>
+        </div>
+    </main>
+    
+    <div class="menu-perfil">
+        <a href="#">posts</a>
+        <a href="#">respostas</a>
+        <a href="#">fotos</a>
+        <a href="#">curtidas</a>
+    </div>
+
+    <main class="perfil-container">
+        <hr>
+        <!-- Tweets -->
+        {% if tweets %}
+        {% for tw in tweets %}
+        <div class="tweet">
+            <!-- <div class="retweet-section">
+                <p style="font-size: 12px;"><i class="fa-solid fa-retweet"></i> retweet by @admin</p>
+            </div> -->
+            
+            <div class="tweet-section">
+                <div class="tweet-ft-perfil">
+                    <img src="{{ tw.usuario.foto_perfil.url }}" alt="perfil">
+                </div>
+                <div class="tweet-main">
+                    <div class="tweet-header">
+                        <a href="#">{{ tw.user.username }}</a>
+                        <p>{{ tw.data|date:"d/m/Y" }}</p>
+                    </div>
+                    <div class="tweet-content">
+                        <p>&emsp;{{ tw.tweet }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tweet-footer">
+                <div class="tweet-reacts">
+                    <a onclick="like({{tw.id}}, {{user.id}})">
+                                         
+                        {% with likes_count=tw.like_set.count %}
+                            {% if likes_count > 0 %}
+                                <p>{{ likes_count }}</p>
+                            {% endif %}
+                        {% endwith %}
+                        
+                        {% if tw.liked_by_user %}
+                            <i id="react-like" class="fa-solid fa-heart" style="color: red;"></i>
+                        {% else %}
+                            <i id="react-like" class="fa-solid fa-heart"></i>
+                        {% endif %}
+                       
+                    </a>
+
+                        <a onclick="retweet({{tw.id}}, {{user.id}})">
+
+                            {% with retweets_count=tw.retweet_set.count %}
+                                {% if retweets_count > 0 %}
+                                    <p>{{ retweets_count }}</p>
+                                {% endif %}
+                            {% endwith %}
+                            
+                            {% if tw.retweeted_by_user %}
+                                <i id="react-reTweet" class="fa-solid fa-retweet" style="color: green;"></i>
+                            {% else %}
+                                <i id="react-reTweet" class="fa-solid fa-retweet"></i>
+                            {% endif %}  
+
+                        </a>
+                        <a>
+                            <p>x</p>
+                            <i id="react-comments" class="fa-solid fa-comment"></i>                                
+                        </a>
+                    </div>
+                    <p>{{ tw.data|date:"H:i" }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+        <!-- Fim Tweets -->
+            
+            <!-- <div class="tweet">
+                <div class="tweet-header">
+                    <p>@usuarioAdmin</p>
+                    <p>10/01/2024</p>
+                </div>
+                <div class="tweet-main">
+                    <div class="foto-main"><img src="img/perfil_padrao.jpg" alt="foto"></div>
+                    <div class="tweet-text">
+                        <p>&ensp;Lorem ipsum dolor sit am Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum officiis labore architecto nobis laudantium placeat odio quas qui rem praesentium molestias nam accusamus vero, totam, at recusandae, esse adipisci porro? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium fugit sapiente quisquam quo laboriosam vero ex assumenda, pariatur ipsam, excepturi distinctio incidunt doloremque officia aut nulla. Minima, dolor quos. Harum quam nam alias iste amet. Velit quidem et repellendus atque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores assumenda incidunt quae corrupti tenetur amet? Distinctio, veniam impedit vel perspiciatis unde, quaerat velit enim molestiae beatae ipsam ullam aperiam sequi perferendis in, voluptatum quis? Repudiandae ad molestias enim autem.</p>
+                    </div>
+                </div>
+                <div class="tweet-footer">
+                    <div class="interacao">
+                        <i class="fa fa-heart" style="color: red;"></i>                       
+                        <i class="fa fa-retweet" style="color: green;"></i>
+                        <i class="fa fa-comment"></i>
+                    </div>         
+                    <p>09:15</p>
+                </div>
+                <hr>
+            </div> -->
+
+        </main>
+
+</body>
+</html>
