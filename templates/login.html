@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login - bem te vi</title>
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+</head>
+<body>
+    <main>
+        <form id="formLogin">
+            <h1>Login</h1>
+            <input type="text" placeholder="email">
+            <input type="text" placeholder="senha">
+            <button class="button" type="submit">Login</button>
+        </form>
+        <a href="#">esqueceu a senha?</a>
+        <a href="{% url 'cadastro' %}">se cadastrar</a>
+    </main>
+</body>
+</html>

@@ -27,27 +27,32 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     background-color: var(--amarelo-palido);
     font-family: 'Roboto', sans-serif;
 }
 
 main {
-    margin: 10% auto;
+    padding: 10px;
     width: 280px;
-    height: 300px;
+    margin: 5% auto;
     background-color: var(--borda-escura);
     background-image: url('../assets/logo_black.png');
-    background-size: 20vh;
+    background-size: 50vh;
     background-position: center;
     box-shadow: 0px 0px 53px -4px rgba(0,0,0,0.61);
+    border-radius: 15px;
+    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.foto {
+    width: 220px;
     display: flex;
     align-items: center;
-    flex-direction: column;
     justify-content: center;
-    border-radius: 15px;
-    gap: 1rem;
 }
 
 form {
@@ -57,8 +62,18 @@ form {
     gap: 1rem;
 }
 
-form h1 {
+main h1 {
     color: var(--amarelo-palido);
+}
+.foto img {
+    width: 100%;
+    border-radius: 50%;
+    border: 3px solid black;
+    box-shadow: 0px 0px 53px -4px rgba(0,0,0,0.61);
+}
+
+.inputs {
+    width: 75%;
 }
 
 form input {
@@ -72,7 +87,7 @@ form input {
 }
 
 .button {
-    width: 40%;
+    width: 60%;
     height: 35px;
     cursor: pointer;
     padding: 5px;
@@ -89,11 +104,19 @@ form input {
     color: var(--borda-escura);
 }
 
-main a {
+.voltar-button {
     text-decoration: none;
     color: var(--amarelo-palido);
 }
 
-main a:hover {
+.voltar-button:hover {
     border-bottom: 1px solid var(--amarelo-palido);
+}
+
+#foto_perfil {
+    display: none;
+}
+
+#img-preview {
+    cursor: pointer;
 }
