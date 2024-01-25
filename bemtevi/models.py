@@ -11,7 +11,6 @@ class Usuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nome = models.CharField(max_length=255)
     sobrenome = models.CharField(max_length=255)
-    data_nascimento = models.DateField()
     email = models.EmailField()
     foto_perfil = models.ImageField(upload_to='perfil/', null=True, blank=True)
 
@@ -31,6 +30,14 @@ class Tweet(models.Model):
 
     def __str__(self):
         return f'Tweet de {self.user}'
+    
+    @property
+    def get_total_likes(self):
+        return self.like_set.count()
+
+    @property
+    def get_total_retweets(self):
+        return self.retweet_set.count()
 
     
 class Like(models.Model):

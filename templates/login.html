@@ -10,10 +10,20 @@
 </head>
 <body>
     <main>
-        <form id="formLogin">
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
             <h1>Login</h1>
-            <input type="text" placeholder="email">
-            <input type="text" placeholder="senha">
+            <input type="text" id="email" name="email" placeholder="email">
+            <input type="text" id="senha" name="senha" placeholder="senha">
+
+            {% if messages %}
+                <div class="messages">
+                    {% for msg in messages %}    
+                        <p style="color: antiquewhite;">{{ msg.tags }} - {{ msg }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
             <button class="button" type="submit">Login</button>
         </form>
         <a href="#">esqueceu a senha?</a>

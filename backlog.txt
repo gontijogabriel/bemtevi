@@ -1,0 +1,8 @@
+Onde parei:
+    - criando contador de likes e retweets = ok
+
+O que fazer:
+    - adicionar funcoes de likes e retweets
+    - recuperacao de senha (envio de email + pagina + endpoint)
+    - criar pagina para cada tweet ?
+    - adicionar funcao de comentarios ?

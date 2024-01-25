@@ -11,24 +11,31 @@
 <body>
     <main>
         <h1>Cadastro</h1>
-        <div class="foto">
-            <a id="img-preview">
-                <img src="{% static 'assets/perfil_padrao.jpg' %}" alt="">
-            </a>
-        </div>
-
-        <form class="inputs" id="formCadastro" enctype="multipart/form-data">
+        <form class="inputs" enctype="multipart/form-data" method="POST" action="{% url 'cadastro' %}">
+            {% csrf_token %}
+            <div class="foto">
+                <label for="foto_perfil" id="img-preview">
+                    <img src="{% static 'assets/perfil_padrao.jpg' %}" alt="">
+                </label>
+                <input type="file" id="foto_perfil" name="foto_perfil" style="display: none;">
+            </div>
+    
             <input type="text" id="username" name="username" placeholder="username">
             <input type="text" id="nome" name="nome" placeholder="nome">
             <input type="text" id="sobrenome" name="sobrenome" placeholder="sobrenome">
             <input type="text" id="email" name="email" placeholder="email"> 
             <input type="text" id="senha" name="senha" placeholder="senha"> 
-            <input type="text" id="senha2" name="senha2" placeholder="repita sua senha"> 
-            <input type="file" id="foto_perfil" name="foto_perfil">
-            <button class="button" type="button" onclick="cadastraUsuario()">Se cadastrar</button>
+            <input type="text" id="senha2" name="senha2" placeholder="repita sua senha">
+            {% if messages %}
+                <div class="messages">
+                    {% for msg in messages %}    
+                        <p style="color: antiquewhite;">{{ msg.tags }} - {{ msg }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <button class="button" type="submit">Se cadastrar</button>
         </form>
         <a class="voltar-button" href="{% url 'login' %}">voltar</a>
-        
     </main>
 
     <script src="{% static 'scripts/cadastro.js' %}"></script>
