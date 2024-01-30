@@ -163,3 +163,6 @@ main {
     gap: 0.25rem;
 }
 
+.p-config {
+    display: flex;
+}

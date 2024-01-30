@@ -2,7 +2,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from bemtevi.views import login, cadastro, home, perfil, novo_tweet, user_logout
+from bemtevi.views import ( login, cadastro, home, perfil, 
+                        novo_tweet, user_logout, like_view,
+                        retweet_view
+)
 
 
 urlpatterns = [
@@ -13,6 +16,9 @@ urlpatterns = [
 
     path('<str:username>/', perfil, name='perfil'),
     path('tweet/novo_tweet/', novo_tweet, name='novo_tweet'),
+
+    path('like_view/<int:id_tweet>/', like_view, name='like_view'),
+    path('retweet_view/<int:id_tweet>/', retweet_view, name='retweet_view'),
 
     # path('reset_password/', reset_password, name='reset_password'),
     # path('likes/', likes, name='likes'),

@@ -23,10 +23,22 @@
                     <img src="{{ data.foto.url }}" alt="foto de perfil">
                 </div>
                 <h3>{{ data.nome }} {{ data.sobrenome }}</h3>
-                <h5>@{{ data.username }}</h5>
+                <div class="p-config">
+                    <h5>@{{ data.username }}</h5>
+                    {% if data.username == request.user %}
+                        {% if data.esta_seguindo %}
+                            <a class="link" href="#"><i class="fa-solid fa-check"></i>Seguindo</a>
+                        {% else %}
+                            <a class="link" href="#"><i class="fa-solid fa-user-plus"></i>Seguir</a>
+                        {% endif %}
+                    {% else %}
+                        <a class="link" href="#">Curtidas</a>
+                    {% endif %}
+                </div>
+                
                 <div class="p-seguidores">
-                    <p><strong>xxx</strong> Seguindo</p>
-                    <p><strong>xxx</strong> Seguidores</p>
+                    <p><strong>{{ data.seguindo }}</strong> Seguindo</p>
+                    <p><strong>{{ data.seguindores }}</strong> Seguidores</p>
                 </div>
             </div>
     
@@ -43,42 +55,53 @@
         <div class="tweets-container">
 
             {% if tweets %}
-                {% for tweet in tweets %}
+                {% for t in tweets %}
                 <div class="tweet">
                     <div class="t-main">    
                         <div class="t-foto">
-                            <img src="{{ tweet.usuario.foto_perfil.url }}" alt="">
+                            <img src="{{ t.tweet.usuario.foto_perfil.url }}" alt="">
                         </div>
                         <div class="t-conteudo">
                             <div class="t-header">
-                                <p>@{{ tweet.user.username }}</p>
-                                <p>{{ tweet.data|date:"d/m/Y" }}</p>
+                                <a href="{% url 'perfil' t.tweet.user.username %}">@{{ t.tweet.user.username }}</a>
+                                <p>{{ t.tweet.data|date:"d/m/Y" }}</p>
                             </div>
                             <div class="t-tweet">
-                                <p>{{ tweet.tweet }}</p>
+                                <p>{{ t.tweet.tweet }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="t-footer">
                         <div class="t-react">
                             <div class="react">
-                                {% if tweet.get_total_likes > 0 %}
-                                    <p>{{ tweet.get_total_likes }}</p>
+                                {% if t.tweet.get_total_likes > 0 %}
+                                    <p>{{ t.tweet.get_total_likes }}</p>
                                 {% endif %}
-                                <i class="fa-solid fa-heart"></i>
+                                <a style="color: black;" href="{% url 'like_view' t.tweet.id %}">
+                                    {% if t.user_has_liked %}
+                                        <i style="color: red;" class="fa-solid fa-heart"></i>
+                                    {% else %}
+                                        <i class="fa-solid fa-heart"></i>
+                                    {% endif %}
+                                </a>
+                                
                             </div>
                             <div class="react">
-                                {% if tweet.get_total_retweets > 0 %}
-                                    <p>{{ tweet.get_total_retweets }}</p>
+                                {% if t.tweet.get_total_retweets > 0 %}
+                                    <p>{{ t.tweet.get_total_retweets }}</p>
                                 {% endif %}
-                                <i class="fa-solid fa-retweet"></i>
-                            </div>
-                            <div class="react">
-                                <p>1</p>
-                                <i class="fa-solid fa-comment"></i>
+
+                                <a style="color: black;" href="{% url 'retweet_view' t.tweet.id %}">
+                                    {% if t.user_has_retweeted %}
+                                        <i style="color: green;" class="fa-solid fa-retweet"></i>
+                                    {% else %}
+                                        <i class="fa-solid fa-retweet"></i>
+                                    {% endif %}
+                                </a>
+
                             </div>
                         </div>
-                        <p>{{ tweet.data|date:"H:i" }}</p>
+                        <p>{{ t.tweet.data|date:"H:i" }}</p>
                     </div>
                 </div>
                 {% endfor %}

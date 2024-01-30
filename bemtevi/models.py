@@ -1,9 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from django.db import models
-from django.contrib.auth.models import User
-
 class Usuario(models.Model):
     class Meta:
         verbose_name_plural = 'usuarios'
@@ -16,6 +13,24 @@ class Usuario(models.Model):
 
     def __str__(self):
         return f'{self.nome} {self.sobrenome}'
+    
+    @property
+    def user_has_following(self):
+        if hasattr(self, 'seguidores'):
+            return self.seguidores.filter(seguidor__user=self.user).exists()
+        return False
+    
+    @property
+    def numero_seguidores(self):
+        return self.seguidores.count()
+
+    @property
+    def numero_seguindo(self):
+        return self.seguindo.count()
+    
+    @property
+    def get_foto_perfil(self):
+        return self.foto_perfil
 
 
 class Tweet(models.Model):
@@ -30,6 +45,16 @@ class Tweet(models.Model):
 
     def __str__(self):
         return f'Tweet de {self.user}'
+    
+    @property
+    def user_has_liked(self):
+        current_user = User.objects.get(username=self.user)
+        return self.like_set.filter(user=current_user).exists()
+
+    @property
+    def user_has_retweeted(self):
+        current_user = User.objects.get(username=self.user)
+        return self.retweet_set.filter(user=current_user).exists()
     
     @property
     def get_total_likes(self):
