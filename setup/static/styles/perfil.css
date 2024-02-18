@@ -165,4 +165,11 @@ main {
 
 .p-config {
     display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.flex-row {
+    display: flex;
+    gap: 0.5rem;
 }

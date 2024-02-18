@@ -160,6 +160,7 @@ def perfil(request, username):
     usuario = Usuario.objects.get(user=user)
 
     contexto = {
+        'username_logado':str(request.user),
         'id_user':user.pk,
         'username':user.username,
         'id':usuario.pk,
@@ -173,6 +174,9 @@ def perfil(request, username):
     tweets = Tweet.objects.filter(usuario=usuario).annotate(total_likes=Count('like'), total_retweets=Count('retweet')).order_by('-data')[:100]
     tweets_with_like_info = []
 
+    print(contexto['username'] == contexto['username_logado'])
+
+
     for tweet in tweets:
         user_has_liked = tweet.like_set.filter(user=user).exists()
         user_has_retweeted = tweet.retweet_set.filter(user=user).exists()
@@ -184,6 +188,8 @@ def perfil(request, username):
         }
 
         tweets_with_like_info.append(tweet_info)
+
+    
 
     return render(request, 'perfil.html', {'data': contexto, 'tweets': tweets_with_like_info})
 
@@ -242,4 +248,10 @@ def retweet_view(request, id_tweet):
         print('Erro: Usuário ou Tweet não encontrado.')
     return redirect('home')
 
+
+
+
+def seguir_view(request, id_user):
+    print(f'seguir {id_user} ?')
+    return print('aqui')
 
