@@ -249,9 +249,21 @@ def retweet_view(request, id_tweet):
     return redirect('home')
 
 
+def seguir_view(request, id_seguir):
+    id_user = request.user.id
+    try:
+        user = Usuario.objects.get(id=id_user)
+        seguir = Usuario.objects.get(id=id_seguir)
 
+        existing_follow = Seguidor.objects.filter(usuario=user.id, seguidor=seguir.id).exists()
+        
+        if existing_follow == False:
+            follow = Seguidor.objects.create(usuario=user, seguidor=seguir)
+            return redirect('home')
+        else:
+            existing_follow.delete()
+            return redirect('home')
 
-def seguir_view(request, id_user):
-    print(f'seguir {id_user} ?')
-    return print('aqui')
-
+    except Exception as e:
+        print(f'Erro view: seguir_view = {e}')
+        return redirect('home')

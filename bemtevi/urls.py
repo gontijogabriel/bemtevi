@@ -20,7 +20,7 @@ urlpatterns = [
     path('like_view/<int:id_tweet>/', like_view, name='like_view'),
     path('retweet_view/<int:id_tweet>/', retweet_view, name='retweet_view'),
 
-    path('seguir/<int:id_user>/', seguir_view, name='seguir_view'),
+    path('seguir/<int:id_seguir>/', seguir_view, name='seguir_view'),
 
     # path('reset_password/', reset_password, name='reset_password'),
     # path('likes/', likes, name='likes'),
