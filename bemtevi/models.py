@@ -15,12 +15,6 @@ class Usuario(models.Model):
         return f'{self.nome} {self.sobrenome}'
     
     @property
-    def user_has_following(self):
-        if hasattr(self, 'seguidores'):
-            return self.seguidores.filter(seguidor__user=self.user).exists()
-        return False
-    
-    @property
     def numero_seguidores(self):
         return self.seguidores.count()
 
@@ -31,6 +25,12 @@ class Usuario(models.Model):
     @property
     def get_foto_perfil(self):
         return self.foto_perfil
+    
+    @property
+    def sugestoes_para_seguir(self):
+        usuarios_seguindo_ids = self.seguindo.values_list('seguidor__id', flat=True)
+        sugestoes = Usuario.objects.exclude(id__in=usuarios_seguindo_ids).exclude(id=self.id)
+        return sugestoes
 
 
 class Tweet(models.Model):

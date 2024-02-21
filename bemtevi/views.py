@@ -99,10 +99,8 @@ def home(request):
     user = User.objects.get(username=request.user)
     usuario = Usuario.objects.get(user=user)
 
-    usuarios_para_seguir = Usuario.objects.exclude(
-        Q(pk=usuario.pk) | Q(seguidores__seguidor__user=user)
-    )
-
+    usuarios_para_seguir = Usuario.objects.filter(~Q(seguidores__seguidor=usuario) & ~Q(user=user))
+    
     contexto = {
         'id_user': user.pk,
         'username': user.username,
@@ -111,7 +109,6 @@ def home(request):
         'sobrenome': usuario.sobrenome,
         'email': usuario.email,
         'foto': usuario.foto_perfil,
-        'esta_seguindo': usuario.user_has_following,
         'para_seguir': usuarios_para_seguir,
     }
 
@@ -131,33 +128,15 @@ def home(request):
 
         tweets_with_like_info.append(tweet_info)
 
-    return render(request, 'home.html', {'data': contexto, 'tweets': tweets_with_like_info})
+    return render(request, 'home.html', {'usuario': usuario, 'data': contexto, 'tweets': tweets_with_like_info})
 
-
-# @login_required(login_url='/')
-# def perfil(request, username):
-#     user = User.objects.get(username=username)
-#     usuario = Usuario.objects.get(user=user)
-
-#     contexto = {
-#         'id_user':user.pk,
-#         'username':user.username,
-#         'id':usuario.pk,
-#         'nome':usuario.nome,
-#         'sobrenome':usuario.sobrenome,
-#         'email':usuario.email,
-#         'foto':usuario.foto_perfil,
-#         'seguindores': usuario.numero_seguidores,
-#         'seguindo': usuario.numero_seguindo,
-#     }
-#     tweets_user = Tweet.objects.filter(user=user).order_by('-data')[:100]
-
-#     return render(request, 'perfil.html', {'data':contexto, 'tweets':tweets_user})
 
 @login_required(login_url='/')
 def perfil(request, username):
     user = User.objects.get(username=username)
     usuario = Usuario.objects.get(user=user)
+
+    seguindo_ou_sim_nao = Seguidor.objects.filter(usuario=request.user.id, seguidor=usuario.id).exists()
 
     contexto = {
         'username_logado':str(request.user),
@@ -170,12 +149,10 @@ def perfil(request, username):
         'foto':usuario.foto_perfil,
         'seguindores': usuario.numero_seguidores,
         'seguindo': usuario.numero_seguindo,
+        'seguindo_ou_sim_nao': seguindo_ou_sim_nao,
     }
     tweets = Tweet.objects.filter(usuario=usuario).annotate(total_likes=Count('like'), total_retweets=Count('retweet')).order_by('-data')[:100]
     tweets_with_like_info = []
-
-    print(contexto['username'] == contexto['username_logado'])
-
 
     for tweet in tweets:
         user_has_liked = tweet.like_set.filter(user=user).exists()
@@ -189,11 +166,7 @@ def perfil(request, username):
 
         tweets_with_like_info.append(tweet_info)
 
-    
-
-    return render(request, 'perfil.html', {'data': contexto, 'tweets': tweets_with_like_info})
-
-
+    return render(request, 'perfil.html', {'usuario': usuario, 'data': contexto, 'tweets': tweets_with_like_info})
 
 @login_required(login_url='/')
 def novo_tweet(request):
@@ -249,15 +222,14 @@ def retweet_view(request, id_tweet):
     return redirect('home')
 
 
+@login_required(login_url='/')
 def seguir_view(request, id_seguir):
     id_user = request.user.id
     try:
         user = Usuario.objects.get(id=id_user)
         seguir = Usuario.objects.get(id=id_seguir)
-
-        existing_follow = Seguidor.objects.filter(usuario=user.id, seguidor=seguir.id).exists()
-        
-        if existing_follow == False:
+        existing_follow = Seguidor.objects.filter(usuario=user.id, seguidor=seguir.id)
+        if existing_follow.exists() == False:
             follow = Seguidor.objects.create(usuario=user, seguidor=seguir)
             return redirect('home')
         else:

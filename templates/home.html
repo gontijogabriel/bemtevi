@@ -118,25 +118,22 @@
 
         <div class="footer-container">
             <h1>Quem Seguir?</h1>
-
+        
             <div class="quem-seguir">
-                
-                {% if data.para_seguir %}
-                    {% for seguir in data.para_seguir %}
+                {% for seguir in usuario.sugestoes_para_seguir %}
                     <div class="seguir">
-                        <img src="/media/{{ seguir.get_foto_perfil }}" alt="foto-perfil">
+                        <img src="{{ seguir.get_foto_perfil.url }}" alt="foto-perfil">
                         <div class="opc">
-                            <a href="{% url 'perfil' seguir.user %}">@{{ seguir.user }}</a>
+                            <a href="{% url 'perfil' seguir.user.username %}">@{{ seguir.user.username }}</a>
                             <a class="mb-botao" href="{% url 'seguir_view' id_seguir=seguir.id %}">Seguir</a>
                         </div>
                     </div>
-                    {% endfor %}
-                {% else %}
-                    <p style="text-align: center;">Nenhuma sugestão!</p>
-                {% endif %}
-
+                {% empty %}
+                    <p>Não há sugestões no momento.</p>
+                {% endfor %}
             </div>
         </div>
+        
 
     </main>
 

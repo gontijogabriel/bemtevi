@@ -32,7 +32,12 @@
                             <span href="#">Editar</span>
                         </a>
                     {% else %}
-                        <a class="link" href="#">NAO SEI</a>
+                        <!-- Verifica se esta seguindo ou nao-->
+                        {% if data.seguindo_ou_sim_nao %}
+                            <a class="link" href="#">Seguindo</a>
+                        {% else %}
+                            <a class="link" href="#">Seguir</a>
+                        {% endif %}
                     {% endif %}
                 </div>
                 
