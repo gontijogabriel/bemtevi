@@ -147,7 +147,7 @@ def perfil(request, username):
         'sobrenome':usuario.sobrenome,
         'email':usuario.email,
         'foto':usuario.foto_perfil,
-        'seguindores': usuario.numero_seguidores,
+        'seguidores': usuario.numero_seguidores,
         'seguindo': usuario.numero_seguindo,
         'seguindo_ou_sim_nao': seguindo_ou_sim_nao,
     }
@@ -239,3 +239,83 @@ def seguir_view(request, id_seguir):
     except Exception as e:
         print(f'Erro view: seguir_view = {e}')
         return redirect('home')
+
+
+
+
+@login_required(login_url='/')
+def seguindo_view(request, username):
+    # Obtenha o usuário logado
+    usuario_logado = request.user
+
+    # Obtenha o usuário associado ao nome de usuário fornecido
+    user = User.objects.get(username=username)
+
+    # Obtenha o objeto Usuario associado ao usuário
+    usuario = Usuario.objects.get(user=user)
+
+    # Verifique se o usuário logado está seguindo o usuário fornecido
+    seguindo_ou_sim_nao = Seguidor.objects.filter(usuario=usuario_logado.id, seguidor=usuario.id).exists()
+
+    # Obtenha todos os usuários que o usuário fornecido está seguindo
+    seguidores = Seguidor.objects.filter(seguidor=usuario)
+    seguindo = Seguidor.objects.filter(usuario=usuario)
+
+    # Lista de usuários que o usuário fornecido está seguindo
+    usuarios_seguindo = [seg.usuario for seg in seguindo]
+    usuarios_seguidores = [seg.usuario for seg in seguidores]
+
+    contexto = {
+        'username_logado': str(usuario_logado),
+        'id_user': user.pk,
+        'username': user.username,
+        'id': usuario.pk,
+        'nome': usuario.nome,
+        'sobrenome': usuario.sobrenome,
+        'email': usuario.email,
+        'foto': usuario.foto_perfil,
+        'seguidores': usuario.numero_seguidores,
+        'seguindo': usuario.numero_seguindo,
+        'seguindo_ou_sim_nao': seguindo_ou_sim_nao,
+        'pessoas_seguindo': usuarios_seguindo,
+        'pessoas_seguidores': usuarios_seguidores,
+    }
+    return render(request, 'seguindo.html', {'data': contexto})
+
+
+@login_required(login_url='/')
+def seguidores_view(request, username):
+        # Obtenha o usuário logado
+    usuario_logado = request.user
+
+    # Obtenha o usuário associado ao nome de usuário fornecido
+    user = User.objects.get(username=username)
+
+    # Obtenha o objeto Usuario associado ao usuário
+    usuario = Usuario.objects.get(user=user)
+
+    # Verifique se o usuário logado está seguindo o usuário fornecido
+    seguindo_ou_sim_nao = Seguidor.objects.filter(usuario=usuario_logado.id, seguidor=usuario.id).exists()
+
+    # Obtenha todos os usuários que o usuário fornecido está seguindo
+    seguidores = Seguidor.objects.filter(usuario=usuario)
+    print(seguidores)
+    # Lista de usuários que o usuário fornecido está seguindo
+
+    # Agora você pode iterar sobre usuarios_seguindo para acessar os detalhes de cada usuário
+
+    contexto = {
+        'username_logado': str(usuario_logado),
+        'id_user': user.pk,
+        'username': user.username,
+        'id': usuario.pk,
+        'nome': usuario.nome,
+        'sobrenome': usuario.sobrenome,
+        'email': usuario.email,
+        'foto': usuario.foto_perfil,
+        'seguidores': usuario.numero_seguidores,
+        'seguindo': usuario.numero_seguindo,
+        'seguindo_ou_sim_nao': seguindo_ou_sim_nao,
+        'pessoas_seguindo': seguidores,
+    }
+    return render(request, 'seguidores.html', {'data': contexto})

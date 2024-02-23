@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@{{ data.username }} - bem te vi</title>
+    <link rel="stylesheet" href="{% static 'styles/perfil.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" type="imagex/png" href="{% static 'assets/logo.png' %}">
+</head>
+<body>
+    <header>
+        <img src="{% static 'assets/logo.png' %}" alt="bem-te-vi">
+    </header>
+
+    <main>
+        
+        <div class="perfil-header">
+
+            <div class="perfil">
+                <div class="p-foto">
+                    <img src="{{ data.foto.url }}" alt="foto de perfil">
+                </div>
+                <h3>{{ data.nome }} {{ data.sobrenome }}</h3>
+                <div class="p-config">
+                    <h5>@{{ data.username }}</h5>
+                    {% if data.username_logado == data.username %}
+                        <a class="link flex-row" href="#">
+                            <i class="fa-solid fa-gears"></i>
+                            <span href="#">Editar</span>
+                        </a>
+                    {% else %}
+                        <!-- Verifica se esta seguindo ou nao-->
+                        {% if data.seguindo_ou_sim_nao %}
+                            <a class="link" href="#">Seguindo</a>
+                        {% else %}
+                            <a class="link" href="#">Seguir</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                
+                <div class="p-seguidores">
+                    <p><strong>{{ data.seguindo }}</strong> Seguindo</p>
+                    <p><strong>{{ data.seguidores }}</strong> Seguidores</p>
+                </div>
+            </div>
+    
+            <div class="links">
+                <a class="link" href="{% url 'home' %}">Home</a>
+                <a class="link" href="#">Retweets</a>
+                <a class="link" href="#">Curtidas</a>
+                <a class="link" href="{% url 'seguindo_view' data.username %}">Seguindo</a>
+                <a class="link" href="{% url 'seguidores_view' data.username %}">Seguidores</a>
+            </div>
+
+        </div>
+
+
+        <h1>Seguidores</h1>
+        <div class="tweets-container">
+
+            {% for seguindo in data.pessoas_seguidores %}
+            <div class="tweet">
+                <p>{{ seguindo.get_foto_perfil }}</p>
+                <p>@{{ seguindo.user.username }}</p>
+            </div>
+            {% endfor %}
+            
+
+        </div>
+
+    </main>
+
+</body>
+</html>

@@ -4,7 +4,8 @@ from django.contrib import admin
 from django.urls import path
 from bemtevi.views import ( login, cadastro, home, perfil, 
                         novo_tweet, user_logout, like_view,
-                        retweet_view, seguir_view
+                        retweet_view, seguir_view, seguindo_view, 
+                        seguidores_view
 )
 
 
@@ -21,6 +22,9 @@ urlpatterns = [
     path('retweet_view/<int:id_tweet>/', retweet_view, name='retweet_view'),
 
     path('seguir/<int:id_seguir>/', seguir_view, name='seguir_view'),
+
+    path('<str:username>/seguindo/', seguindo_view, name='seguindo_view'),
+    path('<str:username>/seguidores/', seguidores_view, name='seguidores_view'),
 
     # path('reset_password/', reset_password, name='reset_password'),
     # path('likes/', likes, name='likes'),
