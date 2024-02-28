@@ -42,8 +42,8 @@
                 </div>
                 
                 <div class="p-seguidores">
-                    <p><strong>{{ data.seguindo }}</strong> Seguindo</p>
-                    <p><strong>{{ data.seguidores }}</strong> Seguidores</p>
+                    <p><strong>{{ data.nm_seguindo }}</strong> Seguindo</p>
+                    <p><strong>{{ data.nm_seguidores }}</strong> Seguidores</p>
                 </div>
             </div>
     
@@ -60,15 +60,16 @@
 
         <h1>Seguidores</h1>
         <div class="tweets-container">
-
-            {% for seguindo in data.pessoas_seguidores %}
-            <div class="tweet">
-                <p>{{ seguindo.get_foto_perfil }}</p>
-                <p>@{{ seguindo.user.username }}</p>
-            </div>
-            {% endfor %}
-            
-
+            {% if data.seguidores %}
+                {% for x in data.seguidores %}
+                <div class="tweet-seguindo">
+                    <img src="{{ x.foto_perfil.url }}" alt="foto de perfil {{x.username}}">
+                    <a href="{% url 'perfil' x.username %}">@{{ x.username }}</a>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p style="text-align: center;">Não possui nenhum seguidor!</p>
+            {% endif %}
         </div>
 
     </main>

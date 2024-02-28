@@ -26,7 +26,6 @@
                 <h3>{{ data.nome }} {{ data.sobrenome }}</h3>
                 <div class="p-config">
                     <h5>@{{ data.username }}</h5>
-                    <h5>{{ data.id }}</h5>
                     {% if data.username_logado == data.username %}
                         <a class="link flex-row" href="#">
                             <i class="fa-solid fa-gears"></i>
@@ -42,8 +41,8 @@
                 </div>
                 
                 <div class="p-seguidores">
-                    <p><strong>{{ data.seguindo }}</strong> Seguindo</p>
-                    <p><strong>{{ data.seguidores }}</strong> Seguidores</p>
+                    <p><strong>{{ data.nm_seguindo }}</strong> Seguindo</p>
+                    <p><strong>{{ data.nm_seguidores }}</strong> Seguidores</p>
                 </div>
             </div>
     
@@ -60,22 +59,16 @@
 
         <h1>Seguindo</h1>
         <div class="tweets-container">
-
-            {% for seguindo in data.pessoas_seguindo %}
-            <div class="tweet">
-                <p>{{ seguindo.get_foto_perfil }}</p>
-                <p>@{{ seguindo.user.username }}</p>
-            </div>
-            {% endfor %}
-            
-            <p>aaaaaaaaa</p>
-
-            {% for seguindo in data.pessoas_seguidores %}
-            <div class="tweet">
-                <p>{{ seguindo.get_foto_perfil }}</p>
-                <p>@{{ seguindo.user.username }}</p>
-            </div>
-            {% endfor %}
+            {% if data.seguindo %}
+                {% for x in data.seguindo %}
+                <div class="tweet-seguindo">
+                    <img src="{{ x.foto_perfil.url }}" alt="foto de perfil {{x.username}}">
+                    <a href="{% url 'perfil' x.username %}">@{{ x.username }}</a>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p style="text-align: center;">Não está seguindo ninguém!</p>
+            {% endif %}
         </div>
 
     </main>

@@ -242,28 +242,18 @@ def seguir_view(request, id_seguir):
 
 
 
-
 @login_required(login_url='/')
 def seguindo_view(request, username):
-    # Obtenha o usuário logado
     usuario_logado = request.user
-
-    # Obtenha o usuário associado ao nome de usuário fornecido
     user = User.objects.get(username=username)
-
-    # Obtenha o objeto Usuario associado ao usuário
     usuario = Usuario.objects.get(user=user)
-
-    # Verifique se o usuário logado está seguindo o usuário fornecido
     seguindo_ou_sim_nao = Seguidor.objects.filter(usuario=usuario_logado.id, seguidor=usuario.id).exists()
 
-    # Obtenha todos os usuários que o usuário fornecido está seguindo
-    seguidores = Seguidor.objects.filter(seguidor=usuario)
-    seguindo = Seguidor.objects.filter(usuario=usuario)
+    # Obter os usuários que o usuário atual está seguindo
+    usuarios_seguindo = [seguidor.seguidor.user for seguidor in usuario.seguindo.all()]
 
-    # Lista de usuários que o usuário fornecido está seguindo
-    usuarios_seguindo = [seg.usuario for seg in seguindo]
-    usuarios_seguidores = [seg.usuario for seg in seguidores]
+    # Obter os seguidores do usuário atual
+    seguidores = [seguidor.usuario.user for seguidor in usuario.seguidores.all()]
 
     contexto = {
         'username_logado': str(usuario_logado),
@@ -274,35 +264,29 @@ def seguindo_view(request, username):
         'sobrenome': usuario.sobrenome,
         'email': usuario.email,
         'foto': usuario.foto_perfil,
-        'seguidores': usuario.numero_seguidores,
-        'seguindo': usuario.numero_seguindo,
+        'nm_seguidores': usuario.numero_seguidores,
+        'nm_seguindo': usuario.numero_seguindo,
         'seguindo_ou_sim_nao': seguindo_ou_sim_nao,
-        'pessoas_seguindo': usuarios_seguindo,
-        'pessoas_seguidores': usuarios_seguidores,
+        'seguindo': [{'username': usuario_seguindo.username, 'foto_perfil': usuario_seguindo.usuario.foto_perfil} for usuario_seguindo in usuarios_seguindo],
+        'seguidores': [{'username': seguidor.username, 'foto_perfil': seguidor.usuario.foto_perfil} for seguidor in seguidores],
     }
     return render(request, 'seguindo.html', {'data': contexto})
 
 
+
+
 @login_required(login_url='/')
 def seguidores_view(request, username):
-        # Obtenha o usuário logado
     usuario_logado = request.user
-
-    # Obtenha o usuário associado ao nome de usuário fornecido
     user = User.objects.get(username=username)
-
-    # Obtenha o objeto Usuario associado ao usuário
     usuario = Usuario.objects.get(user=user)
-
-    # Verifique se o usuário logado está seguindo o usuário fornecido
     seguindo_ou_sim_nao = Seguidor.objects.filter(usuario=usuario_logado.id, seguidor=usuario.id).exists()
 
-    # Obtenha todos os usuários que o usuário fornecido está seguindo
-    seguidores = Seguidor.objects.filter(usuario=usuario)
-    print(seguidores)
-    # Lista de usuários que o usuário fornecido está seguindo
+    # Obter os usuários que o usuário atual está seguindo
+    usuarios_seguindo = [seguidor.seguidor.user for seguidor in usuario.seguindo.all()]
 
-    # Agora você pode iterar sobre usuarios_seguindo para acessar os detalhes de cada usuário
+    # Obter os seguidores do usuário atual
+    seguidores = [seguidor.usuario.user for seguidor in usuario.seguidores.all()]
 
     contexto = {
         'username_logado': str(usuario_logado),
@@ -313,9 +297,10 @@ def seguidores_view(request, username):
         'sobrenome': usuario.sobrenome,
         'email': usuario.email,
         'foto': usuario.foto_perfil,
-        'seguidores': usuario.numero_seguidores,
-        'seguindo': usuario.numero_seguindo,
+        'nm_seguidores': usuario.numero_seguidores,
+        'nm_seguindo': usuario.numero_seguindo,
         'seguindo_ou_sim_nao': seguindo_ou_sim_nao,
-        'pessoas_seguindo': seguidores,
+        'seguindo': [{'username': usuario_seguindo.username, 'foto_perfil': usuario_seguindo.usuario.foto_perfil} for usuario_seguindo in usuarios_seguindo],
+        'seguidores': [{'username': seguidor.username, 'foto_perfil': seguidor.usuario.foto_perfil} for seguidor in seguidores],
     }
     return render(request, 'seguidores.html', {'data': contexto})

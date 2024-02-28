@@ -12,7 +12,15 @@ class Usuario(models.Model):
     foto_perfil = models.ImageField(upload_to='perfil/', null=True, blank=True)
 
     def __str__(self):
-        return f'{self.nome} {self.sobrenome}'
+        return self.nome
+    
+    @property
+    def seguidores(self):
+        return self.seguidores.all()
+    
+    @property
+    def seguindo(self):
+        return self.seguindo.all()
     
     @property
     def numero_seguidores(self):
@@ -94,5 +102,3 @@ class Seguidor(models.Model):
     usuario = models.ForeignKey(Usuario, related_name='seguindo', on_delete=models.CASCADE)
     seguidor = models.ForeignKey(Usuario, related_name='seguidores', on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f'{self.seguidor} segue {self.usuario}'
