@@ -88,9 +88,16 @@
                                         <i class="fa-solid fa-retweet"></i>
                                     {% endif %}
                                 </a>
+                            </div>
 
+                            <div class="react">
+                                <p>0</p>
+                                <a href="{% url 'comentario' t.tweet.id %}" style="color: black;">
+                                    <i class="fa-solid fa-comment"></i>
+                                </a>
                             </div>
                         </div>
+
                         <p>{{ t.tweet.data|date:"H:i" }}</p>
                     </div>
                 </div>

@@ -304,3 +304,12 @@ def seguidores_view(request, username):
         'seguidores': [{'username': seguidor.username, 'foto_perfil': seguidor.usuario.foto_perfil} for seguidor in seguidores],
     }
     return render(request, 'seguidores.html', {'data': contexto})
+
+
+def comentario(request, id_tweet):
+    print(id_tweet)
+
+    tweet = Tweet.objects.get(id=id_tweet)
+    print(tweet.usuario.foto_perfil)
+
+    return render(request, 'comentario.html', {'tweet': tweet})
