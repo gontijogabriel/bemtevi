@@ -1,65 +1,250 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>bem te vi</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
-    <header class="header-home">
-        <div class="header-logo">
-            <img src="{% static 'logo.png' %}" alt="logo">
-        </div>
-
-        <div class="header-links">
-
-            <a href="#" class="header-link">
-                <img src="profile_12382840.png" alt="login-icon">
-                <p>Login</p>
-            </a>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
     
-            <a href="#" class="header-link">
-                <img src="user_121695.png" alt="login-icon">
-                <p>Register</p>
-            </a>
+    :root {
+        --laranja-escuro: #FF8C00;
+        --laranja: #FFA500;
+        --laranja-medio: #FFB84D;
 
+        --cor-base: #FFD42A;
+
+        --amarelo-claro: #FFE24C;
+        --amarelo-suave: #FFD480;
+        --amarelo-palido: #FFEDB3;
+
+        --cor-fundo-escuro: #1E1E1E;
+        --cor-texto-primeiro-plano: #FFFFFF;
+        --destaque-principal: #FFD42A;
+        --texto-secundario: #A0A0A0;
+        --botao-principal: #4D4D4D;
+        --fundo-componentes-escuros: #333333;
+        --borda-escura: #777777;
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Roboto", sans-serif;
+    }
+
+    body {
+        background-color: var(--amarelo-palido);
+    }
+
+    .s-login {
+        margin: 200px auto;
+        width: 250px;
+        height: 300px;
+        border-radius: 16px;
+        background-color: var(--borda-escura);
+        background-image: url('img/logo_black.png');
+        background-size: 20vh;
+        background-position: center;
+        box-shadow: 0px 0px 53px -4px rgba(0,0,0,0.61);
+    }
+    .s-login h1 {
+        padding: 20px;
+        color: var(--amarelo-suave);
+    }
+
+    .form-login { 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        padding: 10px;
+    }
+
+    .input-div {
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        background-color: #ffffff;
+    }
+    .input-email {
+        width: 100%;
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        box-shadow: 0px 0px 53px -4px rgba(0,0,0,0.61);
+        background-color: #f5f0f0;
+    }
+    .input-password {
+        width: 85%;
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        box-shadow: 0px 0px 53px -4px rgba(0,0,0,0.61);
+        background-color: #f5f0f0;
+    }
+    #input-eye-open {
+        width: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    #input-eye-open:hover {
+        color: var(--borda-escura);
+    }
+    #input-eye-close {
+        width: 15%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    #input-eye-close:hover {
+        color: var(--borda-escura);
+    }
+    .input-button {
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+        box-shadow: 0px 0px 53px -4px rgba(0,0,0,0.61);
+        font-size: 16px;
+        background-color: var(--botao-principal);
+        padding: 5px 10px;
+        color: var(--amarelo-suave);
+    }
+    .input-button:hover {
+        background-color: var(--borda-escura);
+        cursor: pointer;
+    }
+    .s-login-links {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    .s-login-links a {
+        color: var(--amarelo-suave);
+        text-decoration: none;
+    }
+    .s-login-links a:hover {
+        color: var(--amarelo-palido);
+    }
+
+    /* INICIO - Modal Erro */
+/* Estilos do modal */
+    .modal {
+        display: none; /* Oculta por padrão */
+        position: fixed; /* Posicionamento fixo para cobrir toda a janela */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro com transparência */
+        z-index: 1; /* Fica acima de outros elementos */
+    }
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* Centraliza verticalmente */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px; /* Largura máxima */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    /* FIM - Modal Erro */
+
+</style>
+<body>
+    <section class="s-login">
+        <h1>BemTeVi</h1>
+
+        <form class="form-login" action="" method="POST">
+            <div class="input-div">
+                <input class="input-email" placeholder="email" type="text">
+            </div>
+            <div class="input-div">
+                <input id="input-password" class="input-password" placeholder="password" type="password">
+                <i id="input-eye-open" class="fa-solid fa-eye" onclick="openPassword()"></i>
+                <i id="input-eye-close" class="fa-solid fa-eye-slash" onclick="closePassword()"></i>
+            </div>
+            <button class="input-button" type="button" onclick="openModal()">login</button>
+        </form>
+
+        <div class="s-login-links">
+            <a href="register.html">sing up</a>
+            <a href="#">forget password</a>
         </div>
 
-    </header>
-
-    <main class="main-home">
-        <hr>
-        <div class="tweet">
-            <div class="tweet-header">
-                <p>@usuarioAdmin</p>
-                <p>10/01/2024</p>
+        <!-- INICIO - Modal Erro -->
+        <div id="myModal" class="modal">
+            <!-- Conteúdo do modal -->
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span> <!-- Botão para fechar o modal -->
+                <p>Ocorreu um erro ao fazer o login. Por favor, tente novamente.</p>
             </div>
-            <div class="tweet-main">
-                <div class="foto-main"><img src="perfil_padrao.jpg" alt="foto"></div>
-                <div class="tweet-text">
-                    <p>&ensp;Lorem ipsum dolor sit am Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum officiis labore architecto nobis laudantium placeat odio quas qui rem praesentium molestias nam accusamus vero, totam, at recusandae, esse adipisci porro? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium fugit sapiente quisquam quo laboriosam vero ex assumenda, pariatur ipsam, excepturi distinctio incidunt doloremque officia aut nulla. Minima, dolor quos. Harum quam nam alias iste amet. Velit quidem et repellendus atque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores assumenda incidunt quae corrupti tenetur amet? Distinctio, veniam impedit vel perspiciatis unde, quaerat velit enim molestiae beatae ipsam ullam aperiam sequi perferendis in, voluptatum quis? Repudiandae ad molestias enim autem.</p>
-                </div>
-            </div>
-            <div class="tweet-footer">
-                <div class="interacao">
-                    <i class="fa fa-heart" style="color: red;"></i>                       
-                    <i class="fa fa-retweet" style="color: green;"></i>
-                    <i class="fa fa-comment"></i>
-                </div>         
-                <p>09:15</p>
-            </div>
-            <hr>
         </div>
+        <!-- FIM - Modal Erro -->
 
+    </section>
 
+    <script>
+        // INICIO - Funcionalidade para ver a senha
+        const inputType = document.getElementById('input-password')
+        const eyeOpen = document.getElementById('input-eye-open')
+        const eyeClose = document.getElementById('input-eye-close')
 
+        function openPassword () {
+            inputType.type = 'text'
+            eyeOpen.style.display = 'none'
+            eyeClose.style.display = 'flex'
+        }
+        function closePassword () {
+            inputType.type = 'password'
+            eyeOpen.style.display = 'flex'
+            eyeClose.style.display = 'none'
+        }
+        // FIM - Funcionalidade para ver a senha
+        // Função para abrir o modal
+        function openModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+            // Configura um temporizador para fechar o modal após 5 segundos
+            setTimeout(closeModal, 5000); // 5000 milissegundos = 5 segundos
+        }
 
-
-    </main>
-
+        // Função para fechar o modal
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+        // Modal Erro
+    </script>
 </body>
 </html>
