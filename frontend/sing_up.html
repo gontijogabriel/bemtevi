@@ -27,6 +27,8 @@
         --botao-principal: #4D4D4D;
         --fundo-componentes-escuros: #333333;
         --borda-escura: #777777;
+
+        --background-white: #f5f0f0;
     }
 
     * {
@@ -40,21 +42,21 @@
         background-color: var(--amarelo-palido);
     }
 
-    .s-login {
-        margin: 200px auto;
+    .s-singup {
+        margin: 100px auto;
         width: 250px;
         border-radius: 16px;
         background-color: var(--borda-escura);
         background-image: url('img/logo_black.png');
-        background-size: 175px;
+        background-size: 275px;
         background-position: center;
         box-shadow: 0px 0px 53px -4px rgba(0,0,0,0.61);
     }
-    .s-login h1 {
-        padding: 15px 0 5px 20px;
+    .s-singup h1 {
+        padding: 20px 0 0 20px;
         color: var(--amarelo-suave);
     }
-    .form-login { 
+    .form-singup { 
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -62,30 +64,45 @@
         gap: 1rem;
         padding: 10px;
     }
-    .input-div {
+    .img-profile {
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin: 0 auto;
+        cursor: pointer;
+    }
+    .img-profile img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    .input-form {
         width: 80%;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 5px;
-        background-color: #f5f0f0;
-    }
-    .input-email {
-        width: 100%;
+        background-color: var(--background-white);
         padding: 5px;
-        border-radius: 5px;
         border: none;
         outline: none;
-        
-        background-color: #f5f0f0;
     }
-    .input-password {
+    .input-password-div {
+        display: flex;
+        width: 80%;
+        border-radius: 5px;
+        background-color: var(--background-white);
+        padding: 5px;
+    }
+    .input-password-div input {
         width: 85%;
-        padding: 5px;
-        border-radius: 5px;
         border: none;
         outline: none;
-        background-color: #f5f0f0;
+        background-color: var(--background-white);
+    }
+    .input-password i {
+        width: 15%;
     }
     #input-eye-open {
         width: 15%;
@@ -107,6 +124,24 @@
     #input-eye-close:hover {
         color: var(--borda-escura);
     }
+    .back-button {
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+        padding: 0 0 10px 0;
+    }
+    .back-button a {
+        color: var(--amarelo-suave);
+        text-decoration: none;
+    }
+    .back-button i {
+        color: var(--amarelo-suave);
+        text-decoration: none;
+        font-size: 12px;
+    }
+    .back-button i:hover {
+        color: var(--amarelo-palido);
+    }
     .input-button {
         padding: 5px;
         border-radius: 5px;
@@ -122,23 +157,7 @@
         background-color: var(--borda-escura);
         cursor: pointer;
     }
-    .s-login-links {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 16px;
-        padding: 0 5px 5px 5px;
-    }
-    .s-login-links a {
-        color: var(--amarelo-suave);
-        text-decoration: none;
-    }
-    .s-login-links a:hover {
-        color: var(--amarelo-palido);
-    }
-
+    
     /* INICIO - Modal Erro */
     .md-error {
         display: none;
@@ -221,26 +240,30 @@
 
 </style>
 <body>
-    <section class="s-login">
-        <h1>BemTeVi</h1>
+    <section class="s-singup">
+        <h1>Sing Up</h1>
 
-        <form class="form-login" action="" method="POST">
-            <div class="input-div">
-                <input class="input-email" placeholder="email" type="text">
+        <div class="form-singup">
+            <div class="img-profile" id="profile-image">
+                <img src="img/perfil_padrao.jpg" alt="img-profile" id="current-image">
             </div>
-            <div class="input-div">
-                <input id="input-password" class="input-password" placeholder="password" type="password">
+            <input id="username" class="input-form" placeholder="username" type="text">
+            <input id="name" class="input-form" placeholder="name" type="text">
+            <input id="last-name" class="input-form" placeholder="last name" type="text">
+            <input id="email" class="input-form" placeholder="email" type="text">
+            <input id="input-password-1" class="input-form" placeholder="password" type="password">
+            <div class="input-password-div">
+                <input id="input-password-2" placeholder="repeat password" type="password">
                 <i id="input-eye-open" class="fa-solid fa-eye" onclick="openPassword()"></i>
                 <i id="input-eye-close" class="fa-solid fa-eye-slash" onclick="closePassword()"></i>
             </div>
-            <button class="input-button" type="button" onclick="openModal()">login</button>
-        </form>
-
-        <div class="s-login-links">
-            <a href="sing_up.html">sing up</a>
-            <a href="#">forget password</a>
+            <button class="input-button" onclick="validateData()" type="button">register</button>
         </div>
 
+        <div class="back-button">
+            <a href="login.html"><i class="fa-solid fa-arrow-left"></i></a>
+        </div>
+    
         <!-- INICIO - Modal Erro -->
         <div id="md-error" class="md-error">
             <div class="md-content">
@@ -272,18 +295,45 @@
     </section>
 
     <script>
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            const profileImage = document.getElementById("profile-image");
+            const currentImage = document.getElementById("current-image");
+
+            profileImage.addEventListener("click", function() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.onchange = function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function() {
+                            currentImage.src = reader.result;
+                            // Aqui você pode enviar a imagem para o servidor ou fazer qualquer outra coisa com ela
+                        };
+                    }
+                };
+                input.click();
+            });
+        });
+
         // INICIO - Funcionalidade para ver a senha
-        const inputType = document.getElementById('input-password')
+        const inputType1 = document.getElementById('input-password-1')
+        const inputType2 = document.getElementById('input-password-2')
         const eyeOpen = document.getElementById('input-eye-open')
         const eyeClose = document.getElementById('input-eye-close')
 
         function openPassword () {
-            inputType.type = 'text'
+            inputType1.type = 'text'
+            inputType2.type = 'text'
             eyeOpen.style.display = 'none'
             eyeClose.style.display = 'flex'
         }
         function closePassword () {
-            inputType.type = 'password'
+            inputType1.type = 'password'
+            inputType2.type = 'password'
             eyeOpen.style.display = 'flex'
             eyeClose.style.display = 'none'
         }
@@ -301,11 +351,49 @@
             setTimeout(closeModal, 10000);
         }
 
+
         function closeModal() {
             const modal = document.getElementById('md-error');
             modal.style.display = 'none';
         }
         // FIM - Modal Erro
+
+
+        // INICIO - Validacão dos dados / envio dos dados
+        function validateData() {
+            const imgProfile = document.getElementById("current-image");
+            const username = document.getElementById('username');
+            const name = document.getElementById('name');
+            const lastName = document.getElementById('last-name');
+            const email = document.getElementById('email');
+            const password1 = document.getElementById('input-password-1');
+            const password2 = document.getElementById('input-password-2');
+
+            // Verificar se a imagem de perfil foi selecionada
+            if (imgProfile.src === "") {
+                openModal("Por favor, selecione uma imagem de perfil");
+                return false;
+            }
+
+            // Verificar se os campos de texto estão preenchidos
+            if (username.value === "" || name.value === "" || lastName.value === "" || email.value === "" || password1.value === "" || password2.value === "") {
+                openModal("Por favor, preencha todos os campos");
+                return false;
+            }
+
+            // Verificar se as senhas são iguais
+            if (password1.value !== password2.value) {
+                openModal("As senhas não coincidem. Por favor, tente novamente");
+                return false;
+            }
+
+            // Aqui você pode adicionar mais validações, como verificar se o e-mail é válido, etc.
+
+            // Se todas as validações passarem, retornar true
+            return true;
+        }
+        // FIM - Validacão dos dados / envio dos dados
+
     </script>
 </body>
 </html>
