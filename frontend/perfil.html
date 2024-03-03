@@ -7,328 +7,207 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <style>
+    :root {
+        --laranja-escuro: #FF8C00;
+        --laranja: #FFA500;
+        --laranja-medio: #FFB84D;
+
+        --cor-base: #FFD42A;
+
+        --amarelo-claro: #FFE24C;
+        --amarelo-suave: #FFD480;
+        --amarelo-palido: #FFEDB3;
+
+        --cor-fundo-escuro: #1E1E1E;
+        --cor-texto-primeiro-plano: #FFFFFF;
+        --destaque-principal: #FFD42A;
+        --texto-secundario: #A0A0A0;
+        --botao-principal: #4D4D4D;
+        --fundo-componentes-escuros: #333333;
+        --borda-escura: #777777;
+    }
     * {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
+        font-family: "Roboto", sans-serif;
     }
+
     body {
-        max-width: 700px;
-        margin: 0 auto;
-    }
-
-    a {text-decoration: none; color: black;}
-    hr {color: black;}
-
-    .header-perfil {
-        width: 100%;
-        height: 80px;
-        background-color: rgb(153, 198, 238);
+        background-color: var(--amarelo-palido);
         display: flex;
         justify-content: center;
-        align-items: center;
-    }
-    .header-perfil img {
-        width: 60px;
-        height: 60px;
-    }
-    .main-perfil {
-        background-color: yellow;
         width: 100%;
-        display: flex;
+        margin: 0;
     }
-    .foto-perfil {
-        padding: 5px;
-        width: 15%;
-        min-width: 180px;
+
+    .container {
+        display: flex;
+        max-width: 1280px;
+        width: 100%;
+    }
+
+    .h-home {
+        width: 30%;
+        max-width: 350px;
+        background-color: rgb(114, 43, 43);
+
+        position: fixed;
+    }
+
+    .m-home {
+        flex: 1;
+        background-color: #76e2fd;
         display: flex;
         flex-direction: column;
-        align-items: start;
         gap: 1rem;
-        justify-content: center;
-    }
-    .foto-perfil img {
-        width: 100%;
-        border-radius: 50%;
-        text-align: center;
-    }
-    .foto-perfil h3 {
-        width: 100%;
-        text-align: center;
-    }
-    .foto-perfil-descricao {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        font-size: 14px;
-    }
-    .descricao-perfil {
-        background-color: aqua;
-        width: 100%;
-    }
-    .descricao-menu {
-        width: 100%;
 
+        margin-left: 30%;
     }
-
-    .menu-perfil {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        background-color: rgb(156, 114, 51);
-    }
-    .menu-perfil a {
-        width: 25%;
-        height: 100%;
-        text-align: center;
-        padding: 10px;
-    }
-    .menu-perfil a:hover {
-        background-color: blanchedalmond;
-    }
-    .perfil-container {
-        width: 100%;
-        background-color: bisque;
-    }
-
-
 
     .tweet {
-        width: 100%;
-        border-radius: 3px;
+        border: 1px solid black;
     }
-    .tweet-header {
-        padding: 5px;
-        display: flex;
-        justify-content: space-between;
-    }
-    .tweet-main {
-        display: flex;
-    }
-    .foto-main img {
-        padding: 3px;
-        width: 60px;
-        min-height: 60px;
-        border-radius: 50%;
-    }
-    .tweet-text {
-        width: 90%;
-        padding: 3px;
-    }
-    .tweet-footer {
-        padding: 5px;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
-    .interacao {
-        display: flex;
-        gap: 2rem;
-    }
-    @media only screen and (max-width: 700px) {
-        .main-perfil {
-            flex-direction: column;
-        }
-    }
-    @media only screen and (max-width: 300px) {}
+
 </style>
-<body>
-    <header class="header-perfil">
-        <img src="logo.png" alt="bem-te-vi">
-    </header>
-
-    <main class="main-perfil">
-        <div class="foto-perfil">
-            <img src="perfil_padrao.jpg" alt="foto">
-            <h3>@usuarioAdmin</h3>
-            <div class="foto-perfil-descricao">
-                <p><strong>324</strong> seguidores</p>
-                <p><strong>410</strong> seguindo</p>
-            </div>
-        </div>
-        <div class="descricao-perfil">
-            <div class="descricao-menu">
-                <a href="#">Sair</a>
-                <a href="#">Editar</a>
-            </div>
-        </div>
-    </main>
-    
-    <div class="menu-perfil">
-        <a href="#">posts</a>
-        <a href="#">respostas</a>
-        <a href="#">fotos</a>
-        <a href="#">curtidas</a>
-    </div>
-
-    <main class="perfil-container">
-        <hr>
-        <div class="tweet">
-            <div class="tweet-header">
-                <p>@usuarioAdmin</p>
-                <p>10/01/2024</p>
-            </div>
-            <div class="tweet-main">
-                <div class="foto-main"><img src="perfil_padrao.jpg" alt="foto"></div>
-                <div class="tweet-text">
-                    <p>&ensp;Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, recusandae. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, expedita.</p>
+    <body>
+        <div class="container">
+            <header class="h-home">
+                <div class="h-h-content">
+                    <ul>
+                        <li>a</li>
+                        <li>a</li>
+                        <li>a</li>
+                    </ul>
+                    <a href="#">aaaa</a>
                 </div>
-            </div>
-            <div class="tweet-footer">
-                <div class="interacao">
-                    <i class="fa fa-heart" style="color: red;"></i>                       
-                    <i class="fa fa-retweet" style="color: green;"></i>
-                    <i class="fa fa-comment"></i>
-                </div>         
-                <p>09:15</p>
-            </div>
-            <hr>
+            </header>
+
+            <main class="m-home">
+                <div class="tweet">aaAA</div>
+                <div class="tweet">bbbbb</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+                <div class="tweet">cccccc</div>
+            </main>
         </div>
 
-
-
-        <div class="tweet">
-            <div class="tweet-header">
-                <p>@usuarioAdmin</p>
-                <p>10/01/2024</p>
-            </div>
-            <div class="tweet-main">
-                <div class="foto-main"><img src="perfil_padrao.jpg" alt="foto"></div>
-                <div class="tweet-text">
-                    <p>&ensp;Lorem ipsum dolor sit am Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum officiis labore architecto nobis laudantium placeat odio quas qui rem praesentium molestias nam accusamus vero, totam, at recusandae, esse adipisci porro? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium fugit sapiente quisquam quo laboriosam vero ex assumenda, pariatur ipsam, excepturi distinctio incidunt doloremque officia aut nulla. Minima, dolor quos. Harum quam nam alias iste amet. Velit quidem et repellendus atque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores assumenda incidunt quae corrupti tenetur amet? Distinctio, veniam impedit vel perspiciatis unde, quaerat velit enim molestiae beatae ipsam ullam aperiam sequi perferendis in, voluptatum quis? Repudiandae ad molestias enim autem.</p>
-                </div>
-            </div>
-            <div class="tweet-footer">
-                <div class="interacao">
-                    <i class="fa fa-heart" style="color: red;"></i>                       
-                    <i class="fa fa-retweet" style="color: green;"></i>
-                    <i class="fa fa-comment"></i>
-                </div>         
-                <p>09:15</p>
-            </div>
-            <hr>
-        </div>
-
-        <div class="tweet">
-            <div class="tweet-header">
-                <p>@usuarioAdmin</p>
-                <p>10/01/2024</p>
-            </div>
-            <div class="tweet-main">
-                <div class="foto-main"><img src="perfil_padrao.jpg" alt="foto"></div>
-                <div class="tweet-text">
-                    <p>&ensp;Lorem ipsum dolor sit am Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum officiis labore architecto nobis laudantium placeat odio quas qui rem praesentium molestias nam accusamus vero, totam, at recusandae, esse adipisci porro? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium fugit sapiente quisquam quo laboriosam vero ex assumenda, pariatur ipsam, excepturi distinctio incidunt doloremque officia aut nulla. Minima, dolor quos. Harum quam nam alias iste amet. Velit quidem et repellendus atque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores assumenda incidunt quae corrupti tenetur amet? Distinctio, veniam impedit vel perspiciatis unde, quaerat velit enim molestiae beatae ipsam ullam aperiam sequi perferendis in, voluptatum quis? Repudiandae ad molestias enim autem.</p>
-                </div>
-            </div>
-            <div class="tweet-footer">
-                <div class="interacao">
-                    <i class="fa fa-heart" style="color: red;"></i>                       
-                    <i class="fa fa-retweet" style="color: green;"></i>
-                    <i class="fa fa-comment"></i>
-                </div>         
-                <p>09:15</p>
-            </div>
-            <hr>
-        </div>
-
-        <div class="tweet">
-            <div class="tweet-header">
-                <p>@usuarioAdmin</p>
-                <p>10/01/2024</p>
-            </div>
-            <div class="tweet-main">
-                <div class="foto-main"><img src="perfil_padrao.jpg" alt="foto"></div>
-                <div class="tweet-text">
-                    <p>&ensp;Lorem ipsum dolor sit am Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum officiis labore architecto nobis laudantium placeat odio quas qui rem praesentium molestias nam accusamus vero, totam, at recusandae, esse adipisci porro? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium fugit sapiente quisquam quo laboriosam vero ex assumenda, pariatur ipsam, excepturi distinctio incidunt doloremque officia aut nulla. Minima, dolor quos. Harum quam nam alias iste amet. Velit quidem et repellendus atque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores assumenda incidunt quae corrupti tenetur amet? Distinctio, veniam impedit vel perspiciatis unde, quaerat velit enim molestiae beatae ipsam ullam aperiam sequi perferendis in, voluptatum quis? Repudiandae ad molestias enim autem.</p>
-                </div>
-            </div>
-            <div class="tweet-footer">
-                <div class="interacao">
-                    <i class="fa fa-heart" style="color: red;"></i>                       
-                    <i class="fa fa-retweet" style="color: green;"></i>
-                    <i class="fa fa-comment"></i>
-                </div>         
-                <p>09:15</p>
-            </div>
-            <hr>
-        </div>
-
-        <div class="tweet">
-            <div class="tweet-header">
-                <p>@usuarioAdmin</p>
-                <p>10/01/2024</p>
-            </div>
-            <div class="tweet-main">
-                <div class="foto-main"><img src="perfil_padrao.jpg" alt="foto"></div>
-                <div class="tweet-text">
-                    <p>&ensp;Lorem ipsum dolor sit am Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum officiis labore architecto nobis laudantium placeat odio quas qui rem praesentium molestias nam accusamus vero, totam, at recusandae, esse adipisci porro? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium fugit sapiente quisquam quo laboriosam vero ex assumenda, pariatur ipsam, excepturi distinctio incidunt doloremque officia aut nulla. Minima, dolor quos. Harum quam nam alias iste amet. Velit quidem et repellendus atque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores assumenda incidunt quae corrupti tenetur amet? Distinctio, veniam impedit vel perspiciatis unde, quaerat velit enim molestiae beatae ipsam ullam aperiam sequi perferendis in, voluptatum quis? Repudiandae ad molestias enim autem.</p>
-                </div>
-            </div>
-            <div class="tweet-footer">
-                <div class="interacao">
-                    <i class="fa fa-heart" style="color: red;"></i>                       
-                    <i class="fa fa-retweet" style="color: green;"></i>
-                    <i class="fa fa-comment"></i>
-                </div>         
-                <p>09:15</p>
-            </div>
-            <hr>
-        </div>
-
-        <div class="tweet">
-            <div class="tweet-header">
-                <p>@usuarioAdmin</p>
-                <p>10/01/2024</p>
-            </div>
-            <div class="tweet-main">
-                <div class="foto-main"><img src="perfil_padrao.jpg" alt="foto"></div>
-                <div class="tweet-text">
-                    <p>&ensp;Lorem ipsum dolor sit am Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum officiis labore architecto nobis laudantium placeat odio quas qui rem praesentium molestias nam accusamus vero, totam, at recusandae, esse adipisci porro? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium fugit sapiente quisquam quo laboriosam vero ex assumenda, pariatur ipsam, excepturi distinctio incidunt doloremque officia aut nulla. Minima, dolor quos. Harum quam nam alias iste amet. Velit quidem et repellendus atque! Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores assumenda incidunt quae corrupti tenetur amet? Distinctio, veniam impedit vel perspiciatis unde, quaerat velit enim molestiae beatae ipsam ullam aperiam sequi perferendis in, voluptatum quis? Repudiandae ad molestias enim autem.</p>
-                </div>
-            </div>
-            <div class="tweet-footer">
-                <div class="interacao">
-                    <i class="fa fa-heart" style="color: red;"></i>                       
-                    <i class="fa fa-retweet" style="color: green;"></i>
-                    <i class="fa fa-comment"></i>
-                </div>         
-                <p>09:15</p>
-            </div>
-            <hr>
-        </div>
-
-        <div class="tweet">
-            <div class="tweet-header">
-                <p>@usuarioAdmin</p>
-                <p>10/01/2024</p>
-            </div>
-            <div class="tweet-main">
-                <div class="foto-main"><img src="perfil_padrao.jpg" alt="foto"></div>
-                <div class="tweet-text">
-                    <p>&ensp;Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae commodi assumenda corporis asperiores? Velit, architecto, laboriosam quisquam quas commodi harum voluptates tempora assumenda pariatur maxime qui unde porro temporibus modi.</p>
-                </div>
-            </div>
-            <div class="tweet-footer">
-                <div class="interacao">
-                    <i class="fa fa-heart" style="color: red;"></i>                       
-                    <i class="fa fa-retweet" style="color: green;"></i>
-                    <i class="fa fa-comment"></i>
-                </div>         
-                <p>09:15</p>
-            </div>
-            <hr>
-        </div>
-
-
-
-
-
-
-
-
-    </main>
-
-
-</body>
+        <footer class="h-footer">footer</footer>
+    </body>
 </html>
