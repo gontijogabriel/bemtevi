@@ -39,76 +39,218 @@
     body {
         background-color: var(--amarelo-palido);
         display: flex;
+        gap: 0.5rem;
         justify-content: center;
+    }
+
+    header {
         width: 100%;
-        max-width: 1280px;
-        margin: 0 auto;
-    }
-
-
-    .h-home {
-        width: 30%;
-        height: 100vh;
-        min-width: 300px;
-        max-width: 350px;
-        display: flex;
-        align-items: start;
-        justify-content: end;
-        background-color: var(--destaque-principal);
+        max-width: 330px;
+        min-width: 150px;
         
-        position: fixed;
-        top: 0;
-        left: calc();
-    }
-    .h-h-content {
-        width: 50%;
-        background-color: #cf3131;
-        margin-top: 50px;
         display: flex;
         flex-direction: column;
+        justify-content: start;
+
+    }
+    .header-div {
+        width: 100%;
+        max-width: 330px;
+        min-width: 150px;
+        height: 100vh;
+        padding: 20px 10px;
+
+        position: fixed;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         align-items: end;
     }
-    .m-home {
-        width: 45%;
-        background-color: #76e2fd;
+    .h-head {
+
+        width: 50%;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
 
     }
+
+    .h-img {
+        
+    }
+    .h-img img {
+        border-radius: 50%;
+        width: 100%;
+        max-width: 180px;
+        min-width: 50px;
+    }
+
+    .h-links {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+        gap: 0.75rem;
+        padding: 10px;
+    }
+    .h-link {
+        text-decoration: none;
+        color: white;
+        background-color: #4D4D4D;
+        padding: 5px 15px;
+        border-radius: 12px;
+        
+    }
+
+    .h-footer {
+        padding: 20px;
+    }
+    .h-footer button {
+        outline: none;
+        border: none;
+        color: white;
+        background-color: #007c85;
+        padding: 5px 15px;
+        border-radius: 12px;
+        cursor: pointer;
+    }
+
+
+
+    main {
+        width: 100%;
+        max-width: 940px;
+        background-color: #FFB84D;
+        display: flex;
+        gap: 0.5rem;
+    }
     .tweet {
-        border: 1px solid black;
+        width: 100%;
+        max-width: 560px;
+        min-width: 350px;
+        background-color: var(--destaque-principal);
+    }
+    .footer {
+        width: 100%;
+        max-width: 330px;
+        min-width: 150px;
+    }
+    .search {
+        background-color: #FFFFFF;
+
+        position: fixed;
+    }
+    .seguir {
+        margin-top: 20px;
     }
 </style>
 <body>
+    <header>
+        <div class="header-div">
 
-    <header class="h-home">
-        <div class="h-h-content">
-            <ul>
-                <li>a</li>
-                <li>a</li>
-                <li>a</li>
-            </ul>
-            <a href="#">aaaa</a>
+            <div class="h-head">
+                <div class="h-img">
+                    <img src="img/perfil_padrao.jpg" alt="foto de perfil">
+                </div>
+
+                <div class="h-links">
+                    <a class="h-link" href="#">Perfil</a>
+                    <a class="h-link" href="#">Notificações</a>
+                    <a class="h-link" href="#">Mensagens</a>
+                    <a class="h-link" href="#">Sair</a>
+                </div>
+            </div>
+
+            <div class="h-footer">
+                <button class="h-link" type="button">POSTAR</button>
+            </div>
         </div>
     </header>
+    <main>
+        
+        <div class="tweet">
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+            <div class="tweet">tweet</div>
+        </div>
 
-    <main class="m-home">
-        <div class="tweet">
-            aaAA
-        </div>
-        <div class="tweet">
-            bbbbbbbbbbb
-        </div>
-        <div class="tweet">
-            ccccccccccccc
+        <div class="footer">
+            <div class="search">
+                <input type="text">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <div class="seguir">
+                <h3>quem seguir?</h3>
+                <p>@gontz</p>
+            </div>
         </div>
 
     </main>
-
-    <footer class="h-footer">
-        footer
-    </footer>
 
     <script>
     </script>
