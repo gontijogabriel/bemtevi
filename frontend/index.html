@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="modal_postar.css">
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
@@ -37,222 +38,466 @@
     }
 
     body {
-        background-color: var(--amarelo-palido);
+        max-width: 800px;
+        margin: 0 auto;
         display: flex;
-        gap: 0.5rem;
-        justify-content: center;
+        gap: 0.1rem;
+        color: #333;
+        background-color: var(--amarelo-palido);
     }
 
     header {
-        width: 100%;
-        max-width: 330px;
-        min-width: 150px;
-        
+        width: 15%;
         display: flex;
         flex-direction: column;
-        justify-content: start;
-
+        align-items: end;
+        padding: 5px;
     }
-    .header-div {
-        width: 100%;
-        max-width: 330px;
-        min-width: 150px;
-        height: 100vh;
-        padding: 20px 10px;
-
-        position: fixed;
+    .h-header {
+        height: calc(100vh - 5px);
 
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        align-items: end;
-    }
-    .h-head {
-
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-
-    }
-
-    .h-img {
-        
-    }
-    .h-img img {
-        border-radius: 50%;
-        width: 100%;
-        max-width: 180px;
-        min-width: 50px;
-    }
-
-    .h-links {
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-        justify-content: start;
-        gap: 0.75rem;
-        padding: 10px;
-    }
-    .h-link {
-        text-decoration: none;
-        color: white;
-        background-color: #4D4D4D;
-        padding: 5px 15px;
-        border-radius: 12px;
-        
-    }
-
-    .h-footer {
-        padding: 20px;
-    }
-    .h-footer button {
-        outline: none;
-        border: none;
-        color: white;
-        background-color: #007c85;
-        padding: 5px 15px;
-        border-radius: 12px;
-        cursor: pointer;
-    }
-
-
-
-    main {
-        width: 100%;
-        max-width: 940px;
-        background-color: #FFB84D;
-        display: flex;
-        gap: 0.5rem;
-    }
-    .tweet {
-        width: 100%;
-        max-width: 560px;
-        min-width: 350px;
-        background-color: var(--destaque-principal);
-    }
-    .footer {
-        width: 100%;
-        max-width: 330px;
-        min-width: 150px;
-    }
-    .search {
-        background-color: #FFFFFF;
 
         position: fixed;
     }
-    .seguir {
+    .h-head {
+        padding: 10px;
+        border-radius: 12px;
+        background-color: #cccccc;
+        box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.3);
+        display: flex;
+        flex-direction: column;
+    }
+    .h-head img {
+        width: 75%;
+        max-width: 200px;
+        min-width: 100px;
+        border-radius: 50%;
+        margin: 0 auto; 
+    }
+    .h-links {
         margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    .link {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        padding: 5px 15px;
+        border-radius: 12px;
+        width: fit-content;
+
+        color: var(--fundo-componentes-escuros);
+        text-decoration: none;
+        background-color: #f0f0f0;
+        font-weight: bolder;
+        box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.3);
+    }
+    .link:hover {
+        box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.1);
+    }
+
+    main {
+        width: 85%;
+        display: flex;
+    }
+    .tweet-container {
+        width: 70%;
+        max-width: 480px;
+        min-width: 100px;
+        display: flex;
+        flex-direction: column;
+    }
+    .opcao-tweets {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: space-around;
+        background-color: #A0A0A0;
+    }
+    .opcao-tweets p {
+        width: 50%;
+        height: 100%;
+        text-decoration: none;
+        background-color: #cccccc;
+        color: var(--fundo-componentes-escuros);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .opcao-tweets p:hover {
+        background-color: var(--borda-escura);
+        color: var(--fundo-componentes-escuros);
+        cursor: pointer;
+    }
+
+    .novo-tweet {
+        width: 100%;
+        background-color: #cccccc;
+        border-radius: 0 0 8px 8px;
+        margin-bottom: 2.5px;
+    }
+    .nv-tw-text textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        outline: none;
+        resize: none;
+        border: none;
+        height: auto;
+        background-color: #d8d8d8;
+        color: #333;
+    }
+    .nv-tw-action {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        padding: 5px;
+    }
+    .nv-tw-action button {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        padding: 8px 20px;
+        border-radius: 12px;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        font-weight: bolder;
+        letter-spacing: 1.5px;
+        box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.2);
+    }
+    .nv-tw-action button:hover {
+        cursor: pointer;
+
+    }
+    .pesquisar-container {
+        width: 30%;
+        max-width: 200px;
+        min-width: 100px;
+        height: 100vh;
+    }
+    .pesquisar-div {
+        position: fixed;
+        padding: 5px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 55%;
+        max-width: 300px;
+    }
+    .pesquisar {
+        width: 100%;
+        height: 35px;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border-radius: 18px;
+        background-color: #f0f0f0;
+        box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.3);
+    }
+    .pesquisar input {
+        width: 100%;
+        font-size: 16px;
+        border: none;
+        outline: none;
+        background-color: transparent;
+    }
+
+    .tweets {
+        display: flex;
+        flex-direction: column;
+        gap: 0.20rem;
+    }
+
+    .tweet {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.1);
+        background-color: #d8d8d8;
+    }
+
+    .tw-head {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px;
+    }
+    .tw-h-rt {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+    .tw-main {
+        width: 100%;
+        display: flex;
+    }
+    .tw-m-img {
+        width: 15%;
+        display: flex;
+        align-items: start;
+        justify-content: center;
+    }
+    .tw-m-img img {
+        width: 100%;
+        padding: 5px;
+        border-radius: 50%;
+    }
+    .tw-m-text {
+        width: 85%;
+    }
+    .tw-m-text p {
+        padding: 5px;
+    }
+
+
+    .tw-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px;
+    }
+    .tw-f-react {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .tw-f-r {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.15rem;
+    }
+
+
+    .quem-seguir {
+        width: 100%;
+        background-color: #cccccc;
+        text-align: center;
+        padding: 5px;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .quem-seguir h3 {
+        margin-top: 5px;
+    }
+    .qs-opc {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px;
+    }
+    .qs-user {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        gap: 0.5rem;
+        font-size: 15px;
+    }
+    .qs-user img {
+        width: 25%;
+        border-radius: 50%;
+    }
+
+    .qs-user-names {
+        display: flex;
+        flex-direction: column;
+        text-align: start;
+    }
+    .qs-opc button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 5px 8px;
+        border: none;
+        outline: none;
+        border-radius: 12px;
+        box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.2);
+    }
+    .qs-opc button:hover {
+        cursor: pointer;
     }
 </style>
 <body>
     <header>
-        <div class="header-div">
+        <div class="h-header">
 
             <div class="h-head">
-                <div class="h-img">
-                    <img src="img/perfil_padrao.jpg" alt="foto de perfil">
-                </div>
-
+                <img src="img/perfil_padrao.jpg" alt="">
                 <div class="h-links">
-                    <a class="h-link" href="#">Perfil</a>
-                    <a class="h-link" href="#">Notificações</a>
-                    <a class="h-link" href="#">Mensagens</a>
-                    <a class="h-link" href="#">Sair</a>
+                    <a href="#" class="link">
+                        <i class="fa-solid fa-user"></i>
+                        Perfil
+                    </a>
+                    <a href="#" class="link">
+                        <i class="fa-solid fa-bell"></i>
+                        Notificações
+                    </a>
+                    <a href="#" class="link">
+                        <i class="fa-solid fa-envelope"></i>
+                        Mensagens
+                    </a>
+                    <a href="#" class="link">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        Sair
+                    </a>
                 </div>
             </div>
 
-            <div class="h-footer">
-                <button class="h-link" type="button">POSTAR</button>
+            <div class="darkmode-container">
+                <button class="button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
             </div>
+
         </div>
     </header>
     <main>
-        
-        <div class="tweet">
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-            <div class="tweet">tweet</div>
-        </div>
-
-        <div class="footer">
-            <div class="search">
-                <input type="text">
-                <i class="fa-solid fa-magnifying-glass"></i>
+        <div class="tweet-container">
+            <div class="opcao-tweets">
+                <p id="tweetsTodos" onclick="tweetsTodos()" href="#">Todos</p>
+                <p id="tweetsSeguindo" onclick="tweetsSeguindo()" href="#">Seguidores</p>
             </div>
 
-            <div class="seguir">
-                <h3>quem seguir?</h3>
-                <p>@gontz</p>
+            <div class="novo-tweet">
+                <div class="nv-tw-text">
+                    <textarea id="myTextarea" placeholder="O que você está pensando..." rows="2"></textarea>
+                </div>
+                <div class="nv-tw-action">
+                    <button type="button">Postar</button>
+                </div>
+            </div>
+
+            <div class="tweets">
+                <div class="tweet">
+                    <div class="tw-head">
+                        <p>
+                        @gontijogabr
+                            <div class="tw-h-rt">
+                                <i class="fa-solid fa-retweet"></i>
+                                <p style="font-size: 12px;">retweet by</p>
+                                <p>@gontz</p>
+                            </div>
+                        </p>
+                        <p>27/12/1998</p>
+                    </div>
+                    <div class="tw-main">
+                        <div class="tw-m-img">
+                            <img src="img/perfil_padrao.jpg" alt="foto de perfil">
+                        </div>
+                        <div class="tw-m-text">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique unde facere modi omnis vel accusantium accusamus mollitia voluptate illo saepe? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis repellendus blanditiis nisi. Voluptatem beatae et cumque quas pariatur, provident ad?</p>
+                        </div>
+                    </div>
+                    <div class="tw-footer">
+                        <div class="tw-f-react">
+                            <div class="tw-f-r">
+                                <p>0</p>
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div class="tw-f-r">
+                                <p>0</p>
+                                <i class="fa-solid fa-retweet"></i>
+                            </div>
+                            <div class="tw-f-r">
+                                <p>0</p>
+                                <i onclick="modalComment()" class="fa-solid fa-comment"></i>
+                            </div>
+                        </div>
+                        <p>09:27</p>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <div class="pesquisar-container">
+            <div class="pesquisar-div">
+                <div class="pesquisar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input placeholder="Buscar" type="text">
+                </div>
+                <div class="quem-seguir">
+                    <h3>Quem seguir?</h3>
+                    <div class="qs-opc">
+                        <div class="qs-user">
+                            <img src="img/perfil_padrao.jpg" alt="">
+                            <div class="qs-user-names">
+                                <p>Gabriel Gontijo</p>
+                                <p>@gontz</p>
+                            </div>
+                        </div>
+                        <button id="btnSeguir" onclick="btnSeguir()" type="button">Seguir<i class="fa-solid fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="modal-comment" class="modal-comment">
+            <div class="md-c-content">
+                <p>This is a modal!</p>
+            </div>
+        </div>
+
 
     </main>
 
     <script>
+        // Função para ajustar a altura do textarea
+        function ajustarAlturaTextarea(elemento) {
+          elemento.style.height = 'auto';
+          elemento.style.height = (elemento.scrollHeight) + 'px';
+        }
+    
+        const textarea = document.getElementById('myTextarea');
+        
+        textarea.addEventListener('input', function() {
+          ajustarAlturaTextarea(this);
+        });
+        
+        ajustarAlturaTextarea(textarea);
+
+        const tweetsTodosId = document.getElementById('tweetsTodos')
+        const tweetsSeguindoId = document.getElementById('tweetsSeguindo')
+        function tweetsSeguindo() {
+            tweetsTodosId.style.fontWeight = ''
+            tweetsTodosId.style.borderBottom = ''
+            tweetsSeguindoId.style.fontWeight = 'bolder'
+            tweetsSeguindoId.style.borderBottom = '2px solid'
+        }
+        function tweetsTodos() {
+            tweetsTodosId.style.fontWeight = 'bolder'
+            tweetsTodosId.style.borderBottom = '2px solid'
+            tweetsSeguindoId.style.fontWeight = ''
+            tweetsSeguindoId.style.borderBottom = ''
+        }
+        
+        const btnSeguirId = document.getElementById('btnSeguir')
+        function btnSeguir() {
+            btnSeguirId.innerText = 'Seguindo'
+        }
+
+
+        function modalComment () {
+            const idModalComment = document.getElementById('modal-comment')
+            idModalComment.style.display = 'block';
+        }
+
+
     </script>
 </body>
 </html>
