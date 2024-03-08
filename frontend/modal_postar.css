@@ -1,5 +1,5 @@
 .modal-comment {
-    display: none;
+    display: block;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -15,4 +15,126 @@
     max-width: 550px;
     background-color: #fefefe;
     margin: 5% auto;
+
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.md-c-tweet {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.md-c-t-header {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+}
+.md-c-t-header {
+    font-size: 14px;
+}
+
+.mdcth-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.mdcth-content img {
+    width: 10%;
+    min-width: 25px;
+    border-radius: 50%;
+}
+.md-c-t-main p {
+    padding: 10px;
+}
+
+.mdcth-voltar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mdcth-voltar:hover {
+    border-bottom: 2px solid;
+    cursor: pointer;
+}
+
+.md-c-t-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 0 5px 5px 0;
+}
+.mdctf-reacts {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.mdctf-r {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+hr {
+    width: 80%;
+    border: 0; /* Quita el borde predeterminado */
+    height: 2px; /* Establece la altura de la regla */
+    background-color: #ccc; /* Cambia el color de fondo */
+    margin: 0 auto; /* Añade espacio arriba y abajo */
+}
+
+.md-c-responder {
+    padding: 10px;
+    background-color: #d8d8d8;
+    border-radius: 12px;
+}
+.mdcr-main {
+    display: flex;
+    gap: 0.5rem;
+}
+.mdcr-m-img {
+    width: 10%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+.mdcr-m-img img {
+    width: 100%;
+    background-color: blue;
+    border-radius: 50%;
+}
+.mdcr-m-text {
+    width: 90%;
+}
+.mdcr-m-text textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    outline: none;
+    resize: none;
+    border: none;
+
+    overflow-y: hidden;
+    background-color: #d8d8d8;
+    color: #333;
+}
+.mdcr-footer {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}   
+.mdcr-footer button {
+    padding: 5px 9px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.3);
+}
+.mdcr-footer button:hover {
+    cursor: pointer;
 }
