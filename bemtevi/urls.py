@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from bemtevi.views import ( login, cadastro, home, perfil, 
+from bemtevi.views import ( login, login_func, cadastro, home, perfil, 
                         novo_tweet, user_logout, like_view,
                         retweet_view, seguir_view, seguindo_view, 
                         seguidores_view, comentario
@@ -10,8 +10,16 @@ from bemtevi.views import ( login, cadastro, home, perfil,
 
 
 urlpatterns = [
-    path('logout/', user_logout, name='logout'),
     path('', login, name='login'),
+    path('login_func/', login_func, name='login_func'),
+
+
+    path('logout/', user_logout, name='logout'),
+
+
+
+
+
     path('cadastro/', cadastro, name='cadastro'),
     path('home/', home, name='home'),
     path('home/comentario/<int:id_tweet>/', comentario, name='comentario'),

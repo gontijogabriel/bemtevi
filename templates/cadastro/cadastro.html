@@ -1,0 +1,67 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Cadastro - 
+    {{ block.super }}
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styles/cadastro/cadastro.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <section class="s-singup">
+        <h1>Sing Up</h1>
+
+        <div class="form-singup">
+            <div class="img-profile" id="profile-image">
+                <img src="{% static 'assets/perfil_padrao.jpg' %}" alt="img-profile" id="current-image">
+            </div>
+            <input id="username" class="input-form" placeholder="username" type="text">
+            <input id="name" class="input-form" placeholder="name" type="text">
+            <input id="last-name" class="input-form" placeholder="last name" type="text">
+            <input id="email" class="input-form" placeholder="email" type="text">
+            <input id="input-password-1" class="input-form" placeholder="password" type="password">
+            <div class="input-password-div">
+                <input id="input-password-2" placeholder="repeat password" type="password">
+                <i id="input-eye-open" class="fa-solid fa-eye" onclick="openPassword()"></i>
+                <i id="input-eye-close" class="fa-solid fa-eye-slash" onclick="closePassword()"></i>
+            </div>
+            <button class="input-button" onclick="validateData()" type="button">register</button>
+        </div>
+
+        <div class="back-button">
+            <a href="{% url 'login' %}"><i class="fa-solid fa-arrow-left"></i></a>
+        </div>
+
+        <!-- INICIO - Modal Erro -->
+            <div id="md-error" class="md-error">
+                <div class="md-content">
+                    <div class="md-header">
+                        <p><strong>Erro</strong></p>
+                    </div>
+                    <div class="md-main">
+                        <div class="md-m-icon">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                        </div>
+                        <div class="md-m-text">
+                            <p id="md-text"></p>
+                        </div>
+                    </div>
+                    <div class="md-footer">
+                        <button type="button" onclick="closeModal()">ok</button>
+                    </div>
+                </div>
+            </div>
+        <!-- FIM - Modal Erro -->
+    </section>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'scripts/cadastro/cadastro.js' %}"></script>
+{% endblock %}

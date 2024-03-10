@@ -1,0 +1,138 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ block.super }}
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styles/home/home.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/home/modal_Comentar.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<header>
+    <div class="h-header">
+
+        <div class="h-head">
+            <img src="{% static 'assets/perfil_padrao.jpg' %}" alt="">
+            <div class="h-links">
+                <a href="perfil.html" class="link">
+                    <i class="fa-solid fa-user"></i>
+                    Perfil
+                </a>
+                <a href="#" class="link">
+                    <i class="fa-solid fa-bell"></i>
+                    Notificações
+                </a>
+                <a href="#" class="link">
+                    <i class="fa-solid fa-envelope"></i>
+                    Mensagens
+                </a>
+                <a href="#" class="link">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Sair
+                </a>
+            </div>
+        </div>
+
+        <div class="darkmode-container">
+            <button class="button" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        </div>
+
+    </div>
+</header>
+
+<main>
+    <div class="tweet-container">
+        <div class="opcao-tweets">
+            <p id="tweetsTodos" onclick="tweetsTodos()" href="#">Todos</p>
+            <p id="tweetsSeguindo" onclick="tweetsSeguindo()" href="#">Seguidores</p>
+        </div>
+
+        <div class="novo-tweet">
+            <div class="nv-tw-text">
+                <textarea id="myTextarea" placeholder="O que você está pensando..." rows="2"></textarea>
+            </div>
+            <div class="nv-tw-action">
+                <button type="button">Postar</button>
+            </div>
+        </div>
+
+        <div class="tweets">
+            <div class="tweet">
+                <div class="tw-head">
+                    <p>
+                    @gontijogabr
+                        <div class="tw-h-rt">
+                            <i class="fa-solid fa-retweet"></i>
+                            <p style="font-size: 12px;">retweet by</p>
+                            <p>@gontz</p>
+                        </div>
+                    </p>
+                    <p>27/12/1998</p>
+                </div>
+                <div class="tw-main">
+                    <div class="tw-m-img">
+                        <img src="{% static 'assets/perfil_padrao.jpg' %}" alt="foto de perfil">
+                    </div>
+                    <div class="tw-m-text">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique unde facere modi omnis vel accusantium accusamus mollitia voluptate illo saepe? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis repellendus blanditiis nisi. Voluptatem beatae et cumque quas pariatur, provident ad?</p>
+                    </div>
+                </div>
+                <div class="tw-footer">
+                    <div class="tw-f-react">
+                        <div class="tw-f-r">
+                            <p>0</p>
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div class="tw-f-r">
+                            <p>0</p>
+                            <i class="fa-solid fa-retweet"></i>
+                        </div>
+                        <div class="tw-f-r">
+                            <p>0</p>
+                            <i onclick="openModalComment()" class="fa-solid fa-comment"></i>
+                        </div>
+                    </div>
+                    <p>09:27</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pesquisar-container">
+        <div class="pesquisar-div">
+            <div class="pesquisar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input placeholder="Buscar" type="text">
+            </div>
+            <div class="quem-seguir">
+                <h3>Quem seguir?</h3>
+                <div class="qs-opc">
+                    <div class="qs-user">
+                        <img src="{% static 'assets/perfil_padrao.jpg' %}" alt="">
+                        <div class="qs-user-names">
+                            <p>Gabriel Gontijo</p>
+                            <p>@gontz</p>
+                        </div>
+                    </div>
+                    <button id="btnSeguir" onclick="btnSeguir()" type="button">Seguir<i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Comentar -->
+    {% include 'home/modal_Comentar.html' %}
+    <!-- Fim Modal Comentar -->
+
+</main>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'scripts/home/home.js' %}"></script>
+{% endblock %}

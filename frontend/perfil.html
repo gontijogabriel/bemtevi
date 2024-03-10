@@ -35,55 +35,125 @@
 
     body {
         background-color: var(--amarelo-palido);
-        display: flex;
-        justify-content: center;
-        width: 100%;
         margin: 0 auto;
+        max-width: 550px;
     }
 
-    .container {
+    header {
+        background-color: #777777;
+        width: 100%;
+        height: 80px;
         display: flex;
-        max-width: 1280px;
+        align-items: center;
+        justify-content: center;
+    }
+    header img {
+        padding: 10px;
+        height: 100%;
+    }
+    main {
+        background-color: #cccccc;
+        display: flex;
         width: 100%;
     }
-
-    .h-home {
+    .foto-perfil {
         width: 30%;
-        max-width: 200px;
-        background-color: rgb(114, 43, 43);
-
-        position: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 5px;
     }
-
-    .m-home {
-        flex: 1;
-        background-color: #76e2fd;
+    .foto-perfil img {
+        width: 100%;
+        border-radius: 50%;
+        padding: 5px;
+    }
+    .descricao {
+        width: 70%;
+        background-color: #cccccc;
         display: flex;
         flex-direction: column;
+        padding: 5px;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+    .seguidores {
+        display: flex;
+        font-size: 14px;
         gap: 1rem;
-        width: 50%;
-        max-width: 500px;
-        margin-left: 30%;
     }
 
-    .tweet {
-        border: 1px solid black;
+
+    .links {
+        list-style-type: none;
+        display: flex;
+        justify-content: center;
+        background-color: #cccccc;
+        height: 50px;
+        border-radius: 0 0 12px 12px;
+        align-items: center;
+        color: #333333;
+    }
+    .link {
+        width: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        font-size: 14px;
+        font-weight: bolder;
+    }
+    .link:hover {
+        background-color: #777777;
+    }
+    .link-img {
+        width: 35px;
     }
 
+    .content {
+        width: 100%;
+        max-width: 450px;
+        margin: 0 auto;
+        margin-top: 5px;
+        background-color: #3d3109;
+        height: 50px;
+        border-radius: 12px 12px 0 0;
+    }
 </style>
-    <body>
-        <div class="container">
-            <header class="h-home">
-                <div class="h-h-content">
-                    header
-                </div>
-            </header>
-
-            <main class="m-home">
-                <div class="tweet">tweet</div>
-            </main>
+<body>
+    <header>
+        <img src="img/logo_black.png" alt="bem te vi logo black">
+    </header>
+    <main>
+        <div class="foto-perfil">
+            <img src="img/perfil_padrao.jpg" alt="foto de perfil">
         </div>
 
-        <footer class="h-footer">footer</footer>
-    </body>
+        <div class="descricao">
+            <h4>Gabriel Gontijo</h4>
+            <h5>@gontijogabr</h5>
+            <button type="button">SEGUIR</button>
+            <div class="seguidores">
+                <p>Seguindo: 158</p>
+                <p>Seguidores: 356</p>
+            </div>
+        </div>
+    </main>
+
+    <section>
+        <ul class="links">
+            <li class="link" style="border-radius: 0 0 0 12px;"><img class="link-img" src="img/logo_black.png" alt="logo black"></li>
+            <li class="link">Tweets</li>
+            <li class="link">Likes</li>
+            <li class="link">Retweets</li>
+            <li class="link" style="border-radius: 0 0 12px 0;">Notificacoes</li>
+        </ul>
+    </section>
+
+    <section class="content">
+
+    </section>
+
+</body>
 </html>

@@ -1,0 +1,85 @@
+{% load static %}
+
+<!-- Modal Comentar -->
+<div id="modal-comment" class="modal-comment">
+    <div class="md-c-content">
+        <div class="md-c-tweet">
+            <div class="md-c-t-header">
+                <div class="mdcth-content">
+                    <img src="{% static 'assets/perfil_padrao.jpg' %}" alt="foto de perfil">
+                    <div class="mdcth-user">
+                        <p>Gabriel Gontijo</p>
+                        <p>@gontijogabr</p>
+                    </div>
+                </div>
+                <div class="mdcth-voltar">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <a onclick="closeModalComment()">Voltar</a>
+                </div>
+            </div>
+            <div class="md-c-t-main">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores voluptas earum id cumque non minus officia quae iste sit veritatis.</p>
+            </div>
+            <div class="md-c-t-footer">
+                <div class="mdctf-reacts">
+                    <div class="mdctf-r">
+                        <p>0</p>
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div class="mdctf-r">
+                        <p>0</p>
+                        <i class="fa-solid fa-retweet"></i>
+                    </div>
+                    <div class="mdctf-r">
+                        <p>0</p>
+                        <i class="fa-solid fa-comment"></i>
+                    </div>
+                </div>
+                <div class="mdctf-data">
+                    <p>27 de Dezembro de 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="md-c-responder">
+            <div class="mdcr-main">
+                <div class="mdcr-m-img">
+                    <img src="{% static 'assets/perfil_padrao.jpg' %}" alt="">
+                </div>
+                <div class="mdcr-m-text">
+                    <textarea id="myTextarea" placeholder="Responder..." rows="2"></textarea>
+                </div>
+            </div>
+            <div class="mdcr-footer">
+                <button type="button">Responder</button>
+            </div>
+        </div>
+
+        <div class="md-c-comments">
+            <div class="tweet">
+                <div class="tw-head">
+                    <p>@gontijogabr</p>
+                    <p>27/12/1998</p>
+                </div>
+                <div class="tw-main">
+                    <div class="tw-m-img">
+                        <img src="{% static 'assets/perfil_padrao.jpg' %}" alt="foto de perfil">
+                    </div>
+                    <div class="tw-m-text">
+                        <p><strong>@gontijogabr</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique unde facere modi omnis vel accusantium accusamus mollitia voluptate illo saepe? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis repellendus blanditiis nisi. Voluptatem beatae et cumque quas pariatur, provident ad?</p>
+                    </div>
+                </div>
+                <div class="tw-footer">
+                    <div class="tw-f-react">
+                        <div class="tw-f-r">
+                            <p>0</p>
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                    </div>
+                    <p>09:27</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fim Modal Comentar -->

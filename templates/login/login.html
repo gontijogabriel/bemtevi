@@ -1,0 +1,49 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Login - 
+    {{ block.super }}
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styles/login/login.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+    <section class="s-login">
+        <h1>BemTeVi</h1>
+
+        <form class="form-login" action="" method="POST">
+            <div class="input-div">
+                <input name="email" class="input-email" placeholder="email" type="text">
+            </div>
+            <div class="input-div">
+                <input id="input-password" name="password" class="input-password" placeholder="password" type="password">
+                <i id="input-eye-open" class="fa-solid fa-eye" onclick="openPassword()"></i>
+                <i id="input-eye-close" class="fa-solid fa-eye-slash" onclick="closePassword()"></i>
+            </div>
+            <button class="input-button" type="button" onclick="validateForm()">login</button>
+        </form>
+        
+        <div class="s-login-links">
+            <a href="{% url 'cadastro' %}">sing up</a>
+            <a href="forget_password.html">forget password</a>
+        </div>
+
+        <!-- INICIO - Modal Erro -->
+        {% include 'login/modal_Erro.html' %}
+        <!-- FIM - Modal Erro -->
+    </section>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'scripts/login/login.js' %}"></script>
+    <script src="{% static 'scripts/login/modal_Erro.js' %}"></script>
+    <script src="{% static 'scripts/login/login_Validacao.js' %}"></script>
+{% endblock %}

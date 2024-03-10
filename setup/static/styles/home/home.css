@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+    
+:root {
+    --laranja-escuro: #FF8C00;
+    --laranja: #FFA500;
+    --laranja-medio: #FFB84D;
+
+    --cor-base: #FFD42A;
+
+    --amarelo-claro: #FFE24C;
+    --amarelo-suave: #FFD480;
+    --amarelo-palido: #FFEDB3;
+
+    --cor-fundo-escuro: #1E1E1E;
+    --cor-texto-primeiro-plano: #FFFFFF;
+    --destaque-principal: #FFD42A;
+    --texto-secundario: #A0A0A0;
+    --botao-principal: #4D4D4D;
+    --fundo-componentes-escuros: #333333;
+    --borda-escura: #777777;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.1rem;
+    color: #333;
+    background-color: var(--amarelo-palido);
+}
+header {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding: 5px;
+}
+.h-header {
+    height: calc(100vh - 5px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: fixed;
+}
+.h-head {
+    padding: 10px;
+    border-radius: 12px;
+    background-color: #cccccc;
+    box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+}
+.h-head img {
+    width: 75%;
+    max-width: 200px;
+    min-width: 100px;
+    border-radius: 50%;
+    margin: 0 auto; 
+}
+.h-links {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.link {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 5px 15px;
+    border-radius: 12px;
+    width: fit-content;
+
+    color: var(--fundo-componentes-escuros);
+    text-decoration: none;
+    background-color: #f0f0f0;
+    font-weight: bolder;
+    box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.3);
+}
+.link:hover {
+    box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.1);
+}
+
+main {
+    width: 85%;
+    display: flex;
+}
+.tweet-container {
+    width: 70%;
+    max-width: 480px;
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+}
+.opcao-tweets {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    background-color: #A0A0A0;
+}
+.opcao-tweets p {
+    width: 50%;
+    height: 100%;
+    text-decoration: none;
+    background-color: #cccccc;
+    color: var(--fundo-componentes-escuros);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.opcao-tweets p:hover {
+    background-color: var(--borda-escura);
+    color: var(--fundo-componentes-escuros);
+    cursor: pointer;
+}
+
+.novo-tweet {
+    width: 100%;
+    background-color: #cccccc;
+    border-radius: 0 0 8px 8px;
+    margin-bottom: 2.5px;
+}
+.nv-tw-text textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+    resize: none;
+    border: none;
+    height: auto;
+    background-color: #d8d8d8;
+    color: #333;
+}
+.nv-tw-action {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 5px;
+}
+.nv-tw-action button {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 8px 20px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-weight: bolder;
+    letter-spacing: 1.5px;
+    box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.2);
+}
+.nv-tw-action button:hover {
+    cursor: pointer;
+
+}
+.pesquisar-container {
+    width: 30%;
+    max-width: 200px;
+    min-width: 100px;
+    height: 100vh;
+}
+.pesquisar-div {
+    position: fixed;
+    padding: 5px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 55%;
+    max-width: 300px;
+}
+.pesquisar {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 18px;
+    background-color: #f0f0f0;
+    box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.3);
+}
+.pesquisar input {
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.tweets {
+    display: flex;
+    flex-direction: column;
+    gap: 0.20rem;
+}
+
+.tweet {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.1);
+    background-color: #d8d8d8;
+}
+
+.tw-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+.tw-h-rt {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+.tw-main {
+    width: 100%;
+    display: flex;
+}
+.tw-m-img {
+    width: 15%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+.tw-m-img img {
+    width: 100%;
+    padding: 5px;
+    border-radius: 50%;
+}
+.tw-m-text {
+    width: 85%;
+}
+.tw-m-text p {
+    padding: 5px;
+}
+
+
+.tw-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+.tw-f-react {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.tw-f-r {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.15rem;
+}
+
+
+.quem-seguir {
+    width: 100%;
+    background-color: #cccccc;
+    text-align: center;
+    padding: 5px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.quem-seguir h3 {
+    margin-top: 5px;
+}
+.qs-opc {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+.qs-user {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5rem;
+    font-size: 15px;
+}
+.qs-user img {
+    width: 25%;
+    border-radius: 50%;
+}
+
+.qs-user-names {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+.qs-opc button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 5px 8px;
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.2);
+}
+.qs-opc button:hover {
+    cursor: pointer;
+}

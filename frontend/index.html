@@ -45,7 +45,6 @@
         color: #333;
         background-color: var(--amarelo-palido);
     }
-
     header {
         width: 15%;
         display: flex;
@@ -340,7 +339,7 @@
             <div class="h-head">
                 <img src="img/perfil_padrao.jpg" alt="">
                 <div class="h-links">
-                    <a href="#" class="link">
+                    <a href="perfil.html" class="link">
                         <i class="fa-solid fa-user"></i>
                         Perfil
                     </a>
@@ -365,6 +364,7 @@
 
         </div>
     </header>
+    
     <main>
         <div class="tweet-container">
             <div class="opcao-tweets">
@@ -414,7 +414,7 @@
                             </div>
                             <div class="tw-f-r">
                                 <p>0</p>
-                                <i onclick="modalComment()" class="fa-solid fa-comment"></i>
+                                <i onclick="openModalComment()" class="fa-solid fa-comment"></i>
                             </div>
                         </div>
                         <p>09:27</p>
@@ -463,7 +463,7 @@
 
                         <div class="mdcth-voltar">
                             <i class="fa-solid fa-arrow-left"></i>
-                            <p>Voltar</p>
+                            <a onclick="closeModalComment()">Voltar</a>
                         </div>
                     </div>
                     <div class="md-c-t-main">
@@ -505,7 +505,32 @@
                     </div>
                 </div>
 
-                <div class="md-c-comments"></div>
+                <div class="md-c-comments">
+                    <div class="tweet">
+                        <div class="tw-head">
+                            <p>@gontijogabr</p>
+                            <p>27/12/1998</p>
+                        </div>
+                        <div class="tw-main">
+                            <div class="tw-m-img">
+                                <img src="img/perfil_padrao.jpg" alt="foto de perfil">
+                            </div>
+                            <div class="tw-m-text">
+                                <p><strong>@gontijogabr</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique unde facere modi omnis vel accusantium accusamus mollitia voluptate illo saepe? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis repellendus blanditiis nisi. Voluptatem beatae et cumque quas pariatur, provident ad?</p>
+                            </div>
+                        </div>
+                        <div class="tw-footer">
+                            <div class="tw-f-react">
+                                <div class="tw-f-r">
+                                    <p>0</p>
+                                    <i class="fa-solid fa-heart"></i>
+                                </div>
+                            </div>
+                            <p>09:27</p>
+                        </div>
+                    </div>
+
+                </div>
 
             </div>
         </div>
@@ -548,9 +573,12 @@
             btnSeguirId.innerText = 'Seguindo'
         }
 
-        function modalComment () {
-            const idModalComment = document.getElementById('modal-comment')
+        const idModalComment = document.getElementById('modal-comment')
+        function openModalComment () {
             idModalComment.style.display = 'block';
+        }
+        function closeModalComment () {
+            idModalComment.style.display = 'none';
         }
 
     </script>

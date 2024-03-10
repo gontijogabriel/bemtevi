@@ -14,29 +14,24 @@ from django.shortcuts import get_object_or_404
 
 
 def login(request):
+    return render(request, 'login/login.html')
+
+
+def login_func(request):
     if request.method == 'POST':
         email = request.POST.get('email')
-        senha = request.POST.get('senha')
-        # print(
-        #     f'{email}\n'
-        #     f'{senha}\n'
-        # )
-        try:
-            _username = User.objects.get(email=email)
-            user = authenticate(request, username=_username.username, password=senha)
-            if user is not None:
-                django_login(request, user)
-                messages.success(request, 'Login - Sucesso')
-                return redirect('home')
-            else:
-                print('Usuário não autenticado')
-                messages.error(request, 'Nome de usuário ou senha incorretos')
-                return render(request, 'login.html')
-        except Exception as e:
-            messages.error(request, 'Erro ao fazer login')
-            return render(request, 'login.html')
+        password = request.POST.get('password')
 
-    return render(request, 'login.html')
+        _username = User.objects.get(email=email)
+        user = authenticate(request, username=_username.username, password=password)
+
+        if user is not None:
+            django_login(request, user)
+            return JsonResponse({'message': 'Login bem-sucedido'}, status=200)
+        else:
+            return JsonResponse({'message': 'Credenciais inválidas'}, status=400)
+
+
 
 
 @login_required(login_url='/')
@@ -46,89 +41,91 @@ def user_logout(request):
 
 
 def cadastro(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        nome = request.POST.get('nome')
-        sobrenome = request.POST.get('sobrenome')
-        email = request.POST.get('email')
-        senha = request.POST.get('senha')
-        senha2 = request.POST.get('senha2')
-        foto_perfil = request.FILES.get('foto_perfil')
+    # if request.method == 'POST':
+    #     username = request.POST.get('username')
+    #     nome = request.POST.get('nome')
+    #     sobrenome = request.POST.get('sobrenome')
+    #     email = request.POST.get('email')
+    #     senha = request.POST.get('senha')
+    #     senha2 = request.POST.get('senha2')
+    #     foto_perfil = request.FILES.get('foto_perfil')
 
-        if foto_perfil == None:
-            foto_perfil = 'perfil/perfil_padrao.jpg'
+    #     if foto_perfil == None:
+    #         foto_perfil = 'perfil/perfil_padrao.jpg'
 
-        if senha != senha2:
-            messages.error(request, 'As senhas não coincidem.')
-            return render(request, 'cadastro.html')
+    #     if senha != senha2:
+    #         messages.error(request, 'As senhas não coincidem.')
+    #         return render(request, 'cadastro.html')
         
-        if Usuario.objects.filter(email=email).exists():
-            messages.error(request, 'Este e-mail já está em uso. Por favor, escolha outro.')
-            return render(request, 'cadastro.html')
+    #     if Usuario.objects.filter(email=email).exists():
+    #         messages.error(request, 'Este e-mail já está em uso. Por favor, escolha outro.')
+    #         return render(request, 'cadastro.html')
 
 
-        if User.objects.filter(username=username).exists():
-            messages.error(request, 'Este e-mail já está em uso. Por favor, escolha outro.')
-            return render(request, 'cadastro.html')
+    #     if User.objects.filter(username=username).exists():
+    #         messages.error(request, 'Este e-mail já está em uso. Por favor, escolha outro.')
+    #         return render(request, 'cadastro.html')
 
-        user = User.objects.create_user(username=username, email=email, password=senha)
-        usuario = Usuario.objects.create(
-            user=user,
-            nome=nome,
-            sobrenome=sobrenome,
-            email=email,
-            foto_perfil=foto_perfil
-        )
-        print(
-            f'{username}\n'
-            f'{nome}\n'
-            f'{sobrenome}\n'
-            f'{email}\n'
-            f'{senha}\n'
-            f'{senha2}\n'
-            f'{foto_perfil}\n'
-        )
-        messages.success(request, 'Cadastro realizado com sucesso! Faça login para continuar.')
-        return redirect('login')
+    #     user = User.objects.create_user(username=username, email=email, password=senha)
+    #     usuario = Usuario.objects.create(
+    #         user=user,
+    #         nome=nome,
+    #         sobrenome=sobrenome,
+    #         email=email,
+    #         foto_perfil=foto_perfil
+    #     )
+    #     print(
+    #         f'{username}\n'
+    #         f'{nome}\n'
+    #         f'{sobrenome}\n'
+    #         f'{email}\n'
+    #         f'{senha}\n'
+    #         f'{senha2}\n'
+    #         f'{foto_perfil}\n'
+    #     )
+    #     messages.success(request, 'Cadastro realizado com sucesso! Faça login para continuar.')
+    #     return redirect('login')
 
-    return render(request, 'cadastro.html')
+    return render(request, 'cadastro/cadastro.html')
 
 
 @login_required(login_url='/')
 def home(request):
-    user = User.objects.get(username=request.user)
-    usuario = Usuario.objects.get(user=user)
+    print(request.user)
+    # user = User.objects.get(username=request.user)
+    # usuario = Usuario.objects.get(user=user)
 
-    usuarios_para_seguir = Usuario.objects.filter(~Q(seguidores__seguidor=usuario) & ~Q(user=user))
+    # usuarios_para_seguir = Usuario.objects.filter(~Q(seguidores__seguidor=usuario) & ~Q(user=user))
     
-    contexto = {
-        'id_user': user.pk,
-        'username': user.username,
-        'id': usuario.pk,
-        'nome': usuario.nome,
-        'sobrenome': usuario.sobrenome,
-        'email': usuario.email,
-        'foto': usuario.foto_perfil,
-        'para_seguir': usuarios_para_seguir,
-    }
+    # contexto = {
+    #     'id_user': user.pk,
+    #     'username': user.username,
+    #     'id': usuario.pk,
+    #     'nome': usuario.nome,
+    #     'sobrenome': usuario.sobrenome,
+    #     'email': usuario.email,
+    #     'foto': usuario.foto_perfil,
+    #     'para_seguir': usuarios_para_seguir,
+    # }
 
 
-    tweets = Tweet.objects.annotate(total_likes=Count('like'), total_retweets=Count('retweet')).order_by('-data')[:100]
-    tweets_with_like_info = []
+    # tweets = Tweet.objects.annotate(total_likes=Count('like'), total_retweets=Count('retweet')).order_by('-data')[:100]
+    # tweets_with_like_info = []
 
-    for tweet in tweets:
-        user_has_liked = tweet.like_set.filter(user=user).exists()
-        user_has_retweeted = tweet.retweet_set.filter(user=user).exists()
+    # for tweet in tweets:
+    #     user_has_liked = tweet.like_set.filter(user=user).exists()
+    #     user_has_retweeted = tweet.retweet_set.filter(user=user).exists()
 
-        tweet_info = {
-            'tweet': tweet,
-            'user_has_liked': user_has_liked,
-            'user_has_retweeted': user_has_retweeted,
-        }
+    #     tweet_info = {
+    #         'tweet': tweet,
+    #         'user_has_liked': user_has_liked,
+    #         'user_has_retweeted': user_has_retweeted,
+    #     }
 
-        tweets_with_like_info.append(tweet_info)
+    #     tweets_with_like_info.append(tweet_info)
 
-    return render(request, 'home.html', {'usuario': usuario, 'data': contexto, 'tweets': tweets_with_like_info})
+    # return render(request, 'home.html', {'usuario': usuario, 'data': contexto, 'tweets': tweets_with_like_info})
+    return render(request, 'home/home.html')
 
 
 @login_required(login_url='/')
