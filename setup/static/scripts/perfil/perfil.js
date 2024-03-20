@@ -1,46 +1,12 @@
-// Função para obter o token CSRF do cookie
-function getCSRFToken() {
-    const cookieValue = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('csrftoken='))
-        .split('=')[1];
-    return cookieValue;
-}
+const pageUrl = window.location.href;
+const partesUrl = pageUrl.split('/')
+const username = partesUrl[3]
 
-// Função para ajustar a altura do textarea
-function ajustarAlturaTextarea(elemento) {
-    elemento.style.height = 'auto';
-    elemento.style.height = (elemento.scrollHeight) + 'px';
-}
-
-const textarea = document.getElementById('myTextarea');
-
-textarea.addEventListener('input', function () {
-    ajustarAlturaTextarea(this);
-});
-
-ajustarAlturaTextarea(textarea);
-
-
-
-function tweetsSeguindo() {
-    tweetsTodosId.classList.remove('btn-selecionado')
-    tweetsSeguindoId.classList.add('btn-selecionado')
-}
-
-
-const tweetsTodosId = document.getElementById('tweetsTodos')
-const tweetsSeguindoId = document.getElementById('tweetsSeguindo')
-
-
-async function tweetsTodos() {
-
-    tweetsTodosId.classList.add('btn-selecionado')
-    tweetsSeguindoId.classList.remove('btn-selecionado')
+async function tweetsPerfil() {
 
     const tweetsContainer = document.getElementById('home-tweets');
     try {
-        const response = await fetch('/tweets/');
+        const response = await fetch('/tweetsPerfil/' + username + '/');
         if (response.ok) {
             const data = await response.json();
 
@@ -104,43 +70,4 @@ async function tweetsTodos() {
 };
 
 
-function postarTweet() {
-
-    if (textarea.value != '') {
-
-        const data = {
-            tweet: textarea.value,
-        };
-    
-        const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('X-CSRFToken', getCSRFToken());
-    
-        const requestOptions = {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(data)
-        };
-    
-        fetch(`/postar/`, requestOptions)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao fazer a solicitação POST');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Resposta:', data.message);
-                tweetsTodos()
-            })
-            .catch(error => {
-                console.error('Erro:', error);
-            });
-    
-    }
-
-}
-
-
-
-document.addEventListener("DOMContentLoaded", tweetsTodos);
+document.addEventListener("DOMContentLoaded", tweetsPerfil);

@@ -1,0 +1,112 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ block.super }}
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/perfil/perfil.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'assets/logo.png' %}" alt="bem te vi logo black">
+        </a>
+    </header>
+    <main>
+        <div class="foto-perfil">
+            <img src="{{ contexto.foto.url }}" alt="foto de perfil">
+        </div>
+
+        <div class="descricao">
+            <h2>{{ contexto.nome }} {{ contexto.sobrenome }}</h2>
+            <h3>@{{ contexto.username }}</h3>
+
+            {% if contexto.username_logado == contexto.username %}
+                <a class="link-perfil" href="#">
+                    <span href="#">Editar</span>
+                    <i class="fa-solid fa-gears"></i>
+                </a>
+            {% else %}
+                {% if contexto.seguindo_ou_sim_nao %}
+                <a class="link-perfil" href="{% url 'seguir_view' contexto.id 'perfil' %}">
+                    <span>Seguindo</span>
+                    <i class="fa-solid fa-check"></i>
+                </a>
+                {% else %}
+                <a class="link-perfil" href="{% url 'seguir_view' contexto.id 'perfil' %}">
+                    <span>Seguir</span>
+                    <i class="fa-solid fa-user-plus"></i>
+                </a>
+                {% endif %}
+            {% endif %}
+
+            <div class="seguidores">
+                <p>Seguindo <strong>{{ contexto.n_seguindo }}</strong></p>
+                <p>Seguidores <strong>{{ contexto.n_seguidores }}</strong></p>
+            </div>
+        </div>
+    </main>
+
+    <section>
+        <div class="links">
+            <a href="{% url 'home' %}"  class="link" style="border-radius: 0 0 0 12px;"><img class="link-img" src="{% static 'assets/logo_black.png' %}" alt="logo black" style="filter: brightness(0) saturate(100%) invert(18%) sepia(1%) saturate(413%) hue-rotate(41deg) brightness(100%) contrast(93%);"></a>
+            <a onclick="tweetsPerfil()" class="link">Tweets</a>
+            <a class="link">Likes</a>
+            <a class="link">Retweets</a>
+            <a class="link" style="border-radius: 0 0 12px 0;">Notificacoes</a>
+        </div>
+    </section>
+
+    <section class="content">
+
+        <div id="home-tweets" class="tweets">
+            <!-- <div class="tweet">
+                <div class="tw-head">
+                    <p>
+                    @gontijogabr
+                        <div class="tw-h-rt">
+                            <i class="fa-solid fa-retweet"></i>
+                            <p style="font-size: 12px;">retweet by</p>
+                            <p>@gontz</p>
+                        </div>
+                    </p>
+                    <p>27/12/1998</p>
+                </div>
+                <div class="tw-main">
+                    <div class="tw-m-img">
+                        <img src="{% static 'assets/perfil_padrao.jpg' %}" alt="foto de perfil">
+                    </div>
+                    <div class="tw-m-text">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique unde facere modi omnis vel accusantium accusamus mollitia voluptate illo saepe? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis repellendus blanditiis nisi. Voluptatem beatae et cumque quas pariatur, provident ad?</p>
+                    </div>
+                </div>
+                <div class="tw-footer">
+                    <div class="tw-f-react">
+                        <div class="tw-f-r">
+                            <p>0</p>
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div class="tw-f-r">
+                            <p>0</p>
+                            <i class="fa-solid fa-retweet"></i>
+                        </div>
+                        <div class="tw-f-r">
+                            <p>0</p>
+                            <i onclick="openModalComment()" class="fa-solid fa-comment"></i>
+                        </div>
+                    </div>
+                    <p>09:27</p>
+                </div>
+            </div> -->
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'scripts/perfil/perfil.js' %}"></script>
+{% endblock %}

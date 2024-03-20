@@ -64,7 +64,7 @@
     cursor: pointer;
 }
 .mdcth-voltar:active {
-    border-radius: 8px;
+    border: none;
     background-color: #ccc;
 }
 

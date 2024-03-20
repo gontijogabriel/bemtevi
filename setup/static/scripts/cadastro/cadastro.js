@@ -1,3 +1,15 @@
+function getCSRFToken() {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith('csrftoken=')) {
+            return cookie.substring('csrftoken='.length, cookie.length);
+        }
+    }
+    return null;
+}
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const profileImage = document.getElementById("profile-image");
     const currentImage = document.getElementById("current-image");
@@ -93,3 +105,48 @@ function validateData() {
     return true;
 }
 // FIM - Validacão dos dados / envio dos dados
+
+
+// Função para enviar os dados de forma assíncrona usando Fetch
+async function sendData() {
+    // Chama a função para validar os dados
+    if (!validateData()) {
+        return; // Se os dados não forem válidos, não envia a requisição
+    }
+
+    const formData = new FormData(); // Cria um objeto FormData para enviar os dados do formulário
+
+    // Adiciona os campos do formulário ao objeto FormData
+    formData.append('username', document.getElementById('username').value);
+    formData.append('name', document.getElementById('name').value);
+    formData.append('lastName', document.getElementById('last-name').value);
+    formData.append('email', document.getElementById('email').value);
+    formData.append('password1', document.getElementById('input-password-1').value);
+    formData.append('password2', document.getElementById('input-password-2').value);
+    formData.append('profileImage', document.getElementById('current-image').src);
+
+    try {
+        // Obter o token CSRF do cookie
+        const csrfToken = getCSRFToken(); // Implemente esta função para obter o token CSRF do cookie
+
+        // Adiciona o token CSRF ao corpo da solicitação
+        formData.append('csrfmiddlewaretoken', csrfToken);
+
+        const response = await fetch('/cadastro_user/', {
+            method: 'POST',
+            body: formData,
+            credentials: 'same-origin'
+        });
+
+        if (response.ok) {
+            // Se a solicitação for bem-sucedida, você pode fazer o que quiser aqui, como exibir uma mensagem de sucesso
+            console.log('Cadastro realizado com sucesso!');
+        } else {
+            // Se a solicitação não for bem-sucedida, você pode exibir uma mensagem de erro
+            console.log('Erro ao cadastrar usuário');
+        }
+    } catch (error) {
+        // Se ocorrer um erro ao enviar a solicitação, você pode lidar com ele aqui
+        console.log('Erro ao enviar requisição:', error);
+    }
+}

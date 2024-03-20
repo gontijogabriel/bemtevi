@@ -18,9 +18,9 @@
     <div class="h-header">
 
         <div class="h-head">
-            <img src="{% static 'assets/perfil_padrao.jpg' %}" alt="">
+            <img src="{{ contexto.foto.url }}" alt="">
             <div class="h-links">
-                <a href="perfil.html" class="link">
+                <a href="{% url 'perfil' request.user.username %}" class="link">
                     <i class="fa-solid fa-user"></i>
                     Perfil
                 </a>
@@ -32,7 +32,7 @@
                     <i class="fa-solid fa-envelope"></i>
                     Mensagens
                 </a>
-                <a href="#" class="link">
+                <a href="{% url 'logout' %}" class="link">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     Sair
                 </a>
@@ -49,8 +49,8 @@
 <main>
     <div class="tweet-container">
         <div class="opcao-tweets">
-            <p id="tweetsTodos" onclick="tweetsTodos()" href="#">Todos</p>
-            <p id="tweetsSeguindo" onclick="tweetsSeguindo()" href="#">Seguidores</p>
+            <p id="tweetsTodos" onclick="tweetsTodos()">Todos</p>
+            <p id="tweetsSeguindo" onclick="tweetsSeguindo()">Seguidores</p>
         </div>
 
         <div class="novo-tweet">
@@ -58,12 +58,12 @@
                 <textarea id="myTextarea" placeholder="O que você está pensando..." rows="2"></textarea>
             </div>
             <div class="nv-tw-action">
-                <button type="button">Postar</button>
+                <button onclick="postarTweet('{{ request.user }}')" type="button">Postar</button>
             </div>
         </div>
 
-        <div class="tweets">
-            <div class="tweet">
+        <div id="home-tweets" class="tweets">
+            <!-- <div class="tweet">
                 <div class="tw-head">
                     <p>
                     @gontijogabr
@@ -100,7 +100,7 @@
                     </div>
                     <p>09:27</p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 
@@ -112,16 +112,20 @@
             </div>
             <div class="quem-seguir">
                 <h3>Quem seguir?</h3>
-                <div class="qs-opc">
-                    <div class="qs-user">
-                        <img src="{% static 'assets/perfil_padrao.jpg' %}" alt="">
-                        <div class="qs-user-names">
-                            <p>Gabriel Gontijo</p>
-                            <p>@gontz</p>
+                {% if contexto.qm_seguir %}
+                    {% for seguir in contexto.qm_seguir %}
+                    <div class="qs-opc">
+                        <div class="qs-user">
+                            <img src="{{ seguir.foto_perfil }}" alt="">
+                            <div class="qs-user-names">
+                                <p>{{ seguir.nome }} {{ seguir.sobrenome }}</p>
+                                <a href="{% url 'perfil' seguir.user.username %}">@{{ seguir.user.username }}</a>
+                            </div>
                         </div>
+                        <a href="{% url 'seguir_view' seguir.id 'home' %}" id="btnSeguir" onclick="btnSeguir()" type="button">Seguir<i class="fa-solid fa-plus"></i></a>
                     </div>
-                    <button id="btnSeguir" onclick="btnSeguir()" type="button">Seguir<i class="fa-solid fa-plus"></i></button>
-                </div>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>
@@ -129,10 +133,11 @@
     <!-- Modal Comentar -->
     {% include 'home/modal_Comentar.html' %}
     <!-- Fim Modal Comentar -->
-
 </main>
 {% endblock %}
 
 {% block js %}
     <script src="{% static 'scripts/home/home.js' %}"></script>
+    <script src="{% static 'scripts/home/modal_Comentar.js' %}"></script>
+
 {% endblock %}

@@ -11,7 +11,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404
-
+import json
 
 def login(request):
     return render(request, 'login/login.html')
@@ -22,16 +22,19 @@ def login_func(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        _username = User.objects.get(email=email)
-        user = authenticate(request, username=_username.username, password=password)
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return JsonResponse({'message': 'E-mail não encontrado'}, status=400)
 
-        if user is not None:
-            django_login(request, user)
-            return JsonResponse({'message': 'Login bem-sucedido'}, status=200)
-        else:
-            return JsonResponse({'message': 'Credenciais inválidas'}, status=400)
+        if user.is_active:
+            user = authenticate(request, username=user.username, password=password)
 
-
+            if user is not None:
+                django_login(request, user)
+                return JsonResponse({'message': 'Login bem-sucedido'}, status=200)
+        
+        return JsonResponse({'message': 'Credenciais inválidas'}, status=400)
 
 
 @login_required(login_url='/')
@@ -41,91 +44,131 @@ def user_logout(request):
 
 
 def cadastro(request):
-    # if request.method == 'POST':
-    #     username = request.POST.get('username')
-    #     nome = request.POST.get('nome')
-    #     sobrenome = request.POST.get('sobrenome')
-    #     email = request.POST.get('email')
-    #     senha = request.POST.get('senha')
-    #     senha2 = request.POST.get('senha2')
-    #     foto_perfil = request.FILES.get('foto_perfil')
-
-    #     if foto_perfil == None:
-    #         foto_perfil = 'perfil/perfil_padrao.jpg'
-
-    #     if senha != senha2:
-    #         messages.error(request, 'As senhas não coincidem.')
-    #         return render(request, 'cadastro.html')
-        
-    #     if Usuario.objects.filter(email=email).exists():
-    #         messages.error(request, 'Este e-mail já está em uso. Por favor, escolha outro.')
-    #         return render(request, 'cadastro.html')
-
-
-    #     if User.objects.filter(username=username).exists():
-    #         messages.error(request, 'Este e-mail já está em uso. Por favor, escolha outro.')
-    #         return render(request, 'cadastro.html')
-
-    #     user = User.objects.create_user(username=username, email=email, password=senha)
-    #     usuario = Usuario.objects.create(
-    #         user=user,
-    #         nome=nome,
-    #         sobrenome=sobrenome,
-    #         email=email,
-    #         foto_perfil=foto_perfil
-    #     )
-    #     print(
-    #         f'{username}\n'
-    #         f'{nome}\n'
-    #         f'{sobrenome}\n'
-    #         f'{email}\n'
-    #         f'{senha}\n'
-    #         f'{senha2}\n'
-    #         f'{foto_perfil}\n'
-    #     )
-    #     messages.success(request, 'Cadastro realizado com sucesso! Faça login para continuar.')
-    #     return redirect('login')
-
     return render(request, 'cadastro/cadastro.html')
+
+
+def cadastro_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        nome = request.POST.get('name')
+        sobrenome = request.POST.get('lastName')
+        email = request.POST.get('email')
+        senha = request.POST.get('password1')
+        senha2 = request.POST.get('password2')
+        foto_perfil = request.POST.get('profileImage')
+
+        # Verifica se a senha é igual à senha2
+        if senha != senha2:
+            messages.error(request, 'As senhas não coincidem.')
+            return redirect('cadastro_user')  # Substitua 'cadastro_user' pelo nome da sua view
+
+        # Verifica se o e-mail já está em uso
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Este e-mail já está em uso. Por favor, escolha outro.')
+            return redirect('cadastro_user')  # Substitua 'cadastro_user' pelo nome da sua view
+
+        # Verifica se o nome de usuário já está em uso
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Este nome de usuário já está em uso. Por favor, escolha outro.')
+            return redirect('cadastro_user')  # Substitua 'cadastro_user' pelo nome da sua view
+
+        # Aqui você pode adicionar mais validações, se necessário
+
+        # Cria o usuário e o perfil do usuário
+        user = User.objects.create_user(username=username, email=email, password=senha)
+        usuario = Usuario.objects.create(
+            user=user,
+            nome=nome,
+            sobrenome=sobrenome,
+            email=email,
+            foto_perfil=foto_perfil  # Certifique-se de que 'foto_perfil' esteja sendo recebido corretamente
+        )
+
+        messages.success(request, 'Cadastro realizado com sucesso! Faça login para continuar.')
+        return redirect('login')  # Substitua 'login' pelo nome da sua view de login
 
 
 @login_required(login_url='/')
 def home(request):
-    print(request.user)
-    # user = User.objects.get(username=request.user)
-    # usuario = Usuario.objects.get(user=user)
 
-    # usuarios_para_seguir = Usuario.objects.filter(~Q(seguidores__seguidor=usuario) & ~Q(user=user))
+    usuario_logado = request.user.usuario
+    qm_seguir = usuario_logado.sugestoes_para_seguir
+
+    contexto = {
+        'id': request.user.id,
+        'username': request.user.username,
+        'nome': request.user.usuario.nome,
+        'sobrenome': request.user.usuario.sobrenome,
+        'email': request.user.usuario.email,
+        'foto': request.user.usuario.foto_perfil,
+
+        'qm_seguir': qm_seguir,
+    }
+
+    return render(request, 'home/home.html', {'contexto': contexto})
+
+
+
+def tweets(request):
+    tweets = Tweet.objects.all().order_by('-data')[:100]
+
+    data = []
+    for tweet in tweets:
+        tweet_data = {
+            'id': tweet.id,
+            'tweet': tweet.tweet,
+            'data': tweet.data.strftime('%d/%m/%Y'),
+            'hora': tweet.data.strftime('%H:%M'),
+            'comentario': tweet.comentario,
+            'user_id': tweet.user.id,
+            'user_username': tweet.user.username,
+            'usuario_id': tweet.usuario.user.id,
+            'usuario_nome': tweet.usuario.nome,
+            'usuario_sobrenome': tweet.usuario.sobrenome,
+            'usuario_email': tweet.usuario.email,
+            'usuario_foto_perfil': tweet.usuario.foto_perfil.url,
+        }
+        data.append(tweet_data)
     
-    # contexto = {
-    #     'id_user': user.pk,
-    #     'username': user.username,
-    #     'id': usuario.pk,
-    #     'nome': usuario.nome,
-    #     'sobrenome': usuario.sobrenome,
-    #     'email': usuario.email,
-    #     'foto': usuario.foto_perfil,
-    #     'para_seguir': usuarios_para_seguir,
-    # }
+    return JsonResponse(data, safe=False)
 
 
-    # tweets = Tweet.objects.annotate(total_likes=Count('like'), total_retweets=Count('retweet')).order_by('-data')[:100]
-    # tweets_with_like_info = []
+def tweetsPerfil(request, username):
+    print(username)
+    _user = User.objects.get(username=username)
+    tweets = Tweet.objects.filter(user=_user).order_by('-data')[:100]
 
-    # for tweet in tweets:
-    #     user_has_liked = tweet.like_set.filter(user=user).exists()
-    #     user_has_retweeted = tweet.retweet_set.filter(user=user).exists()
+    data = []
+    for tweet in tweets:
+        tweet_data = {
+            'id': tweet.id,
+            'tweet': tweet.tweet,
+            'data': tweet.data.strftime('%d/%m/%Y'),
+            'hora': tweet.data.strftime('%H:%M'),
+            'comentario': tweet.comentario,
+            'user_id': tweet.user.id,
+            'user_username': tweet.user.username,
+            'usuario_id': tweet.usuario.user.id,
+            'usuario_nome': tweet.usuario.nome,
+            'usuario_sobrenome': tweet.usuario.sobrenome,
+            'usuario_email': tweet.usuario.email,
+            'usuario_foto_perfil': tweet.usuario.foto_perfil.url,
+        }
+        data.append(tweet_data)
+    
+    return JsonResponse(data, safe=False)
 
-    #     tweet_info = {
-    #         'tweet': tweet,
-    #         'user_has_liked': user_has_liked,
-    #         'user_has_retweeted': user_has_retweeted,
-    #     }
+def postar(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        tweet_text = data.get('tweet')
+        user = request.user
 
-    #     tweets_with_like_info.append(tweet_info)
+        usuario = get_object_or_404(Usuario, user=user)
+        new_tweet = Tweet.objects.create(user=user, usuario=usuario, tweet=tweet_text)
 
-    # return render(request, 'home.html', {'usuario': usuario, 'data': contexto, 'tweets': tweets_with_like_info})
-    return render(request, 'home/home.html')
+        return JsonResponse({'message': 'Sucesso!'}, status=200)
+
 
 
 @login_required(login_url='/')
@@ -144,8 +187,8 @@ def perfil(request, username):
         'sobrenome':usuario.sobrenome,
         'email':usuario.email,
         'foto':usuario.foto_perfil,
-        'seguidores': usuario.numero_seguidores,
-        'seguindo': usuario.numero_seguindo,
+        'n_seguidores': usuario.numero_seguidores,
+        'n_seguindo': usuario.numero_seguindo,
         'seguindo_ou_sim_nao': seguindo_ou_sim_nao,
     }
     tweets = Tweet.objects.filter(usuario=usuario).annotate(total_likes=Count('like'), total_retweets=Count('retweet')).order_by('-data')[:100]
@@ -163,7 +206,10 @@ def perfil(request, username):
 
         tweets_with_like_info.append(tweet_info)
 
-    return render(request, 'perfil.html', {'usuario': usuario, 'data': contexto, 'tweets': tweets_with_like_info})
+    return render(request, 'perfil/perfil.html', {'usuario': usuario, 'contexto': contexto, 'tweets': tweets_with_like_info})
+
+
+
 
 @login_required(login_url='/')
 def novo_tweet(request):
@@ -220,7 +266,7 @@ def retweet_view(request, id_tweet):
 
 
 @login_required(login_url='/')
-def seguir_view(request, id_seguir):
+def seguir_view(request, id_seguir, pag):
     id_user = request.user.id
     try:
         user = Usuario.objects.get(id=id_user)
@@ -228,13 +274,21 @@ def seguir_view(request, id_seguir):
         existing_follow = Seguidor.objects.filter(usuario=user.id, seguidor=seguir.id)
         if existing_follow.exists() == False:
             follow = Seguidor.objects.create(usuario=user, seguidor=seguir)
+            if pag == 'perfil':
+                return redirect('perfil',  username=seguir.user.username)
+            
             return redirect('home')
         else:
             existing_follow.delete()
+            if pag == 'perfil':
+                return redirect('perfil',  username=seguir.user.username)
             return redirect('home')
 
     except Exception as e:
         print(f'Erro view: seguir_view = {e}')
+        if pag == 'perfil':
+            return redirect('perfil',  username=user.seguir.username)
+        
         return redirect('home')
 
 
@@ -303,10 +357,28 @@ def seguidores_view(request, username):
     return render(request, 'seguidores.html', {'data': contexto})
 
 
-def comentario(request, id_tweet):
-    print(id_tweet)
+# def comentario(request, id_tweet):
+#     print(id_tweet)
 
-    tweet = Tweet.objects.get(id=id_tweet)
-    print(tweet.usuario.foto_perfil)
+#     tweet = Tweet.objects.get(id=id_tweet)
+#     print(tweet.usuario.foto_perfil)
 
-    return render(request, 'comentario.html', {'tweet': tweet})
+#     return render(request, 'comentario.html', {'tweet': tweet})
+
+
+def comentario_view(request):
+    
+    return JsonResponse({'message': 'Sucesso!'}, status=200)
+
+
+
+# def postar(request):
+#     if request.method == 'POST':
+#         data = json.loads(request.body)
+#         tweet_text = data.get('tweet')
+#         user = request.user
+
+#         usuario = get_object_or_404(Usuario, user=user)
+#         new_tweet = Tweet.objects.create(user=user, usuario=usuario, tweet=tweet_text)
+
+#         return JsonResponse({'message': 'Sucesso!'}, status=200)

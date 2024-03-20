@@ -28,15 +28,21 @@
                     <h5>@{{ data.username }}</h5>
                     {% if data.username_logado == data.username %}
                         <a class="link flex-row" href="#">
+                            <span>Editar</span>
                             <i class="fa-solid fa-gears"></i>
-                            <span href="#">Editar</span>
                         </a>
                     {% else %}
                         <!-- Verifica se esta seguindo ou nao-->
                         {% if data.seguindo_ou_sim_nao %}
-                            <a class="link" href="#">Seguindo</a>
+                        <a class="link flex-row" href="#">
+                            <span>Seguindo</span>
+                            <i class="fa-solid fa-check"></i>
+                        </a>
                         {% else %}
-                            <a class="link" href="#">Seguir</a>
+                        <a class="link flex-row" href="#">
+                            <span>Seguir</span>
+                            <i class="fa-solid fa-user-plus"></i>
+                        </a>
                         {% endif %}
                     {% endif %}
                 </div>

@@ -35,6 +35,7 @@ body {
     color: #333;
     background-color: var(--amarelo-palido);
 }
+a {text-decoration: none; color:#333}
 header {
     width: 15%;
     display: flex;
@@ -307,7 +308,8 @@ main {
     flex-direction: column;
     text-align: start;
 }
-.qs-opc button {
+#btnSeguir {
+    background-color: #f0f0f0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -318,6 +320,11 @@ main {
     border-radius: 12px;
     box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.2);
 }
-.qs-opc button:hover {
+#btnSeguir:hover {
     cursor: pointer;
+}
+
+.btn-selecionado {
+    font-weight: bolder;
+    border-bottom: 2px solid;
 }

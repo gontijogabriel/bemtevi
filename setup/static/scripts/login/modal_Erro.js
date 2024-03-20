@@ -6,7 +6,7 @@ function openModalErro(text) {
     const modal = document.getElementById('md-error');
     modal.style.display = 'block';
 
-    setTimeout(closeModalErro, 10000);
+    setTimeout(closeModalErro, 5000);
 }
 
 function closeModalErro() {
