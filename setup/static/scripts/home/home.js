@@ -82,7 +82,7 @@ async function tweetsTodos() {
                                 </div>
                                 <div class="tw-f-r">
                                     <p>0</p>
-                                    <i onclick="openModalComment()" class="fa-solid fa-comment"></i>
+                                    <i onclick="openModalComment(${tweet.id})" class="fa-solid fa-comment"></i>
                                 </div>
                             </div>
                             <p>${tweet.hora}</p>

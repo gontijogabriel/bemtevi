@@ -134,7 +134,6 @@ def tweets(request):
 
 
 def tweetsPerfil(request, username):
-    print(username)
     _user = User.objects.get(username=username)
     tweets = Tweet.objects.filter(user=_user).order_by('-data')[:100]
 
@@ -371,6 +370,31 @@ def comentario_view(request):
     return JsonResponse({'message': 'Sucesso!'}, status=200)
 
 
+def get_tweet(request, id_tweet):
+    g_tweet = Tweet.objects.filter(id=id_tweet)
+
+    data = []
+    for tweet in g_tweet:
+        tweet_data = {
+            'id': tweet.id,
+            'tweet': tweet.tweet,
+            'data': tweet.data.strftime('%d/%m/%Y'),
+            'hora': tweet.data.strftime('%H:%M'),
+            'comentario': tweet.comentario,
+            'user_id': tweet.user.id,
+            'user_username': tweet.user.username,
+            'usuario_id': tweet.usuario.user.id,
+            'usuario_nome': tweet.usuario.nome,
+            'usuario_sobrenome': tweet.usuario.sobrenome,
+            'usuario_foto_perfil': tweet.usuario.foto_perfil.url,
+            'n_likes': tweet.get_total_likes,
+            'n_retweets': tweet.get_total_retweets,
+            'user_liked': tweet.user_has_liked,
+            'user_retweeted': tweet.user_has_retweeted,
+        }
+        data.append(tweet_data)
+    
+    return JsonResponse(data, safe=False)
 
 # def postar(request):
 #     if request.method == 'POST':
